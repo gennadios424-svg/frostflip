@@ -74,6 +74,32 @@ input,textarea{user-select:text!important;-webkit-user-select:text!important}
 .wins-list{display:grid;gap:8px;max-height:270px;overflow:hidden}
 .win-row{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:9px;padding:9px 10px;border:1px solid #b9e4f0;background:#f5fdff;border-radius:12px}
 .win-icon{font-size:18px;text-align:center}.win-player{min-width:0}.win-player b{display:block;font-size:11px}.win-player span{display:block;font-size:9px;color:#7193a0;margin-top:2px}.win-amount{font-weight:950;font-size:11px}.win-amount.plus{color:#07985a}.win-amount.minus{color:#d84d5b}
+</style><style>
+.scene{background:radial-gradient(circle at 15% 18%,#ffffff 0 2%,transparent 3%),radial-gradient(circle at 82% 28%,#8beeff55,transparent 25%),radial-gradient(circle at 45% 80%,#1777c855,transparent 34%),linear-gradient(135deg,#e9fbff 0%,#75d5f5 45%,#0b75bd 100%)!important}
+.scene:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 35%,#ffffff18 42%,transparent 49%),repeating-linear-gradient(125deg,transparent 0 80px,#ffffff0b 82px 84px);animation:auroraSweep 9s linear infinite;pointer-events:none}
+@keyframes auroraSweep{from{transform:translateX(-12%)}to{transform:translateX(12%)}}
+.rocket{left:8%!important;bottom:46px!important;transform:translateY(0) rotate(90deg)!important}
+.trail{left:12%!important;bottom:75px!important;width:350px!important;height:7px!important;transform:none!important;background:linear-gradient(90deg,transparent,#55ddff)!important}
+.goat-dancer{position:relative;min-height:270px;border:1px solid #b9deec;border-radius:20px;background:radial-gradient(circle at 50% 20%,#ffffffaa,transparent 28%),linear-gradient(180deg,#dffbff,#8bd8f0 62%,#368ebf);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding-bottom:25px;box-shadow:inset 0 -30px 50px #087bb52a}
+.goat-dancer:after{content:"⚡  🔥  👊  ❄️  💀  ⚡  🩸";position:absolute;top:20px;left:0;right:0;text-align:center;font-size:18px;letter-spacing:5px;animation:emoteFloat 2.5s ease-in-out infinite}
+@keyframes emoteFloat{50%{transform:translateY(12px) scale(1.08);opacity:.72}}
+.goat-label{position:absolute;top:55px;left:0;right:0;text-align:center;color:#087eae;font-size:9px;font-weight:950;letter-spacing:1.5px}
+.steve{position:relative;width:92px;height:180px;animation:kratosBounce .5s ease-in-out infinite alternate;transform-origin:bottom center;z-index:2}
+.head{position:absolute;left:18px;top:0;width:52px;height:52px;background:#8f171c;border:2px solid #5b1014;border-radius:8px;box-shadow:inset 0 -5px #681015}
+.hair{position:absolute;left:-2px;top:-2px;width:56px;height:14px;background:#171717;border-radius:7px 7px 2px 2px}
+.eye{position:absolute;top:25px;width:6px;height:4px;background:#f7e4c9}.e1{left:10px}.e2{right:10px}
+.head:after{content:"";position:absolute;left:17px;top:1px;width:5px;height:47px;background:#f3e7d4;transform:rotate(17deg);box-shadow:0 0 0 1px #fff2}
+.body-skin{position:absolute;left:14px;top:52px;width:60px;height:65px;background:linear-gradient(90deg,#181818,#4b2020,#171717);border:2px solid #111;border-radius:6px;display:grid;place-items:center;color:#f1c5a1;font-weight:950;font-size:20px}
+.arm{position:absolute;top:53px;width:17px;height:64px;background:#8f171c;border:2px solid #5b1014;border-radius:5px;transform-origin:50% 7px}
+.a1{left:-2px;animation:arm1 .5s ease-in-out infinite alternate}.a2{right:-2px;animation:arm2 .5s ease-in-out infinite alternate}
+.leg{position:absolute;top:115px;width:22px;height:62px;background:#272727;border:2px solid #111;border-radius:4px;transform-origin:50% 0}
+.l1{left:18px;animation:leg1 .5s ease-in-out infinite alternate}.l2{right:18px;animation:leg2 .5s ease-in-out infinite alternate}
+.leg:after{content:"";position:absolute;bottom:-5px;width:29px;height:12px;background:#111;border-radius:4px}.l1:after{left:-5px}.l2:after{right:-5px}
+.dancer-shadow{position:absolute;bottom:12px;width:95px;height:13px;border-radius:50%;background:#123b5545;filter:blur(3px);animation:shadow .5s ease-in-out infinite alternate}
+@keyframes kratosBounce{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-12px) rotate(5deg)}}
+@keyframes arm1{from{transform:rotate(45deg)}to{transform:rotate(-55deg)}}@keyframes arm2{from{transform:rotate(-45deg)}to{transform:rotate(55deg)}}
+@keyframes leg1{from{transform:rotate(18deg)}to{transform:rotate(-22deg)}}@keyframes leg2{from{transform:rotate(-18deg)}to{transform:rotate(22deg)}}@keyframes shadow{from{transform:scaleX(1)}to{transform:scaleX(.7)}}
+@media(max-width:700px){.rocket{left:5%!important}.trail{left:10%!important;width:260px!important}.goat-dancer{min-height:230px}}
 </style></head>
 <body>
 <canvas id="snow"></canvas><div class="aurora"></div>
@@ -124,7 +150,7 @@ input,textarea{user-select:text!important;-webkit-user-select:text!important}
 <div class="soon-card"><div class="soon-icon">♠️</div><div><span class="soon">COMING SOON</span><h3>Blackjack</h3><p>Not available yet.</p></div></div>
 </div>
 </section>
-<section class="section" id="roulette"><div class="sectionhead"><div><h2>Roulette</h2><p>A FrostSMP roulette game is coming soon.</p></div></div><div class="roulette-card"><div class="roulette-wheel">❄</div><div><span class="soon">COMING SOON</span><h3>Frost Roulette</h3><p>We're preparing a roulette-style game for the FrostFlip arcade.</p><button class="btn secondary" disabled>NOT AVAILABLE YET</button></div></div></section><section class="section" id="social"><div class="sectionhead"><div><h2>FrostSMP Social</h2><p>Live-style community chat and local leaderboard.</p></div></div><div class="social-grid"><div class="social-card"><div class="social-head"><b>💬 LIVE CHAT</b><span class="live-dot">LIVE</span></div><div class="chat-list" id="chatList"></div><div class="chat-form"><input class="chat-input" id="chatInput" maxlength="120" placeholder="Say something..."><button class="chat-send" id="chatSend">SEND</button></div></div><div class="social-card"><div class="social-head"><b>🏆 LEADERBOARD</b><span class="live-dot">PLAYERS</span></div><div class="leader-list" id="leaders"></div></div><div class="social-card"><div class="social-head"><b>⚡ RECENT WINS & LOSSES</b><span class="live-dot">LIVE</span></div><div class="wins-list" id="winsList"></div></div><div class="goat-dancer"><div class="goat-label">🥇 FROSTYGOAT · #1</div><div class="steve" aria-label="Dancing Steve representing FrostyGoat"><div class="head"><div class="hair"></div><span class="eye e1"></span><span class="eye e2"></span></div><div class="body-skin">F</div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div></div><div class="dancer-shadow"></div></div></div></div></div></section><section class="section" id="history"><div class="sectionhead"><div><h2>Round history</h2><p>Your Rocket results on this browser.</p></div></div><div class="history"><div class="row head"><span>ROUND</span><span>CRASH</span><span>RESULT</span><span>PAYOUT</span></div><div id="rows"><div class="row"><span>—</span><span>—</span><span>Play a round</span><span>—</span></div></div></div></section>
+<section class="section" id="roulette"><div class="sectionhead"><div><h2>Roulette</h2><p>A FrostSMP roulette game is coming soon.</p></div></div><div class="roulette-card"><div class="roulette-wheel">❄</div><div><span class="soon">COMING SOON</span><h3>Frost Roulette</h3><p>We're preparing a roulette-style game for the FrostFlip arcade.</p><button class="btn secondary" disabled>NOT AVAILABLE YET</button></div></div></section><section class="section" id="social"><div class="sectionhead"><div><h2>FrostSMP Social</h2><p>Live-style community chat and local leaderboard.</p></div></div><div class="social-grid"><div class="social-card"><div class="social-head"><b>💬 LIVE CHAT</b><span class="live-dot">LIVE</span></div><div class="chat-list" id="chatList"></div><div class="chat-form"><input class="chat-input" id="chatInput" maxlength="120" placeholder="Say something..."><button class="chat-send" id="chatSend">SEND</button></div></div><div class="social-card"><div class="social-head"><b>🏆 LEADERBOARD</b><span class="live-dot">PLAYERS</span></div><div class="leader-list" id="leaders"></div></div><div class="social-card"><div class="social-head"><b>⚡ RECENT WINS & LOSSES</b><span class="live-dot">LIVE</span></div><div class="wins-list" id="winsList"></div></div><div class="goat-dancer"><div class="goat-label">🥇 FROSTYGOAT · #1</div><div class="steve" aria-label="Dancing Kratos representing FrostyGoat"><div class="head"><div class="hair"></div><span class="eye e1"></span><span class="eye e2"></span></div><div class="body-skin">F</div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div></div><div class="dancer-shadow"></div></div></div></div></div></section><section class="section" id="history"><div class="sectionhead"><div><h2>Round history</h2><p>Your Rocket results on this browser.</p></div></div><div class="history"><div class="row head"><span>ROUND</span><span>CRASH</span><span>RESULT</span><span>PAYOUT</span></div><div id="rows"><div class="row"><span>—</span><span>—</span><span>Play a round</span><span>—</span></div></div></div></section>
 <section class="section" id="rules"><div class="info"><div><b>❄ FrostSMP only</b><p>This prototype uses fictional/local FrostSMP balance only. No real-money deposits, withdrawals, cash-outs, or IRL trading.</p></div><div><b>⚡ Independent rounds</b><p>The crash point is generated before launch using cryptographic randomness when available.</p></div><div><b>📈 How Rocket works</b><p>The multiplier rises continuously. Cashing out locks the current value; crashing first loses the wager.</p></div></div></section>
 </main><footer><div>© 2026 <b>FrostFlip</b></div><div>FrostSMP in-game currency only · No real-money trading</div></footer>
 <div id="toast"></div>
@@ -194,10 +220,10 @@ function engineStop(){if(engineOsc){try{engineOsc.stop()}catch(e){}engineOsc=nul
 let pendingPlay=null;function requireIgn(next){const saved=sessionStorage.getItem("ff-ign");if(saved){$("sideIgn").textContent=saved;next();return}pendingPlay=next;$("playIgn").value="";$("playGate").classList.add("show");setTimeout(()=>$("playIgn").focus(),50)}
 function status(t){$("status").innerHTML=t}
 function setStage(x){let s=1;if(x>=7.5){s=5;$("stage").textContent="UPPER ATMOSPHERE";$("stars").style.opacity=1;$("world").style.opacity=.8;$("scene").style.background="linear-gradient(#06172c,#123e65)"}else if(x>=4){s=4;$("stage").textContent="HIGH ATMOSPHERE";$("stars").style.opacity=.35;$("world").style.opacity=.45;$("scene").style.background="linear-gradient(#9eddf2,#419bc2)"}else if(x>=2.5){s=3;$("stage").textContent="ABOVE THE CLOUDS";$("scene").style.background="linear-gradient(#b9edff,#78cbe8)"}else if(x>=1.5){s=2;$("stage").textContent="FROSTSMP SKYLINE";$("scene").style.background="linear-gradient(#e2f9ff,#bce8f6)"}else{$("stage").textContent="LAUNCH PAD READY";$("stars").style.opacity=0;$("world").style.opacity=0;$("scene").style.background="linear-gradient(#eafaff,#c8effc 58%,#f8fdff)"}if(s>lastStage)tone(650+s*90,.16,"sine",.045);lastStage=s}
-function animate(t){if(state!=="flying")return;m=multiplier(t-start);$("mult").textContent=m.toFixed(2)+"x";$("mult").classList.add("live");$("trail").style.opacity=Math.min(.85,(m-1)*.3);$("rocketModel").style.transform="translate(-50%,"+Math.min(-4,-(m-1)*43)+"px) rotate("+(Math.sin(t/120)*Math.min(6,m/2))+"deg)";setStage(m);engineUpdate(m);if(m>=crash){doCrash();return}raf=requestAnimationFrame(animate)}
+function animate(t){if(state!=="flying")return;m=multiplier(t-start);$("mult").textContent=m.toFixed(2)+"x";$("mult").classList.add("live");$("trail").style.opacity=Math.min(.85,(m-1)*.3);const progress=Math.min(1,(m-1)/12);$("rocketModel").style.transform="translateX("+Math.min(progress*78,78)+"vw) rotate(90deg) rotate("+(Math.sin(t/120)*Math.min(6,m/2))+"deg)";setStage(m);engineUpdate(m);if(m>=crash){doCrash();return}raf=requestAnimationFrame(animate)}
 function countdown(done){state="countdown";$("action").disabled=true;const vals=["3","2","1","LAUNCH!"];let i=0;function next(){const c=$("count");c.textContent=vals[i];c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");tone(i<3?520:880,i<3?.13:.28,i<3?"square":"sawtooth",i<3?.035:.06);i++;if(i<vals.length)setTimeout(next,600);else setTimeout(done,300)}next()}
 function validBet(){const raw=String($("bet").value).replace(/\D/g,"");const n=Number(raw);if(!Number.isInteger(n)||n<1000){status("Enter a valid wager · minimum $1,000");return null}if(n>1000000){status("Maximum wager: $1,000,000");return null}if(n>balance){status("Insufficient FrostSMP balance");return null}return n}
-function resetScene(){ $("rocketModel").style.transform="translate(-50%,0)";$("trail").style.opacity=0;$("mult").textContent="1.00x";$("mult").classList.remove("live");$("boom").classList.remove("go");$("result").classList.remove("show");$("stars").style.opacity=0;$("world").style.opacity=0;$("scene").style.background="linear-gradient(#eafaff,#c8effc 58%,#f8fdff)"}
+function resetScene(){ $("rocketModel").style.transform="translateX(0) rotate(90deg)";$("trail").style.opacity=0;$("mult").textContent="1.00x";$("mult").classList.remove("live");$("boom").classList.remove("go");$("result").classList.remove("show");$("stars").style.opacity=0;$("world").style.opacity=0;$("scene").style.background="linear-gradient(#eafaff,#c8effc 58%,#f8fdff)"}
 function launch(){if(state!=="idle"&&state!=="complete")return;const b=validBet();if(b===null)return;audio();wager=b;balance-=wager;updateBalance();crash=crashPoint();round++;lastStage=1;resetScene();status("Crash result generated. Preparing launch…");countdown(()=>{state="flying";start=performance.now();engineStart();tone(130,.45,"sawtooth",.07);status("Rocket flying — cash out whenever you choose.");$("action").textContent="CASH OUT";$("action").classList.add("cash");$("action").onclick=cashout;raf=requestAnimationFrame(animate)})}
 function showResult(title,text){$("resultTitle").textContent=title;$("resultText").textContent=text;$("result").classList.remove("show");void $("result").offsetWidth;$("result").classList.add("show")}
 function addHistory(cash,payout){history.unshift({round,crash,cash,payout});history=history.slice(0,8);$("rows").innerHTML=history.map(h=>'<div class="row"><span>#'+h.round+'</span><span><b>'+h.crash.toFixed(2)+'x</b></span><span>'+(h.cash?h.cash.toFixed(2)+"x":"CRASHED")+'</span><span>'+(h.cash?fmt(h.payout):"—")+'</span></div>').join("");$("recent").innerHTML=history.slice(0,7).map(h=>'<span class="chip '+(h.crash>=2?"hi":"lo")+'">'+h.crash.toFixed(2)+"x</span>").join("")}
@@ -225,38 +251,34 @@ const caseItems=[
 ];
 let caseSpins=5,caseBusy=false,caseIndex=0;
 function buildCaseReel(){
- const reel=$("caseReel"); if(!reel)return;
- const items=[];
- for(let i=0;i<28;i++) items.push(caseItems[i%caseItems.length]);
+ const reel=$("caseReel");if(!reel)return;
+ const items=[];for(let i=0;i<42;i++)items.push(caseItems[i%caseItems.length]);
  reel.innerHTML=items.map((x,i)=>'<div class="reel-item" data-index="'+i+'"><div class="reel-icon">'+x.icon+'</div><b>'+x.name.toUpperCase()+'</b><span>'+fmt(x.value)+'</span></div>').join("");
+ reel.style.transition="none";reel.style.transform="translateX(0)";
 }
-function caseTick(){
- tone(180,.045,"square",.018);
-}
+function caseTick(){tone(180,.045,"square",.018)}
 function openCase(){
  if(caseBusy)return;
  if(caseSpins<=0){toast("TOO POOR 💀 · You used all your spins");return}
  if(!sessionStorage.getItem("ff-ign")){requireIgn(openCase);return}
  caseBusy=true;
- const reel=$("caseReel"),out=$("caseResult"),btn=$("openCase");
- caseSpins--; $("caseQty").textContent=caseSpins; if($("sideCases"))$("sideCases").textContent=5-caseSpins;
- btn.disabled=true; btn.textContent="OPENING…"; out.classList.remove("show");
- const target=caseIndex%caseItems.length;
- caseIndex++;
- const targetPos=18+target;
- const itemWidth=(reel.querySelector(".reel-item")?.getBoundingClientRect().width||142)+8;
- const offset=(targetPos*itemWidth)-((reel.parentElement.clientWidth/2)-(itemWidth/2));
+ const reel=$("caseReel"),wrap=reel.parentElement,out=$("caseResult"),btn=$("openCase");
+ const target=caseIndex%caseItems.length;caseIndex++;
+ const targetPos=21+target;const targetEl=reel.children[targetPos];
+ const item=caseItems[target];
+ caseSpins--;$("caseQty").textContent=caseSpins;if($("sideCases"))$("sideCases").textContent=5-caseSpins;
+ btn.disabled=true;btn.textContent="OPENING…";out.classList.remove("show");
+ reel.style.transition="none";reel.style.transform="translateX(0)";
+ void reel.offsetWidth;
+ const center=wrap.clientWidth/2, itemCenter=targetEl.offsetLeft+targetEl.offsetWidth/2;
+ const offset=itemCenter-center;
  reel.style.transition="transform 3.8s cubic-bezier(.08,.82,.14,1)";
  reel.style.transform="translateX(-"+offset+"px)";
- let ticks=0;
- const tickTimer=setInterval(()=>{caseTick();ticks++;if(ticks>=28)clearInterval(tickTimer)},120);
+ let ticks=0;const tickTimer=setInterval(()=>{caseTick();if(++ticks>=31)clearInterval(tickTimer)},120);
  setTimeout(()=>{
-   const item=caseItems[target];
    out.innerHTML='<div class="win">'+item.icon+' '+item.name.toUpperCase()+'</div><small>Reward reveal · Reference value '+fmt(item.value)+' Frost</small>';
-   out.classList.add("show");
-   tone(700,.12);setTimeout(()=>tone(980,.2),100);
-   btn.disabled=false;btn.textContent=caseSpins<=0?"TOO POOR 💀":"OPEN CASE ×1";
-   caseBusy=false;
+   out.classList.add("show");tone(700,.12);setTimeout(()=>tone(980,.2),100);
+   btn.disabled=false;btn.textContent=caseSpins<=0?"TOO POOR 💀":"OPEN CASE ×1";caseBusy=false;
  },3950);
 }
 buildCaseReel();
