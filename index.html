@@ -138,8 +138,51 @@ function updateBalance(){if($("sideBalance"))$("sideBalance").textContent=fmt(ba
 function toast(t){const e=$("toast");e.textContent=t;e.classList.add("toast-show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove("toast-show"),2200)}
 function openAccount(mode){$("accountModal").style.display="grid";const dep=mode==="deposit";$("accountTitle").textContent=dep?"Deposit FrostSMP Balance":"Withdraw FrostSMP Balance";$("accountDesc").textContent=dep?"Send FrostSMP in-game currency to the FrostFlip account using the command below. This website does not process real money.":"Withdrawals are handled in FrostSMP in-game currency only. This static prototype cannot execute a server-side payout automatically.";$("withdrawNote").style.display=dep?"none":"block";$("payCommand").textContent="/pay Frostflips "+compactMoney(Number($("accountAmount").value||100000));$("copyCommand").style.display=dep?"block":"none"}
 function updateCommand(){const n=Math.max(1,Number(String($("accountAmount").value).replace(/\D/g,""))||100000);$("accountAmount").value=n;$("payCommand").textContent="/pay Frostflips "+compactMoney(n)}
-function initSocial(){const msgs=[["IceNova","yo this rocket is clean ❄"],["BlueFang","anyone hitting 10x today?"],["SnowByte","FrostFlip lobby looking icy"],["MangoMite","good luck everyone 🚀"],["FrostPixel","just joined"],[nickname,"welcome to FrostFlip"]];$("chatList").innerHTML=msgs.map(x=>'<div class="chat-msg"><div class="avatar">'+x[0][0]+'</div><div><b>'+x[0]+'</b><span>'+x[1]+'</span></div></div>').join("");const players=[["🥇❄️🔥","FrostyGoat",2000000000],["🥈⚡💎","faxlex60",1000000000],["🥉👑🧊","Mazeen",891000000],["❄️🚀","IceNova",18400000],["💙⛄","SnowByte",12750000]];$("leaders").innerHTML=players.map((p,i)=>'<div class="leader"><div class="rank">'+p[0]+'</div><div class="who"><b>'+p[1]+'</b><span>FrostSMP player</span></div><strong>'+fmt(p[2])+'</strong></div>').join("");const wins=[["🚀","FrostyGoat","CASHED 8.42x","+ $842K","plus"],["💀","faxlex60","ROCKET CRASH","- $500K","minus"],["🔥","Mazeen","CASHED 4.17x","+ $417K","plus"],["❄️","IceNova","CASHED 2.63x","+ $263K","plus"],["😭","SnowByte","ROCKET CRASH","- $75K","minus"],["💎","GlacierFox","CASHED 12.08x","+ $1.2M","plus"]];$("winsList").innerHTML=wins.map(x=>'<div class="win-row"><div class="win-icon">'+x[0]+'</div><div class="win-player"><b>'+x[1]+'</b><span>'+x[2]+'</span></div><strong class="win-amount '+x[4]+'">'+x[3]+'</strong></div>').join("");setTimeout(()=>{const extra=[["GlacierFox","that cashout 😭"],["QuartzKid","new round!"],["FrostyBee","snow is everywhere lol"]];let i=0;setInterval(()=>{const x=extra[i++%extra.length];const el=document.createElement("div");el.className="chat-msg";el.innerHTML='<div class="avatar">'+x[0][0]+'</div><div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>';$("chatList").appendChild(el);$("chatList").scrollTop=$("chatList").scrollHeight},6500)},900)}
-
+function initSocial(){
+ const botNames=["IceNova","BlueFang","SnowByte","MangoMite","FrostPixel","GlacierFox","QuartzKid","FrostyBee","ArcticWolf","CryoByte","SnowRush","IceWarden","PolarBear","FrozenFox","BlizzardX","ChillViper","FrostByte","IceDrift","SnowStorm","GlacierKid","ColdSnap","FrostMage","WinterX","IceShard","SnowRider","ArcticAce","FrostKing","BlueBlizzard","CryoFox","IceClaw","SnowGhost","FrostNova","Glacial","WinterWolf","IceTitan","SnowFlake","FrostRunner","PolarX","ColdByte","IceKnight","SnowKing","FrostDash","GlacierX","ChillMaster","IceBolt","SnowPilot","FrostWave","ArcticFox","CryoKing","FrozenByte","IceStorm","SnowFlare","FrostBlade","GlacierWolf","ChillFox","IceRocket","SnowMage","FrostOrbit","PolarByte","ColdRush","IceVortex","SnowClaw","FrostAce","GlacierByte","WinterByte","IcePhantom","SnowViper","FrostWolf","CryoRush","ArcticByte","FrozenFox","IceBlaze","SnowBolt","FrostPilot","GlacierAce","ChillByte","IceComet","SnowGhost","FrostComet","PolarWolf","ColdFox","IceRider","SnowKnight","FrostKnight","GlacierRush","WinterFox","CryoByte2","IceDash","SnowTitan","FrostTitan","ArcticWolf2","FrozenRush","BlueFrost","IceWizard","SnowWizard","FrostWizard","GlacierMage","ChillMage","IceHunter","SnowHunter","FrostHunter","PolarHunter","ColdHunter","IceBunny","SnowBunny","FrostBunny","GlacierBunny","ChillBunny","IceMonkey","SnowMonkey","FrostMonkey","PolarMonkey","ColdMonkey","IceDragon","SnowDragon","FrostDragon","GlacierDragon","ChillDragon","IceReaper","SnowReaper","FrostReaper","PolarReaper","ColdReaper","IceLegend","SnowLegend","FrostLegend","GlacierLegend"];
+ const topics=[
+  ["rocket is flying clean tonight 🚀","that multiplier is moving fast ngl"],
+  ["what do you guys cash out at?","I usually watch the multiplier and leave before it gets too spicy 😭"],
+  ["is 2x safe?","nothing is guaranteed, but 2x is a common target"],
+  ["bro I crashed at 1.3x 💀","that is brutal 😭 next round can still be completely different"],
+  ["anyone hit 10x?","I've seen the lobby hit big multipliers, but they are never guaranteed"],
+  ["how does the rocket work?","multiplier rises until the randomly generated crash point is reached"],
+  ["should I bet max?","I'd keep your wager within whatever amount you're comfortable losing"],
+  ["why did it crash so early?","every round has its own crash point, so previous rounds don't control the next one"],
+  ["FrostFlip looks icy ❄️","the snow effects are actually clean"],
+  ["who is first on leaderboard?","FrostyGoat is sitting at #1 right now 🥇❄️"],
+  ["faxlex60 has 1B??","yep, the leaderboard shows $1B for faxlex60 💎"],
+  ["Mazeen is at 891M","that's a huge FrostSMP balance 👑"],
+  ["when is roulette coming?","it is marked COMING SOON on the games list"],
+  ["case spins finished 😭","you've used all the available demo spins for this session"],
+  ["can I cash out after 1x?","yes, once the rocket is flying the cashout button is available"],
+  ["the rocket is too fast","watch the multiplier rather than the rocket height for timing your cashout"],
+  ["what happens on crash?","the current wager is lost if you haven't cashed out before the crash"],
+  ["new round?","yep, once the previous round finishes you can launch again"],
+  ["snow everywhere 😂","had to make the lobby feel properly FrostSMP"],
+  ["any tips?","there's no guaranteed timing trick; every round is generated independently"]
+ ];
+ function addChat(name,msg,bot=true){
+  const el=document.createElement("div");el.className="chat-msg";
+  el.innerHTML='<div class="avatar">'+name[0]+'</div><div><b>'+name+(bot?' <small style="color:#35aee0">BOT</small>':'')+'</b><span>'+msg+'</span></div>';
+  $("chatList").appendChild(el);
+  while($("chatList").children.length>16)$("chatList").removeChild($("chatList").firstChild);
+  $("chatList").scrollTop=$("chatList").scrollHeight;
+ }
+ const initial=[["IceNova","yo this rocket is clean ❄"],["BlueFang","anyone hitting 10x today?"],["SnowByte","FrostFlip lobby looking icy"],["MangoMite","good luck everyone 🚀"],["FrostPixel","just joined"],[nickname,"welcome to FrostFlip"]];
+ $("chatList").innerHTML="";
+ initial.forEach(x=>addChat(x[0],x[1],x[0]!==nickname));
+ const players=[["🥇❄️🔥","FrostyGoat",2000000000],["🥈⚡💎","faxlex60",1000000000],["🥉👑🧊","Mazeen",891000000],["❄️🚀","IceNova",18400000],["💙⛄","SnowByte",12750000]];
+ $("leaders").innerHTML=players.map(p=>'<div class="leader"><div class="rank">'+p[0]+'</div><div class="who"><b>'+p[1]+'</b><span>FrostSMP player</span></div><strong>'+fmt(p[2])+'</strong></div>').join("");
+ const wins=[["🚀","FrostyGoat","CASHED 8.42x","+ $842K","plus"],["💀","faxlex60","ROCKET CRASH","- $500K","minus"],["🔥","Mazeen","CASHED 4.17x","+ $417K","plus"],["❄️","IceNova","CASHED 2.63x","+ $263K","plus"],["😭","SnowByte","ROCKET CRASH","- $75K","minus"],["💎","GlacierFox","CASHED 12.08x","+ $1.2M","plus"]];
+ $("winsList").innerHTML=wins.map(x=>'<div class="win-row"><div class="win-icon">'+x[0]+'</div><div class="win-player"><b>'+x[1]+'</b><span>'+x[2]+'</span></div><strong class="win-amount '+x[4]+'">'+x[3]+'</strong></div>').join("");
+ let q=0;
+ setInterval(()=>{
+  const x=topics[q++%topics.length],name=botNames[Math.floor(random()*botNames.length)];
+  addChat(name,x[0]);
+  setTimeout(()=>addChat(botNames[Math.floor(random()*botNames.length)],x[1]),1400+Math.floor(random()*1800));
+ },4200);
+}
 function random(){try{if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(2);crypto.getRandomValues(a);return (a[0]*4294967296+a[1])/18446744073709551616}}catch(e){}return Math.random()}
 function crashPoint(){const r=Math.max(1e-12,random());return Math.max(1.01,Math.min(100000,Math.floor((.88/r)*100)/100))}
 function multiplier(ms){return Math.exp(ms/4700)}
