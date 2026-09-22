@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FrostSMP Rocket — FrostFlip</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --ice:#7deaff;
+  --cyan:#19dfff;
+  --blue:#168cff;
+  --navy:#03111f;
+  --panel:rgba(5,24,42,.82);
+  --line:rgba(125,234,255,.18);
+  --white:#f4fcff;
+}
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  background:#020b14;
+  color:var(--white);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+
+.app{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(20,180,255,.16),transparent 38%),
+    linear-gradient(#020b14,#03101d 60%,#020912);
+}
+
+/* TOP BAR */
+.top{
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  border-bottom:1px solid rgba(125,234,255,.12);
+  background:rgba(2,12,22,.72);
+  backdrop-filter:blur(18px);
+  position:relative;
+  z-index:20;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.brandMark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(145deg,#fff,#4eeaff 48%,#0874ff);
+  box-shadow:0 0 28px rgba(25,223,255,.45);
+  position:relative;
+}
+.brandMark:after{
+  content:"";
+  position:absolute;
+  width:10px;height:18px;
+  background:#03111f;
+  border-radius:50% 50% 45% 45%;
+  left:12px;top:7px;
+}
+.balanceBox{
+  border:1px solid var(--line);
+  background:rgba(8,30,49,.72);
+  border-radius:12px;
+  padding:8px 14px;
+  min-width:190px;
+}
+.balanceLabel{
+  color:#82a8bb;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+.balance{
+  font-size:17px;
+  font-weight:900;
+  margin-top:1px;
+}
+
+/* GAME */
+.layout{
+  width:min(1500px,100%);
+  margin:auto;
+  padding:18px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 310px;
+  gap:16px;
+}
+.gameWrap{
+  min-width:0;
+  position:relative;
+}
+.game{
+  position:relative;
+  height:min(760px,calc(100vh - 105px));
+  min-height:580px;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(125,234,255,.17);
+  background:#061626;
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.4),
+    inset 0 0 100px rgba(0,170,255,.05);
+}
+canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.hud{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.multiplier{
+  position:absolute;
+  top:28px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  z-index:5;
+}
+.multiplierValue{
+  font-size:clamp(48px,7vw,92px);
+  line-height:.9;
+  font-weight:1000;
+  letter-spacing:-.06em;
+  text-shadow:0 0 28px rgba(72,225,255,.45);
+}
+.multiplierSub{
+  margin-top:9px;
+  color:#8eb6c8;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.payout{
+  margin-top:8px;
+  font-size:18px;
+  font-weight:800;
+  color:#dffaff;
+}
+.payout span{color:#72ecff}
+.flightBadge{
+  position:absolute;
+  top:27px;
+  left:25px;
+  padding:9px 12px;
+  border:1px solid rgba(125,234,255,.18);
+  background:rgba(2,16,29,.55);
+  border-radius:10px;
+  color:#9ec2d2;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.sound{
+  position:absolute;
+  top:27px;
+  right:25px;
+  pointer-events:auto;
+  width:40px;height:40px;
+  border-radius:10px;
+  border:1px solid rgba(125,234,255,.2);
+  background:rgba(2,16,29,.62);
+  color:#dffaff;
+}
+
+/* LAUNCH PANEL */
+.launchPanel{
+  position:absolute;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%);
+  width:min(690px,calc(100% - 36px));
+  padding:14px;
+  background:rgba(3,17,30,.88);
+  border:1px solid rgba(125,234,255,.2);
+  border-radius:17px;
+  backdrop-filter:blur(18px);
+  box-shadow:0 12px 50px rgba(0,0,0,.32);
+  pointer-events:auto;
+}
+.betRow{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:9px;
+}
+.betInputWrap{
+  position:relative;
+}
+.betInputWrap span{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#7598a9;
+  font-weight:800;
+}
+#bet{
+  width:100%;
+  height:48px;
+  padding:0 14px 0 30px;
+  background:#071c2e;
+  color:#fff;
+  border:1px solid rgba(125,234,255,.18);
+  outline:none;
+  border-radius:11px;
+  font-weight:900;
+  font-size:16px;
+}
+#bet:focus{border-color:rgba(54,225,255,.7);box-shadow:0 0 0 3px rgba(25,223,255,.08)}
+.quick{
+  display:flex;
+  gap:5px;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+.quick button,.adjust button{
+  border:1px solid rgba(125,234,255,.14);
+  background:#071b2c;
+  color:#a9c8d5;
+  border-radius:8px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:800;
+}
+.quick button:hover,.adjust button:hover{border-color:#38ddff;color:#fff}
+.adjust{
+  display:flex;
+  gap:5px;
+}
+.action{
+  width:100%;
+  margin-top:10px;
+  height:56px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#baf8ff,#24dcff 48%,#168bff);
+  color:#02121e;
+  font-weight:1000;
+  font-size:17px;
+  letter-spacing:.04em;
+  box-shadow:0 0 28px rgba(25,223,255,.22);
+  transition:.15s;
+}
+.action:hover{transform:translateY(-1px);box-shadow:0 0 42px rgba(25,223,255,.36)}
+.action:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+.action.cashout{
+  background:linear-gradient(135deg,#d9ffff,#62efff,#1da0ff);
+  font-size:18px;
+}
+.error{
+  min-height:17px;
+  color:#ff8790;
+  font-size:11px;
+  padding:5px 3px 0;
+}
+
+/* RESULT */
+.result{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.9);
+  text-align:center;
+  z-index:8;
+  pointer-events:none;
+  opacity:0;
+  transition:.25s;
+}
+.result.show{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+.resultTitle{
+  font-size:clamp(28px,4vw,55px);
+  font-weight:1000;
+  letter-spacing:-.04em;
+}
+.resultValue{
+  font-size:24px;
+  font-weight:900;
+  margin-top:8px;
+}
+.resultProfit{
+  margin-top:5px;
+  color:#8eefff;
+  font-weight:800;
+}
+.crash .resultTitle{color:#ff6874;text-shadow:0 0 30px rgba(255,70,80,.5)}
+.win .resultTitle{color:#8cf5ff;text-shadow:0 0 30px rgba(25,223,255,.55)}
+
+/* SIDE */
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.panel{
+  border:1px solid rgba(125,234,255,.14);
+  border-radius:15px;
+  background:rgba(5,23,39,.78);
+  padding:15px;
+}
+.panelTitle{
+  font-size:10px;
+  color:#7fa5b6;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  margin-bottom:12px;
+}
+.last{
+  padding:13px;
+  border-radius:11px;
+  background:#071b2c;
+  border:1px solid rgba(125,234,255,.1);
+}
+.lastTitle{font-size:10px;color:#718e9d;text-transform:uppercase;letter-spacing:.12em}
+.lastValue{font-size:23px;font-weight:1000;margin-top:4px}
+.history{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.hist{
+  padding:7px 9px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:900;
+  background:#092237;
+  color:#89b6c8;
+}
+.hist.low{color:#ff9b9b;background:rgba(255,68,80,.07)}
+.hist.mid{color:#7feaff}
+.hist.high{color:#fff;background:rgba(25,223,255,.13);box-shadow:0 0 14px rgba(25,223,255,.08)}
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.stat{
+  padding:10px;
+  background:#071b2c;
+  border-radius:9px;
+}
+.stat label{display:block;color:#668595;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+.stat b{display:block;margin-top:3px;font-size:14px}
+.rulesBtn{
+  width:100%;
+  height:42px;
+  border:1px solid rgba(125,234,255,.16);
+  background:#071b2c;
+  color:#c9eff8;
+  border-radius:10px;
+  font-weight:800;
+}
+.rulesBtn:hover{border-color:#35ddff}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,5,10,.72);
+  backdrop-filter:blur(10px);
+}
+.modal.show{display:flex}
+.modalBox{
+  width:min(620px,100%);
+  max-height:85vh;
+  overflow:auto;
+  border:1px solid rgba(125,234,255,.2);
+  background:#061725;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
+}
+.modalTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.modal h2{margin:0;font-size:24px}
+.close{
+  width:35px;height:35px;
+  border-radius:9px;
+  border:1px solid rgba(125,234,255,.15);
+  background:#0a2135;
+  color:#fff;
+}
+.ruleSection{margin-top:20px}
+.ruleSection h3{font-size:12px;color:#71eaff;text-transform:uppercase;letter-spacing:.12em}
+.ruleSection p,.ruleSection li{color:#9bb7c3;font-size:13px;line-height:1.6}
+.formula{
+  margin-top:10px;
+  padding:13px;
+  background:#03111e;
+  border-radius:9px;
+  color:#dffaff;
+  font-family:ui-monospace,monospace;
+  overflow:auto;
+}
+
+/* COUNTDOWN */
+.countdown{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9;
+  pointer-events:none;
+  opacity:0;
+}
+.countdown.show{opacity:1}
+.countdownText{
+  font-size:clamp(80px,15vw,180px);
+  font-weight:1000;
+  color:#effeff;
+  text-shadow:
+    0 0 20px #29eaff,
+    0 0 70px rgba(25,223,255,.55);
+  animation:count .75s ease both;
+}
+@keyframes count{
+  0%{transform:scale(1.5);opacity:0}
+  30%{transform:scale(1);opacity:1}
+  100%{transform:scale(.7);opacity:0}
+}
+@keyframes pulse{
+  50%{transform:scale(1.035)}
+}
+.pulse{animation:pulse .35s ease}
+
+/* MOBILE */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .side{display:grid;grid-template-columns:1fr 1fr}
+  .side .panel:last-child{grid-column:1/-1}
+  .game{height:calc(100vh - 95px);min-height:600px}
+}
+@media(max-width:600px){
+  .top{padding:0 12px;height:58px}
+  .brand span{display:none}
+  .balanceBox{min-width:150px}
+  .layout{padding:8px}
+  .game{border-radius:14px;min-height:620px;height:calc(100vh - 74px)}
+  .flightBadge{top:14px;left:14px}
+  .sound{top:14px;right:14px}
+  .multiplier{top:64px}
+  .multiplierValue{font-size:62px}
+  .launchPanel{bottom:10px;width:calc(100% - 20px)}
+  .side{display:flex}
+  .side .panel:last-child{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="top">
+  <div class="brand">
+    <div class="brandMark"></div>
+    <span>FROSTFLIP</span>
+  </div>
+
+  <div class="balanceBox">
+    <div class="balanceLabel">FrostSMP Balance</div>
+    <div class="balance" id="balance">$10,000,000</div>
+  </div>
+</header>
+
+<main class="layout">
+
+<section class="gameWrap">
+  <div class="game" id="game">
+
+    <canvas id="scene"></canvas>
+
+    <div class="hud">
+
+      <div class="flightBadge" id="flightBadge">READY</div>
+
+      <button class="sound" id="soundBtn" aria-label="Toggle sound">🔊</button>
+
+      <div class="multiplier">
+        <div class="multiplierValue" id="multiplier">1.00x</div>
+        <div class="multiplierSub">Current Multiplier</div>
+        <div class="payout">
+          Current Cashout
+          <span id="currentPayout">$0</span>
+        </div>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="countdownText" id="countText">3</div>
+      </div>
+
+      <div class="result" id="result">
+        <div class="resultTitle" id="resultTitle"></div>
+        <div class="resultValue" id="resultValue"></div>
+        <div class="resultProfit" id="resultProfit"></div>
+      </div>
+
+      <div class="launchPanel">
+
+        <div class="betRow">
+          <div class="betInputWrap">
+            <span>$</span>
+            <input
+              id="bet"
+              type="number"
+              min="1000"
+              max="1000000"
+              step="1"
+              value="100000"
+              inputmode="numeric"
+              aria-label="Bet amount"
+            >
+          </div>
+
+          <div class="adjust">
+            <button id="half">½</button>
+            <button id="double">2×</button>
+            <button id="max">MAX</button>
+          </div>
+        </div>
+
+        <div class="quick">
+          <button data-bet="1000">1K</button>
+          <button data-bet="5000">5K</button>
+          <button data-bet="10000">10K</button>
+          <button data-bet="25000">25K</button>
+          <button data-bet="50000">50K</button>
+          <button data-bet="100000">100K</button>
+          <button data-bet="250000">250K</button>
+          <button data-bet="500000">500K</button>
+          <button data-bet="1000000">1M</button>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <button class="action" id="action">LAUNCH ROCKET</button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<aside class="side">
+
+  <div class="panel">
+    <div class="panelTitle">Last Round</div>
+    <div class="last">
+      <div class="lastTitle" id="lastTitle">No completed round</div>
+      <div class="lastValue" id="lastValue">—</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panelTitle">Recent Rockets</div>
+    <div class="history" id="history">
+      <span style="color:#617f90;font-size:12px">No rounds yet</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panelTitle">Round Stats</div>
+    <div class="stats">
+      <div class="stat">
+        <label>Rounds</label>
+        <b id="rounds">0</b>
+      </div>
+      <div class="stat">
+        <label>Wins</label>
+        <b id="wins">0</b>
+      </div>
+      <div class="stat">
+        <label>Highest</label>
+        <b id="highest">—</b>
+      </div>
+      <div class="stat">
+        <label>Profit</label>
+        <b id="profit">$0</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <button class="rulesBtn" id="rulesBtn">GAME RULES</button>
+  </div>
+
+</aside>
+</main>
+</div>
+
+<!-- RULES -->
+<div class="modal" id="rulesModal">
+  <div class="modalBox">
+    <div class="modalTop">
+      <h2>FrostSMP Rocket</h2>
+      <button class="close" id="closeRules">×</button>
+    </div>
+
+    <div class="ruleSection">
+      <h3>How it works</h3>
+      <p>
+        Choose a wager and launch the rocket. The multiplier continuously
+        increases while the rocket climbs. Cash out before the predetermined
+        crash point to receive your wager multiplied by the cashout multiplier.
+      </p>
+    </div>
+
+    <div class="ruleSection">
+      <h3>Fairness</h3>
+      <ul>
+        <li>Every round generates one cryptographically secure random value.</li>
+        <li>The crash point is generated before the animation starts.</li>
+        <li>Bet size does not affect the result.</li>
+        <li>Balance does not affect the result.</li>
+        <li>Previous rounds do not affect the result.</li>
+        <li>Cashout history does not affect the result.</li>
+        <li>Every round is independent.</li>
+      </ul>
+
+      <div class="formula">
+        crash = (1 − 0.03) / u
+      </div>
+
+      <p>
+        where <b>u</b> is a secure random value between 0 and 1.
+        The target mathematical house edge is approximately 3%.
+      </p>
+    </div>
+
+    <div class="ruleSection">
+      <h3>Payout</h3>
+      <p><b>Payout = Bet × Cashout Multiplier</b></p>
+      <p>
+        A crash before cashout loses the wager. Cashout is accepted only while
+        the round is in the flying state.
+      </p>
+    </div>
+
+    <div class="ruleSection">
+      <h3>Limits</h3>
+      <p>Minimum wager: <b>1,000</b></p>
+      <p>Maximum wager: <b>1,000,000</b></p>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   FROSTSMP ROCKET
+   Game logic is deliberately separated from presentation.
+   ============================================================ */
+
+const canvas = document.getElementById("scene");
+const ctx = canvas.getContext("2d");
+
+const balanceEl = document.getElementById("balance");
+const multiplierEl = document.getElementById("multiplier");
+const payoutEl = document.getElementById("currentPayout");
+const betEl = document.getElementById("bet");
+const actionEl = document.getElementById("action");
+const errorEl = document.getElementById("error");
+const flightBadge = document.getElementById("flightBadge");
+const resultEl = document.getElementById("result");
+const resultTitle = document.getElementById("resultTitle");
+const resultValue = document.getElementById("resultValue");
+const resultProfit = document.getElementById("resultProfit");
+const countdown = document.getElementById("countdown");
+const countText = document.getElementById("countText");
+const historyEl = document.getElementById("history");
+const lastTitle = document.getElementById("lastTitle");
+const lastValue = document.getElementById("lastValue");
+const roundsEl = document.getElementById("rounds");
+const winsEl = document.getElementById("wins");
+const highestEl = document.getElementById("highest");
+const profitEl = document.getElementById("profit");
+
+const MIN_BET = 1000;
+const MAX_BET = 1000000;
+const HOUSE_EDGE = 0.03;
+
+let balance = 10000000;
+let state = "IDLE";
+let round = null;
+
+let history = [];
+let rounds = 0;
+let wins = 0;
+let highest = 0;
+let totalProfit = 0;
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+
+let visualTime = 0;
+let lastFrame = performance.now();
+let raf = 0;
+
+let soundOn = true;
+let audio = null;
+
+const particles = [];
+const clouds = [];
+const buildings = [];
+
+/* ------------------------------------------------------------
+   SECURE RANDOMNESS
+   ------------------------------------------------------------ */
+
+function secureUnit() {
+  const array = new Uint32Array(2);
+  crypto.getRandomValues(array);
+
+  // 64-bit-ish combination without Math.random.
+  const value =
+    (BigInt(array[0]) << 32n) |
+    BigInt(array[1]);
+
+  const max = 18446744073709551616n;
+  let u = Number(value) / Number(max);
+
+  // Avoid exact zero.
+  if (!(u > 0)) u = Number.MIN_VALUE;
+
+  return u;
+}
+
+function generateCrashPoint() {
+  const u = secureUnit();
+
+  let crash = (1 - HOUSE_EDGE) / u;
+
+  if (!Number.isFinite(crash) || crash < 1) crash = 1;
+
+  /*
+    No arbitrary gameplay cap.
+    Extremely large results are allowed mathematically.
+    Presentation simply compresses altitude visually.
+  */
+  return crash;
+}
+
+/* ------------------------------------------------------------
+   MONEY
+   ------------------------------------------------------------ */
+
+function money(n) {
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+
+function setBalance(n) {
+  balance = Math.max(0, Math.round(n));
+  balanceEl.textContent = money(balance);
+}
+
+function setError(msg) {
+  errorEl.textContent = msg || "";
+}
+
+function getBet() {
+  const value = Number(betEl.value);
+
+  if (!Number.isFinite(value) || !Number.isInteger(value)) {
+    setError("Enter a valid wager");
+    return null;
+  }
+
+  if (value < MIN_BET) {
+    setError("Minimum bet is 1,000");
+    return null;
+  }
+
+  if (value > MAX_BET) {
+    setError("Maximum bet is 1,000,000");
+    return null;
+  }
+
+  if (value > balance) {
+    setError("Insufficient FrostSMP balance");
+    return null;
+  }
+
+  setError("");
+  return value;
+}
+
+function currentRoundedMultiplier(value) {
+  return Math.floor(value * 100) / 100;
+}
+
+/* ------------------------------------------------------------
+   AUDIO
+   ------------------------------------------------------------ */
+
+function initAudio() {
+  if (audio) return;
+
+  try {
+    const AudioContext =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContext) return;
+
+    audio = new AudioContext();
+  } catch {
+    audio = null;
+  }
+}
+
+function beep(freq=500, duration=.08, volume=.035, type="sine") {
+  if (!soundOn || !audio) return;
+
+  try {
+    if (audio.state === "suspended") audio.resume();
+
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+
+    osc.type = type;
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.0001, audio.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      Math.max(volume, 0.0002),
+      audio.currentTime + .008
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      audio.currentTime + duration
+    );
+
+    osc.connect(gain);
+    gain.connect(audio.destination);
+
+    osc.start();
+    osc.stop(audio.currentTime + duration + .02);
+  } catch {}
+}
+
+function launchSound() {
+  beep(90,.25,.07,"sawtooth");
+  setTimeout(()=>beep(170,.35,.045,"sawtooth"),100);
+}
+
+function crashSound() {
+  beep(100,.2,.07,"sawtooth");
+  setTimeout(()=>beep(65,.4,.09,"square"),100);
+  setTimeout(()=>beep(42,.55,.07,"sawtooth"),180);
+}
+
+function cashoutSound() {
+  beep(650,.08,.045);
+  setTimeout(()=>beep(850,.1,.05),70);
+  setTimeout(()=>beep(1100,.18,.045),145);
+}
+
+function milestoneSound(mult) {
+  if (mult >= 10) {
+    beep(1200,.12,.05);
+    setTimeout(()=>beep(1500,.18,.05),90);
+  } else if (mult >= 5) {
+    beep(950,.1,.04);
+  } else if (mult >= 3) {
+    beep(700,.08,.035);
+  } else if (mult >= 2) {
+    beep(550,.07,.025);
+  } else if (mult >= 1.5) {
+    beep(430,.05,.02);
+  }
+}
+
+/* ------------------------------------------------------------
+   CANVAS / WORLD
+   ------------------------------------------------------------ */
+
+function resize() {
+  const rect = canvas.getBoundingClientRect();
+
+  width = rect.width;
+  height = rect.height;
+
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  makeWorld();
+}
+
+function makeWorld() {
+  clouds.length = 0;
+  buildings.length = 0;
+
+  for (let i=0;i<13;i++) {
+    clouds.push({
+      x: Math.random() * Math.max(width,1),
+      y: 80 + Math.random() * height * .65,
+      s: .5 + Math.random() * 1.3,
+      speed: 5 + Math.random() * 12
+    });
+  }
+
+  for (let i=0;i<22;i++) {
+    buildings.push({
+      x:i * (width / 18),
+      w:25 + Math.random()*55,
+      h:50 + Math.random()*150,
+      seed:i
+    });
+  }
+}
+
+/*
+  Math.random is used only for visual decoration.
+  It NEVER participates in game outcome generation.
+*/
+
+function altitudeForMultiplier(mult) {
+  if (mult < 1.5) return 0;
+  if (mult < 2.5) return .22;
+  if (mult < 4) return .48;
+  if (mult < 7.5) return .7;
+
+  const extra = Math.log10(Math.max(mult / 7.5,1));
+  return Math.min(1,.7 + extra * .25);
+}
+
+function skyColor(mult) {
+  const a = altitudeForMultiplier(mult);
+
+  const topR = Math.round(4 + a * 4);
+  const topG = Math.round(27 - a * 17);
+  const topB = Math.round(57 + a * 28);
+
+  const botR = Math.round(6 + a * 3);
+  const botG = Math.round(62 - a * 25);
+  const botB = Math.round(92 + a * 38);
+
+  return {
+    top:`rgb(${topR},${topG},${topB})`,
+    bottom:`rgb(${botR},${botG},${botB})`
+  };
+}
+
+function drawBackground(mult, dt) {
+  const sky = skyColor(mult);
+
+  const grad = ctx.createLinearGradient(0,0,0,height);
+  grad.addColorStop(0,sky.top);
+  grad.addColorStop(1,sky.bottom);
+
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,width,height);
+
+  const altitude = altitudeForMultiplier(mult);
+
+  /* stars */
+  const stars = Math.floor(40 + altitude * 130);
+
+  for (let i=0;i<stars;i++) {
+    const seed = i * 999.123;
+    const x = ((seed * 1.73) % width + width) % width;
+    const y = ((seed * .83) % (height*.8) + height*.8) % (height*.8);
+    const twinkle = .35 + Math.sin(visualTime*2+i)*.2;
+
+    ctx.fillStyle = `rgba(210,248,255,${Math.max(0,altitude*twinkle)})`;
+    ctx.fillRect(x,y,1.4,1.4);
+  }
+
+  /* moon / planet glow at extreme altitude */
+  if (mult >= 7.5) {
+    const r = Math.min(width,height)*.17;
+    const x = width*.78;
+    const y = height*.26;
+
+    const glow = ctx.createRadialGradient(x,y,r*.3,x,y,r);
+    glow.addColorStop(0,"rgba(135,239,255,.38)");
+    glow.addColorStop(1,"rgba(30,170,255,0)");
+
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle = "#8beeff";
+    ctx.globalAlpha = .12;
+    ctx.beginPath();
+    ctx.arc(x,y,r*.55,0,Math.PI*2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  /* clouds */
+  const cloudVisibility =
+    mult < 1.5 ? 1 :
+    mult < 4 ? Math.max(0,1-(mult-1.5)/3) :
+    0;
+
+  if (cloudVisibility > 0) {
+    for (const c of clouds) {
+      c.x -= c.speed * dt * (1 + altitude);
+
+      if (c.x < -180) c.x = width+180;
+
+      ctx.globalAlpha = cloudVisibility * .45;
+
+      const g = ctx.createRadialGradient(
+        c.x,c.y,10,
+        c.x,c.y,100*c.s
+      );
+
+      g.addColorStop(0,"#eaffff");
+      g.addColorStop(1,"rgba(220,250,255,0)");
+
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.ellipse(c.x,c.y,110*c.s,35*c.s,0,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  /* city */
+  const cityVisibility =
+    mult < 1.5 ? 1 :
+    mult < 2.5 ? Math.max(0,1-(mult-1.5)/1) :
+    0;
+
+  if (cityVisibility > 0) {
+    const groundY = height*.74;
+
+    ctx.globalAlpha = cityVisibility*.8;
+
+    for (const b of buildings) {
+      const x = b.x;
+      const y = groundY - b.h;
+
+      const g = ctx.createLinearGradient(0,y,0,groundY);
+      g.addColorStop(0,"#102c43");
+      g.addColorStop(1,"#061623");
+
+      ctx.fillStyle = g;
+      ctx.fillRect(x,y,b.w,b.h);
+
+      for(let wy=y+15;wy<groundY-8;wy+=19){
+        if ((Math.floor(wy)+b.seed)%3 !== 0) {
+          ctx.fillStyle = "rgba(90,235,255,.35)";
+          ctx.fillRect(x+7,wy,4,5);
+        }
+      }
+    }
+
+    ctx.globalAlpha = 1;
+
+    /* snow ground */
+    const ground = ctx.createLinearGradient(0,groundY,0,height);
+    ground.addColorStop(0,"#dffcff");
+    ground.addColorStop(1,"#77aabd");
+
+    ctx.fillStyle = ground;
+    ctx.fillRect(0,groundY,width,height-groundY);
+
+    /* launch pad */
+    ctx.fillStyle = "#0b263b";
+    ctx.fillRect(width*.33,groundY-10,width*.34,12);
+
+    ctx.strokeStyle = "#39e7ff";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(width*.35,groundY-12,width*.30,16);
+
+    for(let x=width*.37;x<width*.64;x+=22){
+      ctx.fillStyle = "rgba(69,239,255,.6)";
+      ctx.fillRect(x,groundY-7,10,3);
+    }
+  }
+
+  /* high altitude haze */
+  if (mult > 2.5) {
+    const haze = Math.min(.4,(mult-2.5)*.04);
+    ctx.fillStyle = `rgba(215,249,255,${haze})`;
+    ctx.fillRect(0,0,width,height);
+  }
+}
+
+/* ------------------------------------------------------------
+   ROCKET
+   ------------------------------------------------------------ */
+
+function rocketPosition(mult) {
+  const altitude = altitudeForMultiplier(mult);
+
+  /*
+    Rocket remains within a controlled visual region.
+    The world moves instead, so 500x does not break layout.
+  */
+  const baseY = height*.62;
+  const travel = Math.min(height*.43, altitude*height*.43);
+
+  const y = baseY - travel;
+
+  const sway =
+    Math.sin(visualTime*2.2) * (4 + altitude*7);
+
+  const tilt =
+    Math.sin(visualTime*1.7) * (.025 + altitude*.025);
+
+  return {
+    x:width*.5 + sway,
+    y,
+    tilt
+  };
+}
+
+function drawRocket(mult) {
+  const p = rocketPosition(mult);
+
+  const danger =
+    round &&
+    round.crashPoint < Infinity &&
+    mult > round.crashPoint*.88;
+
+  const shaking =
+    state === "CRASHING" ?
+      Math.sin(visualTime*55)*5 :
+      danger ?
+        Math.sin(visualTime*28)*(mult-round.crashPoint*.88)*3 :
+        0;
+
+  ctx.save();
+
+  ctx.translate(p.x+shaking,p.y);
+  ctx.rotate(p.tilt + (state==="CRASHING" ? .3 : 0));
+
+  const size = Math.max(1,Math.min(1.25,1+altitudeForMultiplier(mult)*.15));
+
+  /* exhaust glow */
+  const flameLength =
+    38 +
+    Math.min(65,mult*3) +
+    Math.sin(visualTime*20)*5;
+
+  const glow = ctx.createRadialGradient(0,50,2,0,50,55);
+  glow.addColorStop(0,"rgba(87,246,255,.75)");
+  glow.addColorStop(1,"rgba(25,160,255,0)");
+
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(0,50,55,0,Math.PI*2);
+  ctx.fill();
+
+  /* flame */
+  const flame = ctx.createLinearGradient(0,25,0,25+flameLength);
+  flame.addColorStop(0,"#ffffff");
+  flame.addColorStop(.25,"#68f5ff");
+  flame.addColorStop(.65,"#168dff");
+  flame.addColorStop(1,"rgba(0,80,255,0)");
+
+  ctx.fillStyle = flame;
+  ctx.beginPath();
+  ctx.moveTo(-11,24);
+  ctx.quadraticCurveTo(-20,52,-7,24+flameLength);
+  ctx.quadraticCurveTo(0,34+flameLength,7,24+flameLength);
+  ctx.quadraticCurveTo(20,52,11,24);
+  ctx.closePath();
+  ctx.fill();
+
+  /* fins */
+  ctx.fillStyle = "#167bd2";
+
+  ctx.beginPath();
+  ctx.moveTo(-19,12);
+  ctx.lineTo(-39,34);
+  ctx.lineTo(-17,29);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(19,12);
+  ctx.lineTo(39,34);
+  ctx.lineTo(17,29);
+  ctx.closePath();
+  ctx.fill();
+
+  /* body */
+  const body = ctx.createLinearGradient(-17,0,17,0);
+  body.addColorStop(0,"#718894");
+  body.addColorStop(.3,"#f4fdff");
+  body.addColorStop(.7,"#c6e0e8");
+  body.addColorStop(1,"#4f6f7c");
+
+  ctx.fillStyle = body;
+  ctx.beginPath();
+  ctx.moveTo(0,-58);
+  ctx.bezierCurveTo(19,-42,20,-5,17,27);
+  ctx.lineTo(-17,27);
+  ctx.bezierCurveTo(-20,-5,-19,-42,0,-58);
+  ctx.closePath();
+  ctx.fill();
+
+  /* nose */
+  ctx.fillStyle="#dffcff";
+  ctx.beginPath();
+  ctx.moveTo(0,-69);
+  ctx.quadraticCurveTo(14,-51,12,-42);
+  ctx.lineTo(-12,-42);
+  ctx.quadraticCurveTo(-14,-51,0,-69);
+  ctx.fill();
+
+  /* window */
+  const windowG=ctx.createRadialGradient(-3,-25,2,0,-25,12);
+  windowG.addColorStop(0,"#d8ffff");
+  windowG.addColorStop(.3,"#39eaff");
+  windowG.addColorStop(1,"#07538a");
+
+  ctx.fillStyle=windowG;
+  ctx.beginPath();
+  ctx.arc(0,-27,11,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.strokeStyle="rgba(255,255,255,.5)";
+  ctx.lineWidth=1;
+  ctx.stroke();
+
+  /* FrostSMP-ish cyan stripe */
+  ctx.fillStyle="#22dfff";
+  ctx.fillRect(-17,-5,34,5);
+
+  ctx.restore();
+}
+
+/* ------------------------------------------------------------
+   PARTICLES
+   ------------------------------------------------------------ */
+
+function spawnParticle(x,y,type="trail",amount=1) {
+  for(let i=0;i<amount;i++){
+    if(particles.length>450) break;
+
+    particles.push({
+      x:x+(Math.random()-.5)*18,
+      y:y+(Math.random()-.5)*8,
+      vx:(Math.random()-.5)*20,
+      vy:type==="trail" ? 40+Math.random()*80 : (Math.random()-.5)*120,
+      life:type==="trail" ? .35+Math.random()*.45 : .5+Math.random()*.7,
+      max:type==="trail" ? .7 : 1.2,
+      size:type==="debris" ? 2+Math.random()*4 : 1+Math.random()*3,
+      type
+    });
+  }
+}
+
+function updateParticles(dt) {
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+
+    p.life-=dt;
+    p.x+=p.vx*dt;
+    p.y+=p.vy*dt;
+    p.vy+=typeGravity(p.type)*dt;
+
+    if(p.life<=0){
+      particles[i]=particles[particles.length-1];
+      particles.pop();
+    }
+  }
+}
+
+function typeGravity(type){
+  if(type==="debris") return 90;
+  return 18;
+}
+
+function drawParticles(){
+  for(const p of particles){
+    const alpha=Math.max(0,p.life/p.max);
+
+    ctx.globalAlpha=alpha;
+
+    if(p.type==="debris"){
+      ctx.fillStyle="#8eeeff";
+    }else{
+      ctx.fillStyle="#65efff";
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  ctx.globalAlpha=1;
+}
+
+/* ------------------------------------------------------------
+   EXPLOSION
+   ------------------------------------------------------------ */
+
+let explosion = null;
+
+function startExplosion(){
+  const p=rocketPosition(round.currentMultiplier);
+
+  explosion={
+    x:p.x,
+    y:p.y,
+    time:0
+  };
+
+  spawnParticle(p.x,p.y,"debris",80);
+}
+
+function drawExplosion(dt){
+  if(!explosion) return;
+
+  explosion.time+=dt;
+
+  const t=explosion.time;
+
+  if(t<.75){
+    const radius=20+t*150;
+
+    const g=ctx.createRadialGradient(
+      explosion.x,explosion.y,0,
+      explosion.x,explosion.y,radius
+    );
+
+    g.addColorStop(0,"rgba(255,255,255,.95)");
+    g.addColorStop(.15,"rgba(93,240,255,.9)");
+    g.addColorStop(.5,"rgba(36,150,255,.45)");
+    g.addColorStop(1,"rgba(0,80,180,0)");
+
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.arc(explosion.x,explosion.y,radius,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  if(t>1.2){
+    explosion=null;
+  }
+}
+
+/* ------------------------------------------------------------
+   GAME LOGIC
+   ------------------------------------------------------------ */
+
+function resetVisuals(){
+  particles.length=0;
+  explosion=null;
+  resultEl.classList.remove("show","win","crash");
+  visualTime=0;
+}
+
+function updateUI(){
+  const active =
+    state==="FLYING" ||
+    state==="LAUNCHING" ||
+    state==="COUNTDOWN" ||
+    state==="CRASHING";
+
+  const flying = state==="FLYING";
+
+  betEl.disabled=active;
+  document.querySelectorAll(".quick button,.adjust button")
+    .forEach(b=>b.disabled=active);
+
+  if(flying){
+    const mult=currentRoundedMultiplier(round.currentMultiplier);
+    multiplierEl.textContent=mult.toFixed(2)+"x";
+    payoutEl.textContent=money(round.bet*mult);
+
+    actionEl.textContent=
+      "CASH OUT — "+money(round.bet*mult);
+
+    actionEl.classList.add("cashout");
+    actionEl.disabled=false;
+
+    flightBadge.textContent="FLYING";
+  }else{
+    actionEl.classList.remove("cashout");
+
+    if(state==="IDLE" || state==="ROUND_COMPLETE"){
+      actionEl.textContent="LAUNCH ROCKET";
+      actionEl.disabled=false;
+      flightBadge.textContent="READY";
+    }
+
+    if(state==="COUNTDOWN"){
+      actionEl.textContent="LAUNCHING…";
+      actionEl.disabled=true;
+      flightBadge.textContent="COUNTDOWN";
+    }
+
+    if(state==="CRASHING"){
+      actionEl.textContent="CRASHING…";
+      actionEl.disabled=true;
+      flightBadge.textContent="CRITICAL";
+    }
+  }
+
+  roundsEl.textContent=rounds;
+  winsEl.textContent=wins;
+  highestEl.textContent=highest ? highest.toFixed(2)+"x":"—";
+  profitEl.textContent=(totalProfit>=0?"+":"")+money(totalProfit);
+}
+
+function launch(){
+  if(state!=="IDLE" && state!=="ROUND_COMPLETE") return;
+
+  initAudio();
+
+  const bet=getBet();
+  if(bet===null) return;
+
+  resetVisuals();
+
+  round={
+    id:"round-"+Date.now()+"-"+Math.floor(secureUnit()*1000000),
+    bet,
+    random:secureUnit(),
+    crashPoint:0,
+    startTime:0,
+    currentMultiplier:1,
+    finalState:null,
+    cashoutMultiplier:null,
+    payout:0,
+    milestone:1
+  };
+
+  /*
+    The crash point is generated NOW.
+    Nothing after this changes it.
+  */
+  round.crashPoint=(1-HOUSE_EDGE)/round.random;
+
+  if(!Number.isFinite(round.crashPoint) || round.crashPoint<1){
+    round.crashPoint=1;
+  }
+
+  /*
+    Minimum visual crash point of 1.00x is mathematically possible.
+    Cashout is only accepted below the predetermined crash.
+  */
+
+  setBalance(balance-bet);
+
+  state="COUNTDOWN";
+  updateUI();
+
+  runCountdown();
+}
+
+function runCountdown(){
+  const values=["3","2","1","LAUNCH"];
+  let index=0;
+
+  const step=()=>{
+    if(state!=="COUNTDOWN") return;
+
+    countText.textContent=values[index];
+    countdown.classList.remove("show");
+
+    void countdown.offsetWidth;
+
+    countdown.classList.add("show");
+
+    if(index<3){
+      beep(480+index*90,.08,.035);
+    }else{
+      launchSound();
+    }
+
+    index++;
+
+    if(index<values.length){
+      setTimeout(step,760);
+    }else{
+      setTimeout(beginFlight,500);
+    }
+  };
+
+  step();
+}
+
+function beginFlight(){
+  if(state!=="COUNTDOWN" || !round) return;
+
+  state="FLYING";
+  round.startTime=performance.now();
+
+  countdown.classList.remove("show");
+
+  updateUI();
+}
+
+function multiplierAtElapsed(seconds){
+  /*
+    Smooth accelerating exponential curve.
+
+    m(t)=e^(k*t)
+
+    The game result is NOT generated from this.
+    It is only the visual/time representation of the
+    already-selected crash point.
+  */
+
+  const k=.105;
+
+  return Math.exp(k*seconds);
+}
+
+function cashout(){
+  if(state!=="FLYING" || !round) return;
+
+  /*
+    Atomic state transition.
+    Once state changes, a crash/cashout race cannot
+    award twice.
+  */
+  const r=round;
+
+  const mult=currentRoundedMultiplier(r.currentMultiplier);
+
+  if(mult>=r.crashPoint){
+    crash();
+    return;
+  }
+
+  state="CASHED_OUT";
+
+  r.finalState="CASHED_OUT";
+  r.cashoutMultiplier=mult;
+  r.payout=Math.round(r.bet*mult);
+
+  setBalance(balance+r.payout);
+
+  const profit=r.payout-r.bet;
+
+  totalProfit+=profit;
+  rounds++;
+  wins++;
+
+  highest=Math.max(highest,mult);
+
+  addHistory(mult);
+
+  lastTitle.textContent="Cashed out";
+  lastValue.textContent=mult.toFixed(2)+"x";
+
+  resultTitle.textContent="CASHED OUT";
+  resultValue.textContent=mult.toFixed(2)+"x";
+  resultProfit.textContent=
+    "+"+money(profit)+" PROFIT";
+
+  resultEl.classList.remove("crash");
+  resultEl.classList.add("win","show");
+
+  cashoutSound();
+
+  spawnParticle(
+    width*.5,
+    height*.4,
+    "debris",
+    55
+  );
+
+  updateUI();
+
+  setTimeout(()=>{
+    if(state==="CASHED_OUT"){
+      state="ROUND_COMPLETE";
+      updateUI();
+    }
+  },900);
+}
+
+function crash(){
+  if(!round) return;
+
+  if(
+    state!=="FLYING" &&
+    state!=="CRASHING"
+  ) return;
+
+  if(state==="CRASHING") return;
+
+  state="CRASHING";
+
+  const r=round;
+
+  /*
+    The crash point was generated before launch.
+    We now simply present it.
+  */
+  r.currentMultiplier=r.crashPoint;
+  r.finalState="CRASHED";
+
+  const crashMult=currentRoundedMultiplier(r.crashPoint);
+
+  rounds++;
+  totalProfit-=r.bet;
+
+  highest=Math.max(highest,crashMult);
+
+  addHistory(crashMult);
+
+  lastTitle.textContent="Rocket crashed";
+  lastValue.textContent=crashMult.toFixed(2)+"x";
+
+  resultTitle.textContent="ROCKET CRASHED";
+  resultValue.textContent=crashMult.toFixed(2)+"x";
+  resultProfit.textContent="-"+money(r.bet);
+
+  resultEl.classList.remove("win");
+  resultEl.classList.add("crash","show");
+
+  crashSound();
+  startExplosion();
+
+  updateUI();
+
+  setTimeout(()=>{
+    if(state==="CRASHING"){
+      state="ROUND_COMPLETE";
+      updateUI();
+    }
+  },1300);
+}
+
+function addHistory(mult){
+  history.unshift(mult);
+  history=history.slice(0,18);
+
+  historyEl.innerHTML="";
+
+  for(const n of history){
+    const el=document.createElement("span");
+    el.className="hist";
+
+    if(n<1.5) el.classList.add("low");
+    else if(n>=5) el.classList.add("high");
+    else el.classList.add("mid");
+
+    el.textContent=n.toFixed(2)+"x";
+
+    historyEl.appendChild(el);
+  }
+}
+
+/* ------------------------------------------------------------
+   FRAME LOOP
+   ------------------------------------------------------------ */
+
+function frame(now){
+  const dt=Math.min((now-lastFrame)/1000,.05);
+  lastFrame=now;
+
+  visualTime+=dt;
+
+  if(state==="FLYING" && round){
+
+    const elapsed=(now-round.startTime)/1000;
+
+    let mult=multiplierAtElapsed(elapsed);
+
+    /*
+      Prevent the multiplier from visually skipping past the
+      predetermined crash point.
+    */
+    if(mult>=round.crashPoint){
+      mult=round.crashPoint;
+      round.currentMultiplier=mult;
+
+      drawScene(dt);
+
+      crash();
+      raf=requestAnimationFrame(frame);
+      return;
+    }
+
+    round.currentMultiplier=mult;
+
+    const current2=currentRoundedMultiplier(mult);
+    const previousMilestone=round.milestone;
+
+    const milestones=[1.5,2,3,5,10,25];
+
+    for(const m of milestones){
+      if(
+        previousMilestone < m &&
+        current2 >= m
+      ){
+        round.milestone=m;
+        milestoneSound(m);
+        multiplierEl.classList.remove("pulse");
+        void multiplierEl.offsetWidth;
+        multiplierEl.classList.add("pulse");
+      }
+    }
+
+    updateUI();
+  }
+
+  drawScene(dt);
+
+  raf=requestAnimationFrame(frame);
+}
+
+function drawScene(dt){
+  const mult=
+    round && Number.isFinite(round.currentMultiplier)
+      ? round.currentMultiplier
+      : 1;
+
+  drawBackground(mult,dt);
+
+  if(state==="FLYING" || state==="LAUNCHING" || state==="CRASHING"){
+    const p=rocketPosition(mult);
+
+    if(state==="FLYING"){
+      spawnParticle(
+        p.x,
+        p.y+35,
+        "trail",
+        Math.random()<.75 ? 2 : 1
+      );
+    }
+
+    if(state==="CRASHING"){
+      spawnParticle(p.x,p.y,"debris",2);
+    }
+
+    updateParticles(dt);
+    drawParticles();
+
+    if(state!=="CRASHING" || !explosion){
+      drawRocket(mult);
+    }
+
+    drawExplosion(dt);
+  }else{
+    updateParticles(dt);
+    drawParticles();
+
+    /*
+      Idle rocket on the launch pad.
+    */
+    drawRocket(1);
+  }
+}
+
+/* ------------------------------------------------------------
+   CONTROLS
+   ------------------------------------------------------------ */
+
+actionEl.addEventListener("click",()=>{
+  initAudio();
+
+  if(state==="IDLE" || state==="ROUND_COMPLETE"){
+    launch();
+  }else if(state==="FLYING"){
+    cashout();
+  }
+});
+
+betEl.addEventListener("input",()=>{
+  setError("");
+});
+
+document.querySelectorAll("[data-bet]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    if(
+      state==="FLYING" ||
+      state==="COUNTDOWN" ||
+      state==="CRASHING"
+    ) return;
+
+    betEl.value=btn.dataset.bet;
+    setError("");
+  });
+});
+
+document.getElementById("half").addEventListener("click",()=>{
+  if(betEl.disabled)return;
+
+  let v=Math.floor(Number(betEl.value)/2);
+  v=Math.max(MIN_BET,v);
+
+  betEl.value=v;
+});
+
+document.getElementById("double").addEventListener("click",()=>{
+  if(betEl.disabled)return;
+
+  let v=Number(betEl.value)*2;
+
+  v=Math.min(
+    MAX_BET,
+    balance,
+    Math.max(MIN_BET,v)
+  );
+
+  betEl.value=Math.floor(v);
+});
+
+document.getElementById("max").addEventListener("click",()=>{
+  if(betEl.disabled)return;
+
+  betEl.value=Math.min(MAX_BET,balance);
+});
+
+document.getElementById("soundBtn").addEventListener("click",()=>{
+  soundOn=!soundOn;
+
+  document.getElementById("soundBtn").textContent=
+    soundOn ? "🔊" : "🔇";
+
+  if(soundOn){
+    initAudio();
+    beep(700,.08,.035);
+  }
+});
+
+document.getElementById("rulesBtn").addEventListener("click",()=>{
+  document.getElementById("rulesModal").classList.add("show");
+});
+
+document.getElementById("closeRules").addEventListener("click",()=>{
+  document.getElementById("rulesModal").classList.remove("show");
+});
+
+document.getElementById("rulesModal").addEventListener("click",e=>{
+  if(e.target.id==="rulesModal"){
+    e.currentTarget.classList.remove("show");
+  }
+});
+
+/* Space = launch / cashout, except while typing. */
+document.addEventListener("keydown",e=>{
+  const tag=document.activeElement?.tagName;
+
+  if(
+    e.code==="Space" &&
+    tag!=="INPUT" &&
+    tag!=="TEXTAREA"
+  ){
+    e.preventDefault();
+
+    if(state==="IDLE" || state==="ROUND_COMPLETE"){
+      launch();
+    }else if(state==="FLYING"){
+      cashout();
+    }
+  }
+
+  if(e.key==="Escape"){
+    document.getElementById("rulesModal")
+      .classList.remove("show");
+  }
+});
+
+window.addEventListener("resize",resize);
+
+/* ------------------------------------------------------------
+   INITIALIZE
+   ------------------------------------------------------------ */
+
+resize();
+setBalance(balance);
+updateUI();
+
+raf=requestAnimationFrame(frame);
+</script>
+</body>
+</html>
