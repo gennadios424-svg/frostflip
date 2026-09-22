@@ -85,7 +85,7 @@ function random(){try{if(window.crypto&&crypto.getRandomValues){const a=new Uint
 function crashPoint(){return Math.max(1.01,Math.min(100000,Math.floor((.97/Math.max(1e-12,random()))*100)/100))}
 function multiplier(ms){return Math.exp(ms/4700)}
 function audio(){if(!soundOn)return;if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume()}
-function tone(f,d,type="sine",g=.04){if(!soundOn)return;try{audio();if(!ctx)return;const o=ctx.createOscillator(),a=ctx.createGain();o.type=type;o.frequency.value=f;a.gain.value=g;o.connect(a).connect(ctx.destination);o.start();a.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d);o.stop(ctx.currentTime+d)}catch(e){}
+function tone(f,d,type="sine",g=.04){if(!soundOn)return;try{audio();if(!ctx)return;const o=ctx.createOscillator(),a=ctx.createGain();o.type=type;o.frequency.value=f;a.gain.value=g;o.connect(a).connect(ctx.destination);o.start();a.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d);o.stop(ctx.currentTime+d)}catch(e){}}
 function engineStart(){if(!soundOn||engineOsc)return;audio();engineOsc=ctx.createOscillator();engineGain=ctx.createGain();engineOsc.type="sawtooth";engineOsc.frequency.value=60;engineGain.gain.value=.012;engineOsc.connect(engineGain).connect(ctx.destination);engineOsc.start()}
 function engineUpdate(x){if(engineOsc)engineOsc.frequency.setTargetAtTime(60+Math.min(180,x*9),ctx.currentTime,.06)}
 function engineStop(){if(engineOsc){try{engineOsc.stop()}catch(e){}engineOsc=null;engineGain=null}}
