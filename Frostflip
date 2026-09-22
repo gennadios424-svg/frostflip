@@ -1,0 +1,1197 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FrostFlip — FrostSMP</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #05080f;
+    color: #f5f9ff;
+    font-family: Inter, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% -20%, rgba(42,145,255,.18), transparent 35%),
+        radial-gradient(circle at 0% 50%, rgba(0,190,255,.07), transparent 30%),
+        radial-gradient(circle at 100% 70%, rgba(70,90,255,.07), transparent 30%),
+        #05080f;
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(100,170,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,170,255,.035) 1px, transparent 1px);
+    background-size: 55px 55px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .12;
+    animation: floatGlow 12s ease-in-out infinite;
+}
+
+.glow.one {
+    background: #168cff;
+    top: 5%;
+    left: -200px;
+}
+
+.glow.two {
+    background: #00d9ff;
+    right: -200px;
+    top: 35%;
+    animation-delay: -5s;
+}
+
+@keyframes floatGlow {
+    0%,100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(60px) translateX(40px); }
+}
+
+/* SNOW */
+
+.snow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.flake {
+    position: absolute;
+    top: -20px;
+    color: rgba(190,230,255,.45);
+    animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    border-bottom: 1px solid rgba(130,180,255,.09);
+    background: rgba(5,8,15,.72);
+    backdrop-filter: blur(20px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -.8px;
+}
+
+.logo-box {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#54b8ff,#76efff);
+    color: #06111d;
+    box-shadow:
+        0 0 25px rgba(70,190,255,.28),
+        inset 0 1px rgba(255,255,255,.5);
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    50% {
+        box-shadow:
+            0 0 40px rgba(70,190,255,.45),
+            inset 0 1px rgba(255,255,255,.5);
+    }
+}
+
+.logo span {
+    color: #65dfff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    color: #8492a8;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 13px;
+    border-radius: 12px;
+    background: rgba(16,24,37,.75);
+    border: 1px solid rgba(130,180,255,.1);
+}
+
+.online {
+    width: 8px;
+    height: 8px;
+    background: #45e59b;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #45e59b;
+}
+
+.account span {
+    color: #8997ab;
+    font-size: 12px;
+}
+
+.account strong {
+    color: #55e6a2;
+    font-size: 13px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 760px;
+    max-width: 1250px;
+    margin: auto;
+    padding: 145px 25px 100px;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(52,166,255,.09), transparent 65%);
+    pointer-events: none;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 14px;
+    border: 1px solid rgba(92,210,255,.18);
+    border-radius: 999px;
+    background: rgba(58,154,255,.06);
+    color: #9edfff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .7px;
+    animation: fadeDown .8s ease both;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #51e5a2;
+    box-shadow: 0 0 12px #51e5a2;
+}
+
+.hero h1 {
+    margin-top: 27px;
+    font-size: clamp(54px,9vw,108px);
+    line-height: .9;
+    letter-spacing: -7px;
+    font-weight: 900;
+    animation: heroIn 1s ease both;
+}
+
+.hero h1 span {
+    background: linear-gradient(
+        100deg,
+        #ffffff 0%,
+        #a8e9ff 35%,
+        #55b9ff 65%,
+        #ffffff 100%
+    );
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+    to { background-position: 250% center; }
+}
+
+.hero p {
+    max-width: 620px;
+    margin: 30px auto 0;
+    color: #78879d;
+    font-size: 15px;
+    line-height: 1.8;
+    animation: fadeUp 1s .2s ease both;
+}
+
+.hero-buttons {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    animation: fadeUp 1s .35s ease both;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 800;
+    transition: .25s;
+}
+
+.primary {
+    background: linear-gradient(135deg,#5cc8ff,#73ecff);
+    color: #04101b;
+    box-shadow: 0 12px 35px rgba(71,190,255,.2);
+}
+
+.primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 18px 45px rgba(71,190,255,.35);
+}
+
+.secondary {
+    color: white;
+    background: rgba(14,21,32,.8);
+    border: 1px solid rgba(130,180,255,.12);
+}
+
+.secondary:hover {
+    transform: translateY(-3px);
+    background: rgba(25,36,52,.9);
+}
+
+/* FLOATING COIN */
+
+.coin {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(130,220,255,.55);
+    background: radial-gradient(circle at 35% 30%,#9eeeff,#228bd0 70%);
+    color: #062039;
+    font-size: 27px;
+    font-weight: 900;
+    box-shadow:
+        0 0 35px rgba(43,180,255,.25),
+        inset 0 0 15px rgba(255,255,255,.4);
+    animation: coinFloat 5s ease-in-out infinite;
+}
+
+.coin.left {
+    left: 8%;
+    top: 32%;
+}
+
+.coin.right {
+    right: 8%;
+    top: 43%;
+    animation-delay: -2s;
+}
+
+@keyframes coinFloat {
+    0%,100% { transform: translateY(0) rotateY(0); }
+    50% { transform: translateY(-25px) rotateY(180deg); }
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    max-width: 1050px;
+    margin: -25px auto 100px;
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+}
+
+.stat {
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    border-radius: 17px;
+    text-align: center;
+    background: rgba(11,18,29,.72);
+    border: 1px solid rgba(130,180,255,.1);
+    backdrop-filter: blur(15px);
+}
+
+.stat::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #39bfff;
+    opacity: .04;
+    filter: blur(40px);
+    top: -30px;
+    left: 50%;
+}
+
+.stat-number {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.stat-label {
+    margin-top: 6px;
+    color: #66758b;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 25px 110px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 25px;
+}
+
+.heading h2 {
+    font-size: 27px;
+    letter-spacing: -1px;
+}
+
+.heading p {
+    color: #68778c;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.live {
+    color: #4ee5a0;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.live::before {
+    content: "●";
+    margin-right: 6px;
+    text-shadow: 0 0 10px #4ee5a0;
+}
+
+/* =========================
+   GAMES
+========================= */
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 17px;
+}
+
+.game {
+    position: relative;
+    min-height: 315px;
+    padding: 25px;
+    border-radius: 20px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(62,173,255,.1),transparent 50%),
+        rgba(11,18,29,.8);
+    border: 1px solid rgba(130,180,255,.1);
+    transition: .3s;
+}
+
+.game:hover {
+    transform: translateY(-7px);
+    border-color: rgba(90,205,255,.3);
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.3),
+        0 0 40px rgba(50,170,255,.06);
+}
+
+.game::before {
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    right: -70px;
+    top: -70px;
+    border-radius: 50%;
+    background: #42bfff;
+    opacity: .06;
+    filter: blur(25px);
+    transition: .4s;
+}
+
+.game:hover::before {
+    opacity: .13;
+    transform: scale(1.4);
+}
+
+.game-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    background: rgba(63,174,255,.08);
+    border: 1px solid rgba(100,200,255,.1);
+    transition: .3s;
+}
+
+.game:hover .game-icon {
+    transform: scale(1.08) rotate(-3deg);
+    background: rgba(63,174,255,.14);
+}
+
+.game h3 {
+    margin-top: 21px;
+    font-size: 18px;
+}
+
+.game p {
+    margin-top: 7px;
+    color: #6d7b90;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.game-button {
+    position: absolute;
+    left: 25px;
+    right: 25px;
+    bottom: 24px;
+    width: calc(100% - 50px);
+}
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.activity {
+    display: grid;
+    grid-template-columns: 1.4fr .6fr;
+    gap: 18px;
+}
+
+.activity-box {
+    border-radius: 18px;
+    border: 1px solid rgba(130,180,255,.1);
+    background: rgba(11,18,29,.75);
+    overflow: hidden;
+}
+
+.activity-head {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(130,180,255,.08);
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-head strong {
+    font-size: 13px;
+}
+
+.activity-head span {
+    color: #4ee5a0;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.activity-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+    border-bottom: 1px solid rgba(130,180,255,.055);
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg,#1e5b91,#13263b);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+}
+
+.player-name {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.game-name {
+    color: #627188;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.amount {
+    color: #52e1a0;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info-card {
+    padding: 27px;
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 100% 0%,rgba(52,172,255,.12),transparent 55%),
+        rgba(11,18,29,.75);
+    border: 1px solid rgba(130,180,255,.1);
+}
+
+.info-card .big-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.info-card h3 {
+    font-size: 18px;
+}
+
+.info-card p {
+    margin-top: 9px;
+    color: #6d7b90;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.info-list {
+    margin-top: 22px;
+    display: grid;
+    gap: 11px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #8491a4;
+    font-size: 11px;
+}
+
+.check {
+    color: #51e2a0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid rgba(130,180,255,.08);
+    padding: 35px 6%;
+    display: flex;
+    justify-content: space-between;
+    color: #4e5b6e;
+    font-size: 10px;
+}
+
+footer span {
+    color: #6a778b;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%,20px);
+    padding: 13px 18px;
+    border-radius: 12px;
+    background: #101a29;
+    border: 1px solid rgba(100,210,255,.18);
+    color: white;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    transition: .3s;
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%,0);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heroIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .account {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 100px;
+        min-height: 680px;
+    }
+
+    .hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .coin {
+        display: none;
+    }
+
+    .stats,
+    .games,
+    .activity {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .heading {
+        align-items: start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+</div>
+
+<div class="snow" id="snow"></div>
+
+<nav>
+
+    <div class="logo">
+        <div class="logo-box">❄</div>
+        Frost<span>Flip</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#games">Games</a>
+        <a href="#activity">Live Activity</a>
+        <a href="#how">How It Works</a>
+    </div>
+
+    <div class="account">
+        <div class="online"></div>
+        <span>Balance</span>
+        <strong id="balance">0.00M</strong>
+    </div>
+
+</nav>
+
+
+<section class="hero">
+
+    <div class="coin left">✦</div>
+    <div class="coin right">F</div>
+
+    <div class="badge">
+        <span class="badge-dot"></span>
+        BUILT FOR THE FROSTSMP ECONOMY
+    </div>
+
+    <h1>
+        Your luck.<br>
+        <span>Your fortune.</span>
+    </h1>
+
+    <p>
+        FrostFlip brings fast, competitive games to the FrostSMP
+        economy. Use your in-game balance, pick your game,
+        and let the flip decide.
+    </p>
+
+    <div class="hero-buttons">
+        <button class="btn primary" onclick="showToast('Games are coming soon.')">
+            Start Flipping&nbsp; →
+        </button>
+
+        <button class="btn secondary"
+            onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
+            How it works
+        </button>
+    </div>
+
+</section>
+
+
+<section class="stats">
+
+    <div class="stat">
+        <div class="stat-number" data-target="0">0</div>
+        <div class="stat-label">PLAYERS ONLINE</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">0M</div>
+        <div class="stat-label">FROSTCOINS FLIPPED</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">0</div>
+        <div class="stat-label">GAMES PLAYED</div>
+    </div>
+
+</section>
+
+
+<section class="section" id="games">
+
+    <div class="heading">
+        <div>
+            <h2>Choose your game</h2>
+            <p>Three ways to test your luck.</p>
+        </div>
+
+        <div class="live">SYSTEM ONLINE</div>
+    </div>
+
+
+    <div class="games">
+
+        <div class="game">
+
+            <div class="game-icon">🪙</div>
+
+            <h3>Coinflip</h3>
+
+            <p>
+                Heads or tails. Pick a side and let the
+                coin decide your fate.
+            </p>
+
+            <button class="btn primary game-button"
+                onclick="showToast('Coinflip is coming soon.')">
+                Play Coinflip →
+            </button>
+
+        </div>
+
+
+        <div class="game">
+
+            <div class="game-icon">🎲</div>
+
+            <h3>Dice</h3>
+
+            <p>
+                Roll against the odds and see whether
+                fortune lands on your side.
+            </p>
+
+            <button class="btn primary game-button"
+                onclick="showToast('Dice is coming soon.')">
+                Play Dice →
+            </button>
+
+        </div>
+
+
+        <div class="game">
+
+            <div class="game-icon">📈</div>
+
+            <h3>Crash</h3>
+
+            <p>
+                Watch the multiplier climb and cash out
+                before the crash.
+            </p>
+
+            <button class="btn primary game-button"
+                onclick="showToast('Crash is coming soon.')">
+                Play Crash →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="activity">
+
+    <div class="heading">
+        <div>
+            <h2>Live activity</h2>
+            <p>Recent FrostFlip activity.</p>
+        </div>
+
+        <div class="live">LIVE</div>
+    </div>
+
+
+    <div class="activity">
+
+        <div class="activity-box">
+
+            <div class="activity-head">
+                <strong>Recent flips</strong>
+                <span>● UPDATING</span>
+            </div>
+
+            <div class="activity-row">
+
+                <div class="player">
+                    <div class="avatar">?</div>
+
+                    <div>
+                        <div class="player-name">Waiting for players</div>
+                        <div class="game-name">No games played yet</div>
+                    </div>
+                </div>
+
+                <div class="amount">—</div>
+
+            </div>
+
+
+            <div class="activity-row">
+
+                <div class="player">
+                    <div class="avatar">❄</div>
+
+                    <div>
+                        <div class="player-name">FrostFlip</div>
+                        <div class="game-name">System status</div>
+                    </div>
+                </div>
+
+                <div class="amount">ONLINE</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="big-icon">❄️</div>
+
+            <h3>FrostSMP only.</h3>
+
+            <p>
+                FrostFlip is designed around the FrostSMP
+                in-game economy.
+            </p>
+
+            <div class="info-list">
+
+                <div class="info-item">
+                    <span class="check">✓</span>
+                    FrostSMP in-game currency
+                </div>
+
+                <div class="info-item">
+                    <span class="check">✓</span>
+                    Minecraft username based
+                </div>
+
+                <div class="info-item">
+                    <span class="check">✓</span>
+                    Fast automated balance tracking
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="how">
+
+    <div class="heading">
+
+        <div>
+            <h2>How FrostFlip works</h2>
+            <p>Simple from start to finish.</p>
+        </div>
+
+    </div>
+
+
+    <div class="games">
+
+        <div class="game">
+
+            <div class="game-icon">01</div>
+
+            <h3>Connect your account</h3>
+
+            <p>
+                Enter your Minecraft username so FrostFlip
+                knows where your FrostSMP balance belongs.
+            </p>
+
+        </div>
+
+
+        <div class="game">
+
+            <div class="game-icon">02</div>
+
+            <h3>Deposit</h3>
+
+            <p>
+                Send your FrostSMP in-game money to the
+                FrostFlip deposit account.
+            </p>
+
+        </div>
+
+
+        <div class="game">
+
+            <div class="game-icon">03</div>
+
+            <h3>Play & withdraw</h3>
+
+            <p>
+                Play available games and request your
+                FrostSMP winnings whenever you want.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div>
+        © 2026 <span>FrostFlip</span>
+    </div>
+
+    <div>
+        FrostSMP in-game currency only
+    </div>
+
+</footer>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================
+   SNOW PARTICLES
+========================= */
+
+const snow = document.getElementById("snow");
+
+for(let i = 0; i < 32; i++){
+
+    const flake = document.createElement("div");
+
+    flake.className = "flake";
+    flake.textContent = "❄";
+
+    flake.style.left = Math.random() * 100 + "%";
+    flake.style.fontSize = (Math.random() * 8 + 6) + "px";
+    flake.style.opacity = Math.random() * .45 + .1;
+    flake.style.animationDuration = (Math.random() * 15 + 10) + "s";
+    flake.style.animationDelay = (Math.random() * -20) + "s";
+
+    snow.appendChild(flake);
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+
+/* =========================
+   PARALLAX COINS
+========================= */
+
+document.addEventListener("mousemove", e => {
+
+    const x = (e.clientX / window.innerWidth - .5) * 18;
+    const y = (e.clientY / window.innerHeight - .5) * 18;
+
+    document.querySelectorAll(".coin").forEach((coin, index) => {
+
+        const multiplier = index === 0 ? 1 : -1;
+
+        coin.style.marginLeft = x * multiplier + "px";
+        coin.style.marginTop = y * multiplier + "px";
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+```
+
