@@ -44,7 +44,8 @@ main{position:relative;z-index:3;width:min(1180px,calc(100% - 30px));margin:auto
 .casegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.case-items{grid-template-columns:repeat(4,1fr)}.itemvalue{font-size:18px;color:#079fe5;letter-spacing:-.5px}.soon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.soon-card{border:1px solid var(--line);border-radius:20px;background:#fff;padding:20px;display:flex;gap:15px;align-items:center;box-shadow:0 18px 50px #23799a0c}.soon-card h3{margin:6px 0 4px;font-size:15px}.soon-card p{margin:0;color:var(--muted);font-size:10px}.soon-icon{font-size:34px}.soon{display:inline-block;padding:5px 8px;border-radius:999px;background:#eefaff;color:#0786b9;font-size:8px;font-weight:950;letter-spacing:1px}.live-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#ecfff7;color:#0a9b70;font-size:8px;font-weight:950;letter-spacing:1px}.casecard{border:1px solid var(--line);border-radius:24px;background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px #23799a10;transition:.25s}.casecard:hover{transform:translateY(-5px);box-shadow:0 25px 60px #23799a20}.caseicon{font-size:48px}.casecard b{font-size:16px}.casecard span{color:var(--muted);font-size:12px;line-height:1.6;min-height:38px}.caseopen{margin-top:8px}.case-result{margin-top:18px;min-height:0;border-radius:22px;overflow:hidden}.case-result.show{padding:22px;border:1px solid #bfe8f5;background:linear-gradient(135deg,#effcff,#fff);animation:casepop .45s ease}.case-result .win{font-size:24px;font-weight:950;color:#079fe5}.case-result small{display:block;color:var(--muted);margin-top:5px}@keyframes casepop{0%{transform:scale(.94);opacity:0}60%{transform:scale(1.02)}100%{transform:scale(1);opacity:1}}@media(max-width:1200px){main{padding-left:0}}@media(max-width:1000px){.case-items{grid-template-columns:repeat(2,1fr)}.soon-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.casegrid,.case-items,.soon-grid{grid-template-columns:1fr}}
 <style>
 .ignbox{margin:20px 0 8px;text-align:left}.ignbox label{display:block;font-size:10px;font-weight:900;letter-spacing:1px;color:#bfe6f5;margin-bottom:7px}.ignbox input{width:100%;padding:12px 13px;border-radius:12px;border:1px solid #ffffff35;background:#ffffff12;color:#fff;outline:none}.ignbox input::placeholder{color:#9ab7c5}.sidebar{position:absolute;left:0;top:92px;width:210px;padding:18px;border:1px solid var(--line);border-radius:20px;background:#ffffffdf;backdrop-filter:blur(18px);box-shadow:0 20px 60px #23799a18;z-index:10}.sidehead{font-size:10px;font-weight:950;letter-spacing:1.4px;color:var(--ice)}.sideign{font-weight:950;font-size:17px;margin:12px 0 18px;overflow:hidden;text-overflow:ellipsis}.stat{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid #e7f0f4;font-size:11px}.stat span{color:var(--muted)}.green{color:var(--green)}.sideLinks{display:grid;gap:7px;margin-top:12px}.sideLinks a{padding:8px;border-radius:9px;color:#527184;font-size:11px;font-weight:800}.sideLinks a:hover{background:#eefaff;color:var(--ice)}.bigbanner{margin:5px 0 10px;padding:24px 30px;border-radius:22px;background:linear-gradient(100deg,#082b43,#087eb0,#0ac0ee,#082b43);color:#fff;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 18px 50px #087fa022;animation:bannerpulse 4s ease-in-out infinite}.bigbanner b{font-size:22px;letter-spacing:2px}.bigbanner small{font-size:10px;letter-spacing:1.5px;color:#d8f8ff}@keyframes bannerpulse{50%{box-shadow:0 22px 70px #08b9ef35}}.roulette-card{display:flex;align-items:center;gap:25px;padding:30px;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 20px 55px #23799a12}.roulette-wheel{width:115px;height:115px;border-radius:50%;display:grid;place-items:center;font-size:45px;background:conic-gradient(#082b43 0 25%,#dff8ff 25% 50%,#08a9ef 50% 75%,#fff 75%);border:8px solid #d5edf6;box-shadow:inset 0 0 0 5px #fff,0 15px 35px #23799a20;animation:spin 6s linear infinite}.soon{font-size:9px;font-weight:950;letter-spacing:2px;color:var(--ice)}.roulette-card h3{font-size:24px;margin:7px 0}.roulette-card p{color:var(--muted);line-height:1.6}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:1200px){.sidebar{position:relative;left:auto;top:auto;width:100%;margin:18px 0 0;display:grid;grid-template-columns:1.5fr repeat(4,1fr) 1.3fr;gap:10px;align-items:center}.sideign{margin:0}.stat{border-top:0;padding:8px 10px;background:#f7fcff;border-radius:10px;display:block}.stat b{display:block;margin-top:2px}.sideLinks{display:flex;margin:0}.sideLinks a{padding:7px}}@media(max-width:700px){.sidebar{grid-template-columns:1fr 1fr}.sideLinks{grid-column:1/-1}}
-::selection{background:#8deaff55;color:inherit}::-moz-selection{background:#8deaff55;color:inherit}button,.btn,.pill,.brand,.online,.caseicon,.soon,.dot,.flake,.mult,.stage,.bigbanner,.roulette-wheel,.sidehead{user-select:none;-webkit-user-select:none}button,.btn{user-select:none;-webkit-user-select:none}<style>.playgate{position:fixed;right:20px;top:86px;z-index:90;display:none;place-items:center;padding:0;background:transparent;pointer-events:none}.playgate.show{display:grid}.playbox{width:min(320px,calc(100vw - 30px));padding:18px;border:1px solid #bcecff55;border-radius:16px;background:#fffffffa;box-shadow:0 18px 55px #00283c35;text-align:center;pointer-events:auto}.playbox .flake{color:var(--ice);text-shadow:0 0 20px #57e5ff;font-size:24px}.playbox h2{margin:5px 0;font-size:17px}.playbox p{color:var(--muted);line-height:1.5;font-size:10px}.playbox input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;outline:none;margin:7px 0 10px}.playbox .actions{display:flex;gap:7px}.playbox .btn{padding:10px 12px;font-size:10px}</style></style></style></style>
+::selection{background:#8deaff55;color:inherit}::-moz-selection{background:#8deaff55;color:inherit}button,.btn,.pill,.brand,.online,.caseicon,.soon,.dot,.flake,.mult,.stage,.bigbanner,.roulette-wheel,.sidehead{user-select:none;-webkit-user-select:none}button,.btn{user-select:none;-webkit-user-select:none}<style>.playgate{position:fixed;right:20px;top:86px;z-index:90;display:none;place-items:center;padding:0;background:transparent;pointer-events:none}.playgate.show{display:grid}.playbox{width:min(320px,calc(100vw - 30px));padding:18px;border:1px solid #bcecff55;border-radius:16px;background:#fffffffa;box-shadow:0 18px 55px #00283c35;text-align:center;pointer-events:auto}.playbox .flake{color:var(--ice);text-shadow:0 0 20px #57e5ff;font-size:24px}.playbox h2{margin:5px 0;font-size:17px}.playbox p{color:var(--muted);line-height:1.5;font-size:10px}.playbox input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;outline:none;margin:7px 0 10px}.playbox .actions{display:flex;gap:7px}.playbox .btn{padding:10px 12px;font-size:10px}
+.case-shell{border:1px solid #cfe5ef;border-radius:26px;background:linear-gradient(145deg,#fff,#f3fbff);padding:22px;box-shadow:0 25px 70px #23799a14;overflow:hidden}.case-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.case-top>div:first-child{display:flex;align-items:center;gap:12px}.case-logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#07334e,#0baeea);color:#fff;font-size:24px;box-shadow:0 8px 25px #079fe533}.case-top b{display:block;font-size:15px;letter-spacing:.5px}.case-top span{display:block;color:var(--muted);font-size:9px;margin-top:4px}.case-cost{text-align:right}.case-cost small{display:block;color:#8496a3;font-size:8px;font-weight:950;letter-spacing:1px}.case-cost strong{display:block;color:#079fe5;font-size:20px;margin-top:2px}.case-cost span{font-size:8px;color:#9aaab4}.case-reel-wrap{height:150px;position:relative;border:1px solid #cfe8f2;border-radius:18px;background:linear-gradient(180deg,#e9faff,#d3f4ff);overflow:hidden;box-shadow:inset 0 0 45px #4bdcff20}.case-reel{display:flex;height:100%;align-items:center;gap:8px;width:max-content;transform:translateX(0)}.reel-item{width:142px;height:112px;flex:0 0 142px;border:1px solid #c8e2ec;border-radius:15px;background:#ffffffd9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 8px 22px #20708e0d}.reel-icon{font-size:35px;filter:drop-shadow(0 3px 6px #188cb733)}.reel-item b{font-size:8px;text-align:center}.reel-item span{font-size:10px;color:#079fe5;font-weight:950}.case-pointer{position:absolute;z-index:5;left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);background:#08a9ef;box-shadow:0 0 16px #08a9ef,0 0 35px #57e5ff;pointer-events:none}.case-pointer:before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);border-left:9px solid transparent;border-right:9px solid transparent;border-top:12px solid #08a9ef}.case-glow{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#d7f7ffcc,transparent 18%,transparent 82%,#d7f7ffcc)}.case-bottom{display:flex;align-items:center;gap:14px;margin-top:18px}.case-qty{padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#f8fcff;min-width:105px}.case-qty small{display:block;color:#8496a3;font-size:8px;font-weight:950;letter-spacing:1px}.case-qty strong{font-size:20px;color:#079fe5}.case-bottom .caseopen{flex:1;height:50px}.case-bottom .caseopen:disabled{opacity:.55;cursor:not-allowed;transform:none}.case-chances{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:13px}.case-chances div{border:1px solid var(--line);border-radius:12px;padding:11px;background:#ffffffa8}.case-chances b{display:block;font-size:8px}.case-chances span{display:block;color:#079fe5;font-size:10px;font-weight:950;margin-top:4px}.case-result{min-height:0;margin-top:16px;text-align:center}.case-result.show{padding:18px;border:1px solid #bfe8f5;border-radius:17px;background:linear-gradient(135deg,#effcff,#fff);animation:casepop .45s ease}.case-result .win{font-size:22px;font-weight:950;color:#079fe5}.case-result small{display:block;color:var(--muted);margin-top:5px;font-size:9px}@media(max-width:760px){.case-chances{grid-template-columns:repeat(2,1fr)}.case-top{align-items:flex-start}.case-cost strong{font-size:16px}.reel-item{width:125px;flex-basis:125px}}</style></style></style></style>
 </head>
 <body>
 <canvas id="snow"></canvas><div class="aurora"></div>
@@ -57,17 +58,32 @@ main{position:relative;z-index:3;width:min(1180px,calc(100% - 30px));margin:auto
 <section class="section" id="rocket"><div class="sectionhead"><div><h2>Rocket Crash</h2><p>Climb higher. Watch the multiplier rise. Cash out before the crash.</p></div></div><div class="game"><div class="gamebar"><strong>🚀 FROSTSMP ROCKET</strong><span class="online">SYSTEM ONLINE</span></div><div class="gamegrid"><div class="scene" id="scene"><div class="stars" id="stars"></div><div class="world" id="world"></div><div class="cloud" style="top:25%"></div><div class="cloud" style="top:45%;left:55%;transform:scale(.7);animation-duration:34s"></div><div class="mult" id="mult">1.00x</div><div class="stage" id="stage">LAUNCH PAD READY</div><div class="trail" id="trail"></div><div class="rocket" id="rocketModel"><div class="body"><div class="window"></div></div><i class="fin l"></i><i class="fin r"></i><div class="engine"></div></div><div class="count" id="count"></div><div class="boom" id="boom"></div><div class="result" id="result"><div class="resultbox"><h2 id="resultTitle"></h2><p id="resultText"></p></div></div></div>
 <aside class="controls"><label class="label">WAGER</label><input class="bet" id="bet" value="100000" inputmode="numeric"><div class="quick"><button data-b="1000">1K</button><button data-b="5000">5K</button><button data-b="10000">10K</button><button data-b="25000">25K</button><button data-b="50000">50K</button><button data-b="100000">100K</button><button data-b="250000">250K</button><button data-b="500000">500K</button><button data-b="1000000">1M</button></div><div class="utils"><button id="half">½</button><button id="double">2×</button><button id="max">MAX</button></div><button class="btn primary launch" id="action">LAUNCH ROCKET</button><div class="status" id="status">Minimum wager: $1,000 · Maximum: $1,000,000<br>Crash result is generated before launch.</div><label class="label" style="margin-top:17px">RECENT ROCKETS</label><div class="recent" id="recent"><span class="chip">No rounds yet</span></div><button class="btn secondary sound" id="sound">🔊 SOUND ON</button><div class="fair">Every round gets an independent result before launch. The result does not depend on your wager, balance, previous rounds, username, or cashout behavior.</div></aside></div></div></section>
 <div class="bigbanner"><span>❄</span><b>FROSTSMP FLIP</b><small>PLAY THE FROST. OWN THE MOMENT.</small><span>❄</span></div><section class="section" id="cases">
-<div class="sectionhead"><div><h2>Frost Case Contents</h2><p>Seven FrostSMP item entries with reference values. No wager or random currency payout is attached to these cases.</p></div><span class="soon">7 ITEMS</span></div>
-<div class="casegrid case-items">
-<div class="casecard itemcard"><div class="caseicon">💎</div><b>DIAMOND BLOCK</b><strong class="itemvalue">$1,000,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Diamond Block" data-value="1000000">VIEW ITEM</button></div>
-<div class="casecard itemcard"><div class="caseicon">⬜</div><b>IRON BLOCK</b><strong class="itemvalue">$25,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Iron Block" data-value="25000">VIEW ITEM</button></div>
-<div class="casecard itemcard"><div class="caseicon">🟨</div><b>GOLD BLOCK</b><strong class="itemvalue">$300,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Gold Block" data-value="300000">VIEW ITEM</button></div>
-<div class="casecard itemcard"><div class="caseicon">🟫</div><b>ANCIENT DEBRIS</b><strong class="itemvalue">$500,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Ancient Debris" data-value="500000">VIEW ITEM</button></div>
-<div class="casecard itemcard"><div class="caseicon">🔷</div><b>LAPIS BLOCK</b><strong class="itemvalue">$15,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Lapis Block" data-value="15000">VIEW ITEM</button></div>
-<div class="casecard itemcard"><div class="caseicon">🟥</div><b>REDSTONE BLOCK</b><strong class="itemvalue">$20,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Redstone Block" data-value="20000">VIEW ITEM</button></div>
-<div class="casecard itemcard"><div class="caseicon">🟩</div><b>EMERALD BLOCK</b><strong class="itemvalue">$750,000</strong><span>Reference in-game value</span><button class="btn secondary caseopen" data-item="Emerald Block" data-value="750000">VIEW ITEM</button></div>
+<div class="sectionhead"><div><h2>Frost Case</h2><p>Open the Frost Case and watch the reward reel spin. The listed values are FrostSMP reference values only.</p></div><span class="soon">500,000 FROST · 5 SPINS</span></div>
+<div class="case-shell">
+  <div class="case-top">
+    <div><div class="case-logo">❄</div><div><b>FROST CASE</b><span>7 possible item reveals</span></div></div>
+    <div class="case-cost"><small>CASE VALUE</small><strong>$500,000</strong><span>FrostSMP reference</span></div>
+  </div>
+  <div class="case-reel-wrap">
+    <div class="case-pointer"></div>
+    <div class="case-reel" id="caseReel"></div>
+    <div class="case-glow"></div>
+  </div>
+  <div class="case-bottom">
+    <div class="case-qty"><small>SPINS REMAINING</small><strong id="caseQty">5</strong></div>
+    <button class="btn primary caseopen" id="openCase">OPEN CASE ×1</button>
+  </div>
+  <div id="caseResult" class="case-result"></div>
 </div>
-<div id="caseResult" class="case-result"></div>
+<div class="case-chances">
+  <div><b>💎 DIAMOND BLOCK</b><span>$1,000,000</span></div>
+  <div><b>🟩 EMERALD BLOCK</b><span>$750,000</span></div>
+  <div><b>🟫 ANCIENT DEBRIS</b><span>$500,000</span></div>
+  <div><b>🟨 GOLD BLOCK</b><span>$300,000</span></div>
+  <div><b>⬜ IRON BLOCK</b><span>$25,000</span></div>
+  <div><b>🟥 REDSTONE BLOCK</b><span>$20,000</span></div>
+  <div><b>🔷 LAPIS BLOCK</b><span>$15,000</span></div>
+</div>
 </section>
 <section class="section" id="soon-games">
 <div class="sectionhead"><div><h2>More Games</h2><p>Only fully working games are marked LIVE. The unfinished games stay locked until they are actually ready.</p></div></div>
@@ -125,21 +141,53 @@ $("yes").onclick=()=>{$("gate").style.display="none";sessionStorage.setItem("ff-
 $("playCancel").onclick=()=>$("playGate").classList.remove("show");$("playConfirm").onclick=()=>{const ign=$("playIgn").value.trim();if(!/^[A-Za-z0-9_]{3,16}$/.test(ign)){toast("Enter a valid FrostSMP IGN");$("playIgn").focus();return}sessionStorage.setItem("ff-ign",ign);$("sideIgn").textContent=ign;$("playGate").classList.remove("show");launch()};$("playIgn").addEventListener("keydown",e=>{if(e.key==="Enter")$("playConfirm").click()});const savedIgn=sessionStorage.getItem("ff-ign");if(savedIgn)$("sideIgn").textContent=savedIgn;if(sessionStorage.getItem("ff-entered")==="1")$("gate").style.display="none";updateBalance();
 (function snow(){const c=$("snow"),x=c.getContext("2d"),flakes=[];function resize(){c.width=innerWidth;c.height=innerHeight;const n=innerWidth<600?42:78;while(flakes.length<n)flakes.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+.6,v:Math.random()*.5+.22,d:Math.random()*1.3-.65,p:Math.random()*6.28,a:Math.random()*.5+.15})}resize();addEventListener("resize",resize,{passive:true});function draw(){x.clearRect(0,0,c.width,c.height);for(const f of flakes){f.y+=f.v;f.p+=.012;f.x+=Math.sin(f.p)*f.d;if(f.y>c.height+5){f.y=-5;f.x=Math.random()*c.width}x.globalAlpha=f.a;x.fillStyle="#fff";x.beginPath();x.arc(f.x,f.y,f.r,0,Math.PI*2);x.fill()}requestAnimationFrame(draw)}draw()})();
 
-// Case contents are informational only: no wagering, random currency payout, or cash value is executed here.
-let casesOpened=0;
-document.querySelectorAll(".caseopen").forEach(btn=>btn.onclick=()=>{
- const item=btn.dataset.item;
- casesOpened++;
- if($("sideCases"))$("sideCases").textContent=casesOpened;
- const out=$("caseResult");
- out.classList.remove("show");void out.offsetWidth;
- out.innerHTML='<div class="win">'+item+'</div><small>Reference value: 
-</script>
-</body>
-</html>+Number(btn.dataset.value).toLocaleString("en-US")+' in FrostSMP in-game currency. Values are display references only.</small>';
- out.classList.add("show");
- tone(620,.08);setTimeout(()=>tone(880,.12),100);
-});
+// Frost Case reel demo: spins are visual/non-wagering and use a fixed reward sequence.
+const caseItems=[
+ {name:"Diamond Block",icon:"💎",value:1000000},
+ {name:"Iron Block",icon:"⬜",value:25000},
+ {name:"Gold Block",icon:"🟨",value:300000},
+ {name:"Ancient Debris",icon:"🟫",value:500000},
+ {name:"Lapis Block",icon:"🔷",value:15000},
+ {name:"Redstone Block",icon:"🟥",value:20000},
+ {name:"Emerald Block",icon:"🟩",value:750000}
+];
+let caseSpins=5,caseBusy=false,caseIndex=0;
+function buildCaseReel(){
+ const reel=$("caseReel"); if(!reel)return;
+ const items=[];
+ for(let i=0;i<28;i++) items.push(caseItems[i%caseItems.length]);
+ reel.innerHTML=items.map((x,i)=>'<div class="reel-item" data-index="'+i+'"><div class="reel-icon">'+x.icon+'</div><b>'+x.name.toUpperCase()+'</b><span>'+fmt(x.value)+'</span></div>').join("");
+}
+function caseTick(){
+ tone(180,.045,"square",.018);
+}
+function openCase(){
+ if(caseBusy)return;
+ if(caseSpins<=0){toast("No spins remaining");return}
+ caseBusy=true;
+ const reel=$("caseReel"),out=$("caseResult"),btn=$("openCase");
+ caseSpins--; $("caseQty").textContent=caseSpins; if($("sideCases"))$("sideCases").textContent=5-caseSpins;
+ btn.disabled=true; btn.textContent="OPENING…"; out.classList.remove("show");
+ const target=caseIndex%caseItems.length;
+ caseIndex++;
+ const targetPos=18+target;
+ const itemWidth=150;
+ const offset=(targetPos*itemWidth)-((reel.parentElement.clientWidth/2)-(itemWidth/2));
+ reel.style.transition="transform 3.8s cubic-bezier(.08,.82,.14,1)";
+ reel.style.transform="translateX(-"+offset+"px)";
+ let ticks=0;
+ const tickTimer=setInterval(()=>{caseTick();ticks++;if(ticks>=28)clearInterval(tickTimer)},120);
+ setTimeout(()=>{
+   const item=caseItems[target];
+   out.innerHTML='<div class="win">'+item.icon+' '+item.name.toUpperCase()+'</div><small>Reward reveal · Reference value '+fmt(item.value)+' Frost</small>';
+   out.classList.add("show");
+   tone(700,.12);setTimeout(()=>tone(980,.2),100);
+   btn.disabled=caseSpins<=0;btn.textContent=caseSpins<=0?"NO SPINS LEFT":"OPEN CASE ×1";
+   caseBusy=false;
+ },3950);
+}
+buildCaseReel();
+$("openCase").onclick=openCase;
 </script>
 </body>
 </html>
