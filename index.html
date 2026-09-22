@@ -40,7 +40,9 @@ main{position:relative;z-index:3;width:min(1180px,calc(100% - 30px));margin:auto
 .command{display:flex;gap:8px;margin:14px 0 4px}.command code{flex:1;padding:11px;border:1px solid #d6e8ef;background:#f7fcff;border-radius:10px;font-size:12px;color:#0b79a8;font-weight:900}.command button{border:0;border-radius:10px;background:#0aa9e9;color:#fff;padding:0 14px;font-weight:950;font-size:10px}
 @media(max-width:850px){.account-actions{display:none}.social-grid{grid-template-columns:1fr}.banner-wrap{margin-top:10px}}
 @media(max-width:560px){.frost-banner{font-size:9px;letter-spacing:1.7px}.hanger:before{left:10%}.hanger:after{right:10%}}
-</style>
+<style>
+.casegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.casecard{border:1px solid var(--line);border-radius:24px;background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px #23799a10;transition:.25s}.casecard:hover{transform:translateY(-5px);box-shadow:0 25px 60px #23799a20}.caseicon{font-size:48px}.casecard b{font-size:16px}.casecard span{color:var(--muted);font-size:12px;line-height:1.6;min-height:38px}.caseopen{margin-top:8px}.case-result{margin-top:18px;min-height:0;border-radius:22px;overflow:hidden}.case-result.show{padding:22px;border:1px solid #bfe8f5;background:linear-gradient(135deg,#effcff,#fff);animation:casepop .45s ease}.case-result .win{font-size:24px;font-weight:950;color:#079fe5}.case-result small{display:block;color:var(--muted);margin-top:5px}@keyframes casepop{0%{transform:scale(.94);opacity:0}60%{transform:scale(1.02)}100%{transform:scale(1);opacity:1}}@media(max-width:760px){.casegrid{grid-template-columns:1fr}}
+</style></style>
 </head>
 <body>
 <canvas id="snow"></canvas><div class="aurora"></div>
@@ -52,6 +54,15 @@ main{position:relative;z-index:3;width:min(1180px,calc(100% - 30px));margin:auto
 <section class="hero"><div><div class="pill"><span class="dot"></span> FROSTSMP IN-GAME CURRENCY ONLY</div><h1>PLAY.<br>RISK.<br><span>FLIP.</span></h1><p>FrostSMP's frozen gaming hub. Launch the rocket, watch the multiplier climb, and decide when to cash out.</p><div class="actions"><button class="btn primary" onclick="document.querySelector('#rocket').scrollIntoView({behavior:'smooth'})">EXPLORE ROCKET →</button><button class="btn secondary" id="rulesBtn">GAME RULES</button></div></div><div class="preview"><div class="mini-rocket"><div class="mini-body"><div class="mini-window"></div></div><i class="mini-fin"></i><i class="mini-fin"></i><div class="flame"></div></div></div></section>
 <section class="section" id="rocket"><div class="sectionhead"><div><h2>Rocket Crash</h2><p>Climb higher. Watch the multiplier rise. Cash out before the crash.</p></div></div><div class="game"><div class="gamebar"><strong>🚀 FROSTSMP ROCKET</strong><span class="online">SYSTEM ONLINE</span></div><div class="gamegrid"><div class="scene" id="scene"><div class="stars" id="stars"></div><div class="world" id="world"></div><div class="cloud" style="top:25%"></div><div class="cloud" style="top:45%;left:55%;transform:scale(.7);animation-duration:34s"></div><div class="mult" id="mult">1.00x</div><div class="stage" id="stage">LAUNCH PAD READY</div><div class="trail" id="trail"></div><div class="rocket" id="rocketModel"><div class="body"><div class="window"></div></div><i class="fin l"></i><i class="fin r"></i><div class="engine"></div></div><div class="count" id="count"></div><div class="boom" id="boom"></div><div class="result" id="result"><div class="resultbox"><h2 id="resultTitle"></h2><p id="resultText"></p></div></div></div>
 <aside class="controls"><label class="label">WAGER</label><input class="bet" id="bet" value="100000" inputmode="numeric"><div class="quick"><button data-b="1000">1K</button><button data-b="5000">5K</button><button data-b="10000">10K</button><button data-b="25000">25K</button><button data-b="50000">50K</button><button data-b="100000">100K</button><button data-b="250000">250K</button><button data-b="500000">500K</button><button data-b="1000000">1M</button></div><div class="utils"><button id="half">½</button><button id="double">2×</button><button id="max">MAX</button></div><button class="btn primary launch" id="action">LAUNCH ROCKET</button><div class="status" id="status">Minimum wager: $1,000 · Maximum: $1,000,000<br>Crash result is generated before launch.</div><label class="label" style="margin-top:17px">RECENT ROCKETS</label><div class="recent" id="recent"><span class="chip">No rounds yet</span></div><button class="btn secondary sound" id="sound">🔊 SOUND ON</button><div class="fair">Every round gets an independent result before launch. The result does not depend on your wager, balance, previous rounds, username, or cashout behavior.</div></aside></div></div></section>
+<section class="section" id="cases">
+<div class="sectionhead"><div><h2>Frost Cases</h2><p>Open free cosmetic cases and collect FrostSMP-themed items.</p></div></div>
+<div class="casegrid">
+<div class="casecard"><div class="caseicon">❄️</div><b>FROZEN CASE</b><span>Contains a random cosmetic title.</span><button class="btn primary caseopen" data-case="Frozen Case">OPEN CASE</button></div>
+<div class="casecard"><div class="caseicon">💎</div><b>ICE CASE</b><span>Contains a random cosmetic badge.</span><button class="btn primary caseopen" data-case="Ice Case">OPEN CASE</button></div>
+<div class="casecard"><div class="caseicon">🚀</div><b>ROCKET CASE</b><span>Contains a random rocket cosmetic.</span><button class="btn primary caseopen" data-case="Rocket Case">OPEN CASE</button></div>
+</div>
+<div id="caseResult" class="case-result"></div>
+</section>
 <section class="section" id="social"><div class="sectionhead"><div><h2>FrostSMP Social</h2><p>Live-style community chat and local leaderboard.</p></div></div><div class="social-grid"><div class="social-card"><div class="social-head"><b>💬 LIVE CHAT</b><span class="live-dot">LIVE</span></div><div class="chat-list" id="chatList"></div><div class="chat-form"><input class="chat-input" id="chatInput" maxlength="120" placeholder="Say something..."><button class="chat-send" id="chatSend">SEND</button></div></div><div class="social-card"><div class="social-head"><b>🏆 LEADERBOARD</b><span class="live-dot">PLAYERS</span></div><div class="leader-list" id="leaders"></div></div></div></section><section class="section" id="history"><div class="sectionhead"><div><h2>Round history</h2><p>Your Rocket results on this browser.</p></div></div><div class="history"><div class="row head"><span>ROUND</span><span>CRASH</span><span>RESULT</span><span>PAYOUT</span></div><div id="rows"><div class="row"><span>—</span><span>—</span><span>Play a round</span><span>—</span></div></div></div></section>
 <section class="section" id="rules"><div class="info"><div><b>❄ FrostSMP only</b><p>This prototype uses fictional/local FrostSMP balance only. No real-money deposits, withdrawals, cash-outs, or IRL trading.</p></div><div><b>⚡ Independent rounds</b><p>The crash point is generated before launch using cryptographic randomness when available.</p></div><div><b>📈 How Rocket works</b><p>The multiplier rises continuously. Cashing out locks the current value; crashing first loses the wager.</p></div></div></section>
 </main><footer><div>© 2026 <b>FrostFlip</b></div><div>FrostSMP in-game currency only · No real-money trading</div></footer>
@@ -96,6 +107,19 @@ $("rulesBtn").onclick=()=>{$("modal").style.display="grid"};$("close").onclick=(
 $("yes").onclick=()=>{$("gate").style.display="none";sessionStorage.setItem("ff-entered","1");toast("Welcome to FrostFlip, "+nickname)};$("no").onclick=()=>{window.location.href="https://www.google.com/"};
 if(sessionStorage.getItem("ff-entered")==="1")$("gate").style.display="none";updateBalance();
 (function snow(){const c=$("snow"),x=c.getContext("2d"),flakes=[];function resize(){c.width=innerWidth;c.height=innerHeight;const n=innerWidth<600?42:78;while(flakes.length<n)flakes.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+.6,v:Math.random()*.5+.22,d:Math.random()*1.3-.65,p:Math.random()*6.28,a:Math.random()*.5+.15})}resize();addEventListener("resize",resize,{passive:true});function draw(){x.clearRect(0,0,c.width,c.height);for(const f of flakes){f.y+=f.v;f.p+=.012;f.x+=Math.sin(f.p)*f.d;if(f.y>c.height+5){f.y=-5;f.x=Math.random()*c.width}x.globalAlpha=f.a;x.fillStyle="#fff";x.beginPath();x.arc(f.x,f.y,f.r,0,Math.PI*2);x.fill()}requestAnimationFrame(draw)}draw()})();
+
+// Cosmetic cases: no wagering, no currency cost, and no cash value.
+const caseRewards={
+ "Frozen Case":["❄️ Frostborn","🧊 Ice Walker","🌨️ Snowbound","☃️ Frosty"],
+ "Ice Case":["💎 Glacier","🔷 Crystal","🧊 Frozen Core","❄️ Icebound"],
+ "Rocket Case":["🚀 Sky Runner","🌌 Void Flyer","☄️ Comet","❄️ Frost Rocket"]
+};
+document.querySelectorAll(".caseopen").forEach(btn=>btn.onclick=()=>{
+ const name=btn.dataset.case,rewards=caseRewards[name],reward=rewards[Math.floor(random()*rewards.length)];
+ const out=$("caseResult");out.classList.remove("show");void out.offsetWidth;
+ out.innerHTML='<div class="win">'+reward+'</div><small>You received a cosmetic from the '+name+'. Cosmetic only — no FrostSMP currency or real-money value.</small>';
+ out.classList.add("show");tone(620,.08);setTimeout(()=>tone(880,.12),100);
+});
 </script>
 </body>
 </html>
