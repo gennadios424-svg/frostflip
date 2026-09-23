@@ -3,382 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FrostFlip — FrostSMP</title>
+<title>FrostFlip — Maybe Soon...?</title>
 <style>
-:root{--bg:#f5fbff;--panel:rgba(255,255,255,.78);--panel2:#fff;--ink:#102536;--muted:#6c8294;--ice:#08a9ef;--cyan:#57e5ff;--line:#d8e9f2;--green:#13b981;--red:#ef6078}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font:14px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 15% 10%,#b9f3ff 0,transparent 28%),radial-gradient(circle at 85% 20%,#d9f8ff 0,transparent 25%),linear-gradient(135deg,#e9faff 0%,#c7eefa 48%,#f7fcff 100%);overflow-x:hidden}
-button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
-#snow{position:fixed;inset:0;pointer-events:none;z-index:2}
-.aurora{position:fixed;inset:-20%;pointer-events:none;background:radial-gradient(circle at 20% 20%,#57e5ff45,transparent 30%),radial-gradient(circle at 80% 30%,#9cecff35,transparent 28%),radial-gradient(circle at 50% 90%,#79dfff25,transparent 32%);filter:blur(20px);animation:drift 16s ease-in-out infinite alternate}@keyframes drift{to{transform:translate3d(3%,-2%,0) scale(1.05)}}
-.gate{position:fixed;inset:0;z-index:100;background:linear-gradient(135deg,#071a2b,#0e3550 55%,#063a59);display:grid;place-items:center;padding:20px}.gate:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff9 1px,transparent 1.5px);background-size:55px 55px;opacity:.25}.gatebox{position:relative;width:min(540px,100%);padding:42px;border:1px solid #ffffff2b;border-radius:30px;background:#ffffff12;backdrop-filter:blur(25px);text-align:center;color:white;box-shadow:0 40px 120px #0007}.flake{font-size:42px;text-shadow:0 0 30px #57e5ff}.eyebrow{font-size:10px;letter-spacing:3px;font-weight:900;color:#7deaff;margin:14px 0}.gate h1{font-size:clamp(25px,6vw,42px);margin:0;letter-spacing:-1.5px}.gate p{color:#c6dce9;line-height:1.7}.age{margin:25px 0 15px;font-weight:900;letter-spacing:1px}.actions{display:flex;gap:10px}.btn{border:0;border-radius:13px;padding:13px 18px;font-weight:900;transition:.2s transform,.2s box-shadow,.2s border-color}.btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(135deg,#08a9ef,#57e5ff);color:#062438;box-shadow:0 12px 30px #0aa9ef2b}.secondary{background:#fff;color:#284458;border:1px solid var(--line)}.actions .btn{flex:1}
-header{position:sticky;top:0;z-index:20;height:72px;background:#ffffffd9;border-bottom:1px solid #dceaf2;backdrop-filter:blur(18px);display:flex;align-items:center}.nav{width:min(1180px,calc(100% - 30px));margin:auto;display:flex;align-items:center;gap:28px}.brand{font-weight:950;letter-spacing:-.7px;font-size:18px;display:flex;align-items:center;gap:9px}.brand i{font-style:normal;color:var(--ice);font-size:23px}.brand span{color:var(--ice)}.links{display:flex;gap:24px;color:#62798a;font-weight:750;font-size:12px}.links a:hover{color:var(--ice)}.balance{margin-left:auto;padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:12px;display:flex;gap:8px;align-items:center}.balance small{color:#8193a0}.balance b{font-size:13px}.profile{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:#f4fbff}
-main{position:relative;z-index:3;width:min(1180px,calc(100% - 30px));margin:auto;padding-left:235px}
-.hero{min-height:520px;display:grid;grid-template-columns:1fr 440px;gap:55px;align-items:center;padding:72px 0}.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid #cfe9f4;background:#fff;border-radius:99px;color:#4e7083;font-size:9px;font-weight:950;letter-spacing:1px}.dot{width:6px;height:6px;border-radius:50%;background:#12ba85;box-shadow:0 0 10px #12ba85}.hero h1{font-size:clamp(58px,8vw,96px);line-height:.88;letter-spacing:-6px;margin:22px 0 18px}.hero h1 span{background:linear-gradient(100deg,#0b8fd0,#08b9ef,#65eaff);-webkit-background-clip:text;color:transparent}.hero p{max-width:540px;color:var(--muted);line-height:1.8}.hero .actions{margin-top:25px;width:min(390px,100%)}.preview{height:360px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(180deg,#e7f9ff,#bfefff 62%,#fafdff);position:relative;overflow:hidden;box-shadow:0 30px 80px #23799a18}.preview:before{content:"";position:absolute;width:500px;height:130px;bottom:-75px;left:-30px;border-radius:50%;background:#8dddf4;box-shadow:0 0 0 25px #c9f3ff}.mini-rocket{position:absolute;left:50%;top:90px;width:56px;height:145px;transform:translateX(-50%);animation:hover 2.5s ease-in-out infinite}.mini-body{position:absolute;inset:0 7px 25px;border-radius:50% 50% 14px 14px;background:linear-gradient(90deg,#b9cbd4,#fff 45%,#b8d1dc);border:1px solid #9db7c5}.mini-body:after{content:"F";position:absolute;top:65px;left:50%;transform:translateX(-50%);font-weight:950;color:#079fe5}.mini-window{position:absolute;top:27px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;background:#12344a;border:5px solid #56e6ff;box-shadow:0 0 18px #57e5ff}.mini-fin{position:absolute;bottom:25px;width:23px;height:48px;background:#0aa9e9;clip-path:polygon(0 100%,100% 100%,100% 0)}.mini-fin:first-of-type{left:-7px}.mini-fin:last-of-type{right:-7px;transform:scaleX(-1)}.flame{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:34px;height:95px;background:linear-gradient(#fff,#62eaff,#079fe5,transparent);clip-path:polygon(50% 0,100% 55%,75% 100%,50% 70%,25% 100%,0 55%);filter:drop-shadow(0 0 13px #57e5ff);animation:flame .08s infinite alternate}@keyframes flame{to{height:108px;transform:translateX(-50%) scaleX(.82)}}@keyframes hover{50%{transform:translate(-50%,-12px) rotate(1deg)}}
-.section{padding:35px 0 85px}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.section h2{font-size:28px;letter-spacing:-1.2px;margin:0}.sectionhead p{color:var(--muted);margin:7px 0 0;font-size:12px}.game{border:1px solid #cfe5ef;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 25px 70px #23799a12}.gamebar{height:62px;padding:0 22px;border-bottom:1px solid #e1edf2;display:flex;align-items:center;justify-content:space-between}.gamebar strong{font-size:13px}.online{color:#10a87c;font-size:9px;font-weight:950;letter-spacing:1px}.online:before{content:"●";margin-right:6px}.gamegrid{display:grid;grid-template-columns:1fr 340px;min-height:650px}.scene{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 15%,#ffffffaa,transparent 24%),linear-gradient(180deg,#dff9ff 0%,#8bdcf5 42%,#3fa9db 72%,#dff7ff 100%);isolation:isolate}.scene.sky{transition:background 1s}.stars{position:absolute;inset:0;opacity:0;transition:1s;background-image:radial-gradient(#fff 1px,transparent 1.6px);background-size:63px 63px}.cloud{position:absolute;width:240px;height:62px;border-radius:99px;background:#ffffffb8;filter:blur(2px);animation:cloud 28s linear infinite}.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit;box-shadow:0 0 30px #fff7}.cloud:before{width:85px;height:85px;left:28px;top:-40px}.cloud:after{width:105px;height:105px;right:22px;top:-52px}@keyframes cloud{from{transform:translateX(-300px)}to{transform:translateX(900px)}}.world{position:absolute;left:50%;bottom:-230px;transform:translateX(-50%);width:700px;height:300px;border-radius:50% 50% 0 0;background:radial-gradient(circle at 40% 18%,#b5f2ff,#2e9ed6 58%,#126195);opacity:0;transition:1s}.mult{position:absolute;z-index:8;top:35px;left:50%;transform:translateX(-50%);font-size:clamp(54px,7vw,82px);font-weight:950;letter-spacing:-5px;color:#102b40}.mult.live{color:#079fe5}.stage{position:absolute;z-index:8;top:128px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:950;letter-spacing:2px;color:#688293;white-space:nowrap}.rocket{position:absolute;z-index:7;left:50%;bottom:46px;width:64px;height:160px;transform:translateX(-50%);transition:filter .2s}.body{position:absolute;inset:0 8px 24px;border-radius:55% 55% 14px 14px;background:linear-gradient(90deg,#b8ccd6,#fff 45%,#bfd4de);border:1px solid #9cb6c4;box-shadow:0 15px 30px #21667c22}.body:after{content:"F";position:absolute;left:50%;top:69px;transform:translateX(-50%);font-weight:950;font-size:19px;color:#079fe5}.window{position:absolute;left:50%;top:27px;transform:translateX(-50%);width:32px;height:32px;border-radius:50%;background:#15374c;border:5px solid #58e5ff;box-shadow:0 0 22px #58e5ff}.fin{position:absolute;bottom:25px;width:26px;height:54px;background:linear-gradient(#12b9ef,#0878c7);clip-path:polygon(0 100%,100% 100%,100% 0)}.fin.l{left:-8px}.fin.r{right:-8px;transform:scaleX(-1)}.engine{position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:40px;height:100px;background:linear-gradient(#fff,#5beaff,#078ee0,transparent);clip-path:polygon(50% 0,100% 56%,78% 100%,50% 72%,22% 100%,0 56%);filter:drop-shadow(0 0 13px #29d9ff);animation:flame .08s infinite alternate}.trail{position:absolute;z-index:4;left:50%;bottom:125px;width:7px;height:350px;transform:translateX(-50%);background:linear-gradient(transparent,#55ddff);filter:blur(3px);opacity:0}.count{position:absolute;z-index:30;inset:0;display:grid;place-items:center;font-size:100px;font-weight:950;color:#079fe5;pointer-events:none}.pop{animation:pop .58s ease both}@keyframes pop{0%{opacity:0;transform:scale(.6)}35%{opacity:1;transform:scale(1.08)}100%{opacity:0;transform:scale(1.25)}}.boom{position:absolute;z-index:40;left:50%;top:48%;width:35px;height:35px;border-radius:50%;transform:translate(-50%,-50%) scale(0);background:#fff;box-shadow:0 0 30px 18px #57e5ff,0 0 100px 55px #35a9ff66}.boom.go{animation:boom .8s ease-out forwards}@keyframes boom{to{transform:translate(-50%,-50%) scale(12);opacity:0}}
-.result{position:absolute;z-index:50;inset:0;display:grid;place-items:center;pointer-events:none}.resultbox{padding:26px 34px;border:1px solid #d8eaf2;border-radius:20px;background:#fffffff2;box-shadow:0 25px 80px #21617c28;text-align:center;opacity:0;transform:translateY(15px)}.result.show .resultbox{animation:result .45s forwards}@keyframes result{to{opacity:1;transform:none}}.result h2{margin:0;font-size:24px}.result p{margin:8px 0 0;color:var(--muted);font-size:11px}.controls{padding:23px;background:#fff;border-left:1px solid #dfedf3}.label{display:block;color:#708696;font-size:9px;font-weight:950;letter-spacing:1px;margin:0 0 7px}.bet{width:100%;height:51px;border:1px solid #d5e5ed;border-radius:12px;background:#fafdff;padding:0 14px;outline:0;font-size:18px;font-weight:950;color:var(--ink)}.bet:focus{border-color:#55dafa;box-shadow:0 0 0 4px #55dafa18}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:9px 0 14px}.quick button,.utils button{border:1px solid #dbe7ee;background:#f7fcff;border-radius:9px;padding:9px 2px;color:#60798a;font-size:10px;font-weight:950}.utils{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:15px}.launch{width:100%;height:58px;font-size:13px}.cash{background:linear-gradient(135deg,#11b77f,#62e8bc)!important;color:#062a1d}.cash strong{display:block;font-size:17px}.status{margin-top:12px;padding:11px;border:1px solid #e0edf3;border-radius:11px;background:#f7fbfe;color:#6d8393;font-size:10px;line-height:1.5;min-height:49px}.recent{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{padding:7px 9px;border:1px solid #dce8ef;border-radius:8px;background:#fff;font-size:10px;font-weight:950}.hi{color:#0aa477}.lo{color:#d3536a}.sound{width:100%;margin-top:14px}.fair{font-size:9px;line-height:1.6;color:#8496a3;margin-top:14px}
-.history{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}.row{display:grid;grid-template-columns:1fr .8fr 1fr 1fr;padding:12px 14px;border-top:1px solid #edf3f6;font-size:10px;color:#61798a}.row:first-child{border-top:0}.head{background:#f7fbfe;font-weight:950;color:#80919e}.info{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.info div{padding:19px;border:1px solid var(--line);border-radius:17px;background:#ffffffa8}.info b{font-size:12px}.info p{font-size:10px;line-height:1.6;color:var(--muted)}footer{border-top:1px solid var(--line);padding:28px 15px;color:#7b8e9c;font-size:10px;display:flex;justify-content:space-between;width:min(1180px,calc(100% - 30px));margin:auto}footer b{color:#079fe5}
-.modal{position:fixed;z-index:80;inset:0;display:none;place-items:center;padding:20px;background:#0a30444d;backdrop-filter:blur(8px)}.modalbox{width:min(560px,100%);background:#fff;border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:0 35px 100px #164e6a35}.modalbox p,.modalbox li{color:#6d8192;font-size:11px;line-height:1.7}.close{float:right;border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 9px}
-@media(max-width:850px){.hero{grid-template-columns:1fr;padding:55px 0}.preview{display:none}.gamegrid{grid-template-columns:1fr}.controls{border-left:0;border-top:1px solid #dfedf3}.info{grid-template-columns:1fr}.links{display:none}}
-@media(max-width:560px){.nav{width:calc(100% - 20px)}.balance small{display:none}.hero h1{font-size:61px}.actions{flex-direction:column}.scene{min-height:510px}.gamebar{padding:0 15px}.controls{padding:17px}.row{grid-template-columns:1fr .8fr 1fr}.row span:last-child{display:none}.section{padding-bottom:55px}footer{flex-direction:column;gap:8px}}
-
-/* FrostFlip social + account polish */
-.banner-wrap{position:relative;z-index:4;width:min(1180px,calc(100% - 30px));margin:18px auto 0;height:78px;display:flex;justify-content:center;pointer-events:none}
-.hanger{position:relative;width:min(430px,80vw);height:64px;display:flex;justify-content:center;align-items:center;filter:drop-shadow(0 16px 20px #17617a22);animation:sway 5s ease-in-out infinite}
-.hanger:before,.hanger:after{content:"";position:absolute;top:-12px;width:2px;height:24px;background:#7895a5;box-shadow:0 0 5px #57e5ff55}
-.hanger:before{left:18%}.hanger:after{right:18%}
-.hanger .rope{position:absolute;top:-14px;left:50%;width:14px;height:14px;border:2px solid #7895a5;border-bottom:0;border-radius:50% 50% 0 0;transform:translateX(-50%)}
-.frost-banner{position:relative;width:100%;height:58px;border:1px solid #a9dbea;border-radius:8px;background:linear-gradient(110deg,#0a2940,#0b5f86 50%,#0a2940);color:#eaffff;display:grid;place-items:center;font-weight:950;letter-spacing:3px;font-size:12px;box-shadow:inset 0 0 25px #57e5ff18,0 0 25px #57e5ff12;overflow:hidden}
-.frost-banner:before{content:"❄";position:absolute;left:18px;opacity:.65;font-size:20px}.frost-banner:after{content:"❄";position:absolute;right:18px;opacity:.65;font-size:20px}
-@keyframes sway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
-.account-actions{display:flex;gap:7px;margin-left:8px}.account-btn{border:1px solid #cfe4ee;background:#fff;border-radius:10px;padding:8px 10px;font-size:10px;font-weight:950;color:#456477;transition:.2s}.account-btn:hover{transform:translateY(-2px);border-color:#62dfff;box-shadow:0 8px 22px #159dd21c}.account-btn.deposit{color:#087fae;background:#f2fcff}
-.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-.social-card{border:1px solid var(--line);border-radius:20px;background:#ffffffc7;backdrop-filter:blur(12px);box-shadow:0 18px 55px #23799a0c;overflow:hidden}
-.social-head{padding:15px 17px;border-bottom:1px solid #e6f0f4;display:flex;align-items:center;justify-content:space-between}
-.social-head b{font-size:12px}.live-dot{color:#11ad7d;font-size:9px;font-weight:950;letter-spacing:1px}.live-dot:before{content:"●";margin-right:5px}
-.chat-list{height:230px;overflow:auto;padding:12px}.chat-msg{display:flex;gap:9px;padding:8px 4px;animation:chatin .35s ease both}.avatar{width:27px;height:27px;border-radius:9px;background:linear-gradient(135deg,#0c86c5,#6beaff);display:grid;place-items:center;color:white;font-size:11px;font-weight:950;flex:0 0 auto}.chat-msg b{font-size:10px}.chat-msg span{display:block;color:#6d8190;font-size:10px;line-height:1.45;margin-top:2px}.chat-form{display:flex;gap:7px;padding:10px;border-top:1px solid #e6f0f4}.chat-input{flex:1;min-width:0;border:1px solid #d7e6ed;border-radius:9px;padding:9px 10px;outline:0;background:#fafdff;font-size:10px}.chat-send{border:0;border-radius:9px;background:#0aa9e9;color:white;padding:0 13px;font-weight:950;font-size:10px}.leader-list{padding:8px 12px 12px}.leader{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:8px;padding:11px 5px;border-bottom:1px solid #edf3f6}.leader:last-child{border-bottom:0}.rank{font-size:10px;font-weight:950;color:#8195a2}.leader .who b{display:block;font-size:10px}.leader .who span{font-size:9px;color:#8a9aa5}.leader strong{font-size:10px;color:#0a93ca}.empty-note{padding:22px;color:#8294a1;font-size:10px;text-align:center}
-#toast{position:fixed;z-index:120;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:11px 15px;border:1px solid #b9e4f0;border-radius:12px;background:#0b2940;color:white;font-size:10px;font-weight:850;box-shadow:0 16px 40px #07354d55;transition:.25s}.toast-show{opacity:1!important;transform:translate(-50%,0)!important}
-.command{display:flex;gap:8px;margin:14px 0 4px}.command code{flex:1;padding:11px;border:1px solid #d6e8ef;background:#f7fcff;border-radius:10px;font-size:12px;color:#0b79a8;font-weight:900}.command button{border:0;border-radius:10px;background:#0aa9e9;color:#fff;padding:0 14px;font-weight:950;font-size:10px}
-@media(max-width:850px){.account-actions{display:none}.social-grid{grid-template-columns:1fr}.banner-wrap{margin-top:10px}}
-@media(max-width:560px){.frost-banner{font-size:9px;letter-spacing:1.7px}.hanger:before{left:10%}.hanger:after{right:10%}}
-<style>
-.casegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.case-items{grid-template-columns:repeat(4,1fr)}.itemvalue{font-size:18px;color:#079fe5;letter-spacing:-.5px}.soon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.soon-card{border:1px solid var(--line);border-radius:20px;background:#fff;padding:20px;display:flex;gap:15px;align-items:center;box-shadow:0 18px 50px #23799a0c}.soon-card h3{margin:6px 0 4px;font-size:15px}.soon-card p{margin:0;color:var(--muted);font-size:10px}.soon-icon{font-size:34px}.soon{display:inline-block;padding:5px 8px;border-radius:999px;background:#eefaff;color:#0786b9;font-size:8px;font-weight:950;letter-spacing:1px}.live-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#ecfff7;color:#0a9b70;font-size:8px;font-weight:950;letter-spacing:1px}.casecard{border:1px solid var(--line);border-radius:24px;background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px #23799a10;transition:.25s}.casecard:hover{transform:translateY(-5px);box-shadow:0 25px 60px #23799a20}.caseicon{font-size:48px}.casecard b{font-size:16px}.casecard span{color:var(--muted);font-size:12px;line-height:1.6;min-height:38px}.caseopen{margin-top:8px}.case-result{margin-top:18px;min-height:0;border-radius:22px;overflow:hidden}.case-result.show{padding:22px;border:1px solid #bfe8f5;background:linear-gradient(135deg,#effcff,#fff);animation:casepop .45s ease}.case-result .win{font-size:24px;font-weight:950;color:#079fe5}.case-result small{display:block;color:var(--muted);margin-top:5px}@keyframes casepop{0%{transform:scale(.94);opacity:0}60%{transform:scale(1.02)}100%{transform:scale(1);opacity:1}}@media(max-width:1200px){main{padding-left:0}}@media(max-width:1000px){.case-items{grid-template-columns:repeat(2,1fr)}.soon-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.casegrid,.case-items,.soon-grid{grid-template-columns:1fr}}
-<style>
-.ignbox{margin:20px 0 8px;text-align:left}.ignbox label{display:block;font-size:10px;font-weight:900;letter-spacing:1px;color:#bfe6f5;margin-bottom:7px}.ignbox input{width:100%;padding:12px 13px;border-radius:12px;border:1px solid #ffffff35;background:#ffffff12;color:#fff;outline:none}.ignbox input::placeholder{color:#9ab7c5}.sidebar{position:absolute;left:0;top:92px;width:210px;padding:18px;border:1px solid var(--line);border-radius:20px;background:#ffffffdf;backdrop-filter:blur(18px);box-shadow:0 20px 60px #23799a18;z-index:10}.sidehead{font-size:10px;font-weight:950;letter-spacing:1.4px;color:var(--ice)}.sideign{font-weight:950;font-size:17px;margin:12px 0 18px;overflow:hidden;text-overflow:ellipsis}.stat{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid #e7f0f4;font-size:11px}.stat span{color:var(--muted)}.green{color:var(--green)}.sideLinks{display:grid;gap:7px;margin-top:12px}.sideLinks a{padding:8px;border-radius:9px;color:#527184;font-size:11px;font-weight:800}.sideLinks a:hover{background:#eefaff;color:var(--ice)}.bigbanner{margin:5px 0 10px;padding:24px 30px;border-radius:22px;background:linear-gradient(100deg,#082b43,#087eb0,#0ac0ee,#082b43);color:#fff;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 18px 50px #087fa022;animation:bannerpulse 4s ease-in-out infinite}.bigbanner b{font-size:22px;letter-spacing:2px}.bigbanner small{font-size:10px;letter-spacing:1.5px;color:#d8f8ff}@keyframes bannerpulse{50%{box-shadow:0 22px 70px #08b9ef35}}.roulette-card{display:flex;align-items:center;gap:25px;padding:30px;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 20px 55px #23799a12}.roulette-wheel{width:115px;height:115px;border-radius:50%;display:grid;place-items:center;font-size:45px;background:conic-gradient(#082b43 0 25%,#dff8ff 25% 50%,#08a9ef 50% 75%,#fff 75%);border:8px solid #d5edf6;box-shadow:inset 0 0 0 5px #fff,0 15px 35px #23799a20;animation:spin 6s linear infinite}.soon{font-size:9px;font-weight:950;letter-spacing:2px;color:var(--ice)}.roulette-card h3{font-size:24px;margin:7px 0}.roulette-card p{color:var(--muted);line-height:1.6}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:1200px){.sidebar{position:relative;left:auto;top:auto;width:100%;margin:18px 0 0;display:grid;grid-template-columns:1.5fr repeat(4,1fr) 1.3fr;gap:10px;align-items:center}.sideign{margin:0}.stat{border-top:0;padding:8px 10px;background:#f7fcff;border-radius:10px;display:block}.stat b{display:block;margin-top:2px}.sideLinks{display:flex;margin:0}.sideLinks a{padding:7px}}@media(max-width:700px){.sidebar{grid-template-columns:1fr 1fr}.sideLinks{grid-column:1/-1}}
-::selection{background:#8deaff55;color:inherit}::-moz-selection{background:#8deaff55;color:inherit}button,.btn,.pill,.brand,.online,.caseicon,.soon,.dot,.flake,.mult,.stage,.bigbanner,.roulette-wheel,.sidehead{user-select:none;-webkit-user-select:none}button,.btn{user-select:none;-webkit-user-select:none}<style>.playgate{position:fixed;right:20px;top:86px;z-index:90;display:none;place-items:center;padding:0;background:transparent;pointer-events:none}.playgate.show{display:grid}.playbox{width:min(320px,calc(100vw - 30px));padding:18px;border:1px solid #bcecff55;border-radius:16px;background:#fffffffa;box-shadow:0 18px 55px #00283c35;text-align:center;pointer-events:auto}.playbox .flake{color:var(--ice);text-shadow:0 0 20px #57e5ff;font-size:24px}.playbox h2{margin:5px 0;font-size:17px}.playbox p{color:var(--muted);line-height:1.5;font-size:10px}.playbox input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;outline:none;margin:7px 0 10px}.playbox .actions{display:flex;gap:7px}.playbox .btn{padding:10px 12px;font-size:10px}
-.case-shell{border:1px solid #cfe5ef;border-radius:26px;background:linear-gradient(145deg,#fff,#f3fbff);padding:22px;box-shadow:0 25px 70px #23799a14;overflow:hidden}.case-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.case-top>div:first-child{display:flex;align-items:center;gap:12px}.case-logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#07334e,#0baeea);color:#fff;font-size:24px;box-shadow:0 8px 25px #079fe533}.case-top b{display:block;font-size:15px;letter-spacing:.5px}.case-top span{display:block;color:var(--muted);font-size:9px;margin-top:4px}.case-cost{text-align:right}.case-cost small{display:block;color:#8496a3;font-size:8px;font-weight:950;letter-spacing:1px}.case-cost strong{display:block;color:#079fe5;font-size:20px;margin-top:2px}.case-cost span{font-size:8px;color:#9aaab4}.case-reel-wrap{height:150px;position:relative;border:1px solid #cfe8f2;border-radius:18px;background:linear-gradient(180deg,#e9faff,#d3f4ff);overflow:hidden;box-shadow:inset 0 0 45px #4bdcff20}.case-reel{display:flex;height:100%;align-items:center;gap:8px;width:max-content;transform:translateX(0)}.reel-item{width:142px;height:112px;flex:0 0 142px;border:1px solid #c8e2ec;border-radius:15px;background:#ffffffd9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 8px 22px #20708e0d}.reel-icon{font-size:35px;filter:drop-shadow(0 3px 6px #188cb733)}.reel-item b{font-size:8px;text-align:center}.reel-item span{font-size:10px;color:#079fe5;font-weight:950}.case-pointer{position:absolute;z-index:5;left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);background:#08a9ef;box-shadow:0 0 16px #08a9ef,0 0 35px #57e5ff;pointer-events:none}.case-pointer:before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);border-left:9px solid transparent;border-right:9px solid transparent;border-top:12px solid #08a9ef}.case-glow{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#d7f7ffcc,transparent 18%,transparent 82%,#d7f7ffcc)}.case-bottom{display:flex;align-items:center;gap:14px;margin-top:18px}.case-qty{padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#f8fcff;min-width:105px}.case-qty small{display:block;color:#8496a3;font-size:8px;font-weight:950;letter-spacing:1px}.case-qty strong{font-size:20px;color:#079fe5}.case-bottom .caseopen{flex:1;height:50px}.case-bottom .caseopen:disabled{opacity:.55;cursor:not-allowed;transform:none}.case-chances{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:13px}.case-chances div{border:1px solid var(--line);border-radius:12px;padding:11px;background:#ffffffa8}.case-chances b{display:block;font-size:8px}.case-chances span{display:block;color:#079fe5;font-size:10px;font-weight:950;margin-top:4px}.case-result{min-height:0;margin-top:16px;text-align:center}.case-result.show{padding:18px;border:1px solid #bfe8f5;border-radius:17px;background:linear-gradient(135deg,#effcff,#fff);animation:casepop .45s ease}.case-result .win{font-size:22px;font-weight:950;color:#079fe5}.case-result small{display:block;color:var(--muted);margin-top:5px;font-size:9px}@media(max-width:760px){.case-chances{grid-template-columns:repeat(2,1fr)}.case-top{align-items:flex-start}.case-cost strong{font-size:16px}.reel-item{width:125px;flex-basis:125px}}
-/* ===== FROSTFLIP ULTRA POLISH ===== */
-:root{--ice2:#8cecff;--deep:#06182b}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.22) 50%,transparent 80%);transform:translateX(-120%);animation:iceSweep 18s ease-in-out infinite}
-@keyframes iceSweep{0%,70%{transform:translateX(-120%)}90%,100%{transform:translateX(120%)}}
-button,.casecard,.soon-card,.social-card,.history,.info div,.gamebar,.balance,.profile,.pill,.chip,.leader,.chat-msg,.preview,.frost-banner,.account-btn,.quick button,.utils button,.sideLinks a{transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,border-color .22s,background .22s,filter .22s}
-button:hover,.account-btn:hover,.quick button:hover,.utils button:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 12px 32px rgba(8,169,239,.20);border-color:#62dcff}
-button:active,.quick button:active,.utils button:active{transform:translateY(0) scale(.97)}
-.casecard:hover{transform:translateY(-9px) scale(1.012);box-shadow:0 28px 70px rgba(8,169,239,.20);border-color:#75def8}
-.casecard:hover .caseicon{animation:caseIconFloat .75s ease-in-out infinite alternate;filter:drop-shadow(0 0 15px #57e5ff)}
-.casecard:hover .caseopen{box-shadow:0 0 0 4px rgba(87,229,255,.08),0 12px 30px rgba(8,169,239,.25)}
-.soon-card:hover,.social-card:hover,.info div:hover,.history:hover{transform:translateY(-5px);box-shadow:0 20px 55px rgba(8,169,239,.14);border-color:#8bdfef}
-.leader:hover{background:#effcff;transform:translateX(5px);border-radius:10px}
-.chat-msg:hover{transform:translateX(4px);background:#f3fbfe;border-radius:10px}
-.preview:hover{transform:translateY(-7px) rotate(-.5deg);box-shadow:0 35px 90px rgba(8,169,239,.22)}
-.frost-banner:hover{box-shadow:inset 0 0 35px rgba(87,229,255,.20),0 0 35px rgba(87,229,255,.18)}
-@keyframes caseIconFloat{from{transform:translateY(0) rotate(-2deg) scale(1)}to{transform:translateY(-8px) rotate(3deg) scale(1.08)}}
-.case-result.show{position:relative;box-shadow:0 0 0 1px #8ce8ff,0 15px 50px rgba(8,169,239,.16)}
-.case-result.show:before{content:"";position:absolute;inset:-2px;border-radius:24px;pointer-events:none;background:linear-gradient(110deg,transparent,rgba(255,255,255,.65),transparent);transform:translateX(-110%);animation:revealSweep 1s ease .05s forwards}
-@keyframes revealSweep{to{transform:translateX(110%)}}
-.case-result.show .win{animation:winReveal .65s cubic-bezier(.2,1.5,.3,1) both;text-shadow:0 0 20px #57e5ff}
-@keyframes winReveal{0%{transform:scale(.45) rotate(-4deg);opacity:0;filter:blur(8px)}70%{transform:scale(1.08) rotate(1deg);opacity:1;filter:blur(0)}100%{transform:scale(1)}}
-.case-result.show small{animation:fadeUp .45s ease .25s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.case-opening{animation:caseShake .13s ease-in-out infinite alternate!important}
-@keyframes caseShake{from{transform:translateX(-2px) rotate(-.6deg)}to{transform:translateX(2px) rotate(.6deg)}}
-#caseBurst{position:absolute;inset:0;pointer-events:none;z-index:9}
-.case-spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#8cecff;box-shadow:0 0 14px #57e5ff;animation:caseSpark 900ms ease-out forwards}
-@keyframes caseSpark{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.15)}}
-#frostHud{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:12px;margin:-2px 0 12px}
-.hud-card{position:relative;overflow:hidden;border:1px solid rgba(141,219,241,.55);border-radius:18px;padding:16px;background:rgba(255,255,255,.72);box-shadow:0 15px 45px rgba(35,121,154,.08);backdrop-filter:blur(12px)}
-.hud-card:after{content:"";position:absolute;width:90px;height:90px;right:-35px;top:-35px;border-radius:50%;background:rgba(87,229,255,.16);filter:blur(8px)}
-.hud-kicker{font-size:8px;font-weight:950;letter-spacing:1.5px;color:#5e7f91}
-.hud-value{display:block;margin-top:6px;font-size:20px;font-weight:950;letter-spacing:-.7px}
-.hud-sub{display:block;margin-top:3px;font-size:9px;color:#7891a0}
-.hud-live{color:#0a9b70!important}.hud-live:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#13b981;margin-right:6px;box-shadow:0 0 10px #13b981}
-.frost-activity{margin:0 0 28px;border:1px solid rgba(141,219,241,.5);border-radius:20px;background:rgba(255,255,255,.68);overflow:hidden;box-shadow:0 18px 55px rgba(35,121,154,.07)}
-.activity-head{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid #dcecf3;font-size:9px;font-weight:950;letter-spacing:1.1px}
-.activity-track{display:flex;gap:10px;overflow:hidden;padding:12px 14px}
-.activity-item{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:#f4fbfe;border:1px solid #d7edf5;font-size:9px;animation:activityIn .4s ease both}
-.activity-item b{font-size:10px}.activity-item .up{color:#0aa675}.activity-item .down{color:#e55b72}
-@keyframes activityIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.hero .pill{box-shadow:0 0 0 1px rgba(87,229,255,.1),0 8px 30px rgba(8,169,239,.08)}
-.hero h1 span{position:relative;text-shadow:0 0 28px rgba(87,229,255,.35)}
-.hero h1 span:after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:linear-gradient(90deg,transparent,#57e5ff,transparent);animation:underlinePulse 2.2s ease-in-out infinite}
-@keyframes underlinePulse{50%{opacity:.35;transform:scaleX(.65)}}
-.game{box-shadow:0 30px 90px rgba(10,93,126,.13),0 0 0 1px rgba(87,229,255,.12)}
-.sectionhead h2{letter-spacing:-.7px}
-#mouseGlow{position:fixed;width:240px;height:240px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(87,229,255,.11),transparent 65%);transform:translate(-50%,-50%);mix-blend-mode:multiply}
-body.ultra .hud-card{box-shadow:0 20px 60px rgba(8,169,239,.12)}
-@media(max-width:900px){#frostHud{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){#frostHud{grid-template-columns:1fr 1fr}.hud-card{padding:13px}.hud-value{font-size:16px}.activity-track{padding:9px}.activity-item{font-size:8px}}
-</style></style></style></style>
-<style>
-.goat-dancer{position:relative;min-height:270px;border:1px solid #b9deec;border-radius:20px;background:linear-gradient(180deg,#e8fbff 0%,#a8e5f6 68%,#72c8e7 100%);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding-bottom:25px;box-shadow:inset 0 -30px 50px #078fc51c}
-.goat-dancer:before{content:"❄  ❄  ❄";position:absolute;top:13px;left:0;right:0;text-align:center;color:#fff;font-size:13px;letter-spacing:7px;animation:snowdrop 3s linear infinite}
-.goat-label{position:absolute;top:42px;left:0;right:0;text-align:center;color:#087eae;font-size:9px;font-weight:950;letter-spacing:1.5px}
-.steve{position:relative;width:82px;height:174px;animation:steveBounce .48s ease-in-out infinite alternate;transform-origin:bottom center;z-index:2}
-.head{position:absolute;left:18px;top:0;width:46px;height:46px;background:#c98d68;border:2px solid #9d6447;box-shadow:inset 0 -4px #b97959}
-.hair{position:absolute;left:-2px;top:-2px;width:50px;height:15px;background:#52352a}
-.eye{position:absolute;top:23px;width:5px;height:5px;background:#20303a}.e1{left:9px}.e2{right:9px}
-.body-skin{position:absolute;left:14px;top:46px;width:54px;height:62px;background:#3e82c3;border:2px solid #2c6399;border-radius:4px;display:grid;place-items:center;color:#d5f8ff;font-weight:950;font-size:22px}
-.arm{position:absolute;top:48px;width:16px;height:61px;background:#c98d68;border:2px solid #9d6447;border-radius:4px;transform-origin:50% 7px}
-.a1{left:-1px;animation:arm1 .48s ease-in-out infinite alternate}.a2{right:-1px;animation:arm2 .48s ease-in-out infinite alternate}
-.leg{position:absolute;top:106px;width:20px;height:62px;background:#354d7b;border:2px solid #263b61;border-radius:3px;transform-origin:50% 0}
-.l1{left:17px;animation:leg1 .48s ease-in-out infinite alternate}.l2{right:17px;animation:leg2 .48s ease-in-out infinite alternate}
-.leg:after{content:"";position:absolute;bottom:-5px;width:27px;height:11px;background:#263d4f;border-radius:3px}
-.l1:after{left:-5px}.l2:after{right:-5px}
-.dancer-shadow{position:absolute;bottom:12px;width:90px;height:13px;border-radius:50%;background:#17698738;filter:blur(3px);animation:shadow .48s ease-in-out infinite alternate}
-@keyframes steveBounce{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-11px) rotate(4deg)}} 
-@keyframes arm1{from{transform:rotate(38deg)}to{transform:rotate(-52deg)}}@keyframes arm2{from{transform:rotate(-38deg)}to{transform:rotate(52deg)}}
-@keyframes leg1{from{transform:rotate(15deg)}to{transform:rotate(-20deg)}}@keyframes leg2{from{transform:rotate(-15deg)}to{transform:rotate(20deg)}}
-@keyframes shadow{from{transform:scaleX(1);opacity:.55}to{transform:scaleX(.72);opacity:.25}}
-@keyframes snowdrop{from{transform:translateY(-5px);opacity:.9}to{transform:translateY(220px);opacity:.1}}
-@media(max-width:850px){.goat-dancer{min-height:220px}.social-grid{grid-template-columns:1fr}.goat-dancer{margin-top:12px}}
-</style><style>
-*{-webkit-user-select:none!important;-moz-user-select:none!important;user-select:none!important}
-input,textarea{user-select:text!important;-webkit-user-select:text!important}
-.wins-list{display:grid;gap:8px;max-height:270px;overflow:hidden}
-.win-row{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:9px;padding:9px 10px;border:1px solid #b9e4f0;background:#f5fdff;border-radius:12px}
-.win-icon{font-size:18px;text-align:center}.win-player{min-width:0}.win-player b{display:block;font-size:11px}.win-player span{display:block;font-size:9px;color:#7193a0;margin-top:2px}.win-amount{font-weight:950;font-size:11px}.win-amount.plus{color:#07985a}.win-amount.minus{color:#d84d5b}
-</style><style>
-.scene{background:radial-gradient(circle at 15% 18%,#ffffff 0 2%,transparent 3%),radial-gradient(circle at 82% 28%,#8beeff55,transparent 25%),radial-gradient(circle at 45% 80%,#1777c855,transparent 34%),linear-gradient(135deg,#e9fbff 0%,#75d5f5 45%,#0b75bd 100%)!important}
-.scene:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 35%,#ffffff18 42%,transparent 49%),repeating-linear-gradient(125deg,transparent 0 80px,#ffffff0b 82px 84px);animation:auroraSweep 9s linear infinite;pointer-events:none}
-@keyframes auroraSweep{from{transform:translateX(-12%)}to{transform:translateX(12%)}}
-.rocket{left:8%!important;bottom:46px!important;transform:translateY(0) rotate(90deg)!important}
-.trail{left:12%!important;bottom:75px!important;width:350px!important;height:7px!important;transform:none!important;background:linear-gradient(90deg,transparent,#55ddff)!important}
-.goat-dancer{position:relative;min-height:270px;border:1px solid #b9deec;border-radius:20px;background:radial-gradient(circle at 50% 20%,#ffffffaa,transparent 28%),linear-gradient(180deg,#dffbff,#8bd8f0 62%,#368ebf);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding-bottom:25px;box-shadow:inset 0 -30px 50px #087bb52a}
-.goat-dancer:after{content:"⚡  🔥  👊  ❄️  💀  ⚡  🩸";position:absolute;top:20px;left:0;right:0;text-align:center;font-size:18px;letter-spacing:5px;animation:emoteFloat 2.5s ease-in-out infinite}
-@keyframes emoteFloat{50%{transform:translateY(12px) scale(1.08);opacity:.72}}
-.goat-label{position:absolute;top:55px;left:0;right:0;text-align:center;color:#087eae;font-size:9px;font-weight:950;letter-spacing:1.5px}
-.steve{position:relative;width:92px;height:180px;animation:kratosBounce .5s ease-in-out infinite alternate;transform-origin:bottom center;z-index:2}
-.head{position:absolute;left:18px;top:0;width:52px;height:52px;background:#8f171c;border:2px solid #5b1014;border-radius:8px;box-shadow:inset 0 -5px #681015}
-.hair{position:absolute;left:-2px;top:-2px;width:56px;height:14px;background:#171717;border-radius:7px 7px 2px 2px}
-.eye{position:absolute;top:25px;width:6px;height:4px;background:#f7e4c9}.e1{left:10px}.e2{right:10px}
-.head:after{content:"";position:absolute;left:17px;top:1px;width:5px;height:47px;background:#f3e7d4;transform:rotate(17deg);box-shadow:0 0 0 1px #fff2}
-.body-skin{position:absolute;left:14px;top:52px;width:60px;height:65px;background:linear-gradient(90deg,#181818,#4b2020,#171717);border:2px solid #111;border-radius:6px;display:grid;place-items:center;color:#f1c5a1;font-weight:950;font-size:20px}
-.arm{position:absolute;top:53px;width:17px;height:64px;background:#8f171c;border:2px solid #5b1014;border-radius:5px;transform-origin:50% 7px}
-.a1{left:-2px;animation:arm1 .5s ease-in-out infinite alternate}.a2{right:-2px;animation:arm2 .5s ease-in-out infinite alternate}
-.leg{position:absolute;top:115px;width:22px;height:62px;background:#272727;border:2px solid #111;border-radius:4px;transform-origin:50% 0}
-.l1{left:18px;animation:leg1 .5s ease-in-out infinite alternate}.l2{right:18px;animation:leg2 .5s ease-in-out infinite alternate}
-.leg:after{content:"";position:absolute;bottom:-5px;width:29px;height:12px;background:#111;border-radius:4px}.l1:after{left:-5px}.l2:after{right:-5px}
-.dancer-shadow{position:absolute;bottom:12px;width:95px;height:13px;border-radius:50%;background:#123b5545;filter:blur(3px);animation:shadow .5s ease-in-out infinite alternate}
-@keyframes kratosBounce{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-12px) rotate(5deg)}}
-@keyframes arm1{from{transform:rotate(45deg)}to{transform:rotate(-55deg)}}@keyframes arm2{from{transform:rotate(-45deg)}to{transform:rotate(55deg)}}
-@keyframes leg1{from{transform:rotate(18deg)}to{transform:rotate(-22deg)}}@keyframes leg2{from{transform:rotate(-18deg)}to{transform:rotate(22deg)}}@keyframes shadow{from{transform:scaleX(1)}to{transform:scaleX(.7)}}
-@media(max-width:700px){.rocket{left:5%!important}.trail{left:10%!important;width:260px!important}.goat-dancer{min-height:230px}}
-</style></head>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#eefaff;background:#fff;animation:night 14s ease-in-out infinite alternate;position:relative}
+body:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#ffffff22,transparent 25%),linear-gradient(180deg,#fdfefe,#d9f5ff 48%,#07192b 100%);animation:sky 14s ease-in-out infinite alternate;z-index:-3}
+body:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,#57e5ff18,transparent 28%),radial-gradient(circle at 80% 35%,#fff1 0,transparent 25%);z-index:-2}
+.banner{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(720px,88vw);height:86px;z-index:4}
+.rope{position:absolute;top:0;width:2px;height:43px;background:linear-gradient(#536b79,#b8dbe7);box-shadow:0 0 8px #57e5ff55}
+.rope.l{left:13%}.rope.r{right:13%}
+.sign{position:absolute;top:38px;left:50%;transform:translateX(-50%);width:100%;height:58px;border:1px solid #bdeafa;border-radius:8px;background:linear-gradient(105deg,#061b2b,#0b5274,#061b2b);display:grid;place-items:center;box-shadow:0 12px 35px #0005,inset 0 0 28px #57e5ff1c;animation:swing 5s ease-in-out infinite}
+.sign:before,.sign:after{content:"❄";position:absolute;font-size:23px;color:#aeeeff}.sign:before{left:18px}.sign:after{right:18px}
+.sign b{font-size:clamp(12px,2.2vw,18px);letter-spacing:5px;text-shadow:0 0 18px #57e5ff}
+.center{position:absolute;inset:0;display:grid;place-items:center;padding:110px 20px 40px;text-align:center;z-index:3}
+.box{width:min(780px,100%);padding:46px 30px;border:1px solid #ffffff30;border-radius:32px;background:#ffffff0d;backdrop-filter:blur(18px);box-shadow:0 30px 100px #0005}
+.flake{font-size:62px;filter:drop-shadow(0 0 20px #57e5ff);animation:float 2.8s ease-in-out infinite}
+h1{font-size:clamp(38px,8vw,82px);line-height:.9;margin:14px 0;letter-spacing:-4px}
+h1 span{background:linear-gradient(90deg,#fff,#72eaff,#fff);-webkit-background-clip:text;color:transparent}
+p{color:#bdd5e2;line-height:1.7;font-size:14px}
+.status{display:inline-flex;align-items:center;gap:9px;margin-top:12px;padding:10px 15px;border:1px solid #ffffff22;border-radius:99px;background:#071c2dcc;font-size:10px;font-weight:900;letter-spacing:2px}
+.dot{width:7px;height:7px;border-radius:50%;background:#ff647d;box-shadow:0 0 15px #ff647d;animation:pulse 1.2s infinite}
+.legal{margin-top:25px;color:#8299a8;font-size:9px;letter-spacing:.5px}
+.snow{position:absolute;inset:0;pointer-events:none;z-index:2}
+.flake2{position:absolute;top:-30px;color:#fff;opacity:.75;animation:fall linear infinite}
+.f1{left:7%;font-size:14px;animation-duration:8s}.f2{left:18%;font-size:9px;animation-duration:11s;animation-delay:-4s}.f3{left:31%;font-size:18px;animation-duration:13s;animation-delay:-7s}.f4{left:46%;font-size:11px;animation-duration:9s;animation-delay:-2s}.f5{left:62%;font-size:17px;animation-duration:12s;animation-delay:-8s}.f6{left:77%;font-size:10px;animation-duration:10s;animation-delay:-3s}.f7{left:91%;font-size:19px;animation-duration:14s;animation-delay:-9s}
+@keyframes fall{to{transform:translate3d(45px,110vh,0) rotate(360deg)}}
+@keyframes swing{0%,100%{transform:translateX(-50%) rotate(-1deg)}50%{transform:translateX(-50%) rotate(1deg)}}
+@keyframes float{50%{transform:translateY(-10px) rotate(3deg)}}
+@keyframes pulse{50%{transform:scale(1.35);opacity:.55}}
+@keyframes night{to{background:#061727}}
+@keyframes sky{to{opacity:.25}}
+@media(max-width:600px){.banner{width:94vw}.box{padding:35px 20px}.sign{height:52px}.sign b{letter-spacing:2px}h1{letter-spacing:-2px}.flake{font-size:50px}}
+</style>
+</head>
 <body>
-<canvas id="snow"></canvas><div class="aurora"></div>
-<div class="gate" id="gate"><div class="gatebox"><div class="flake">❄</div><div class="eyebrow">FROSTSMP FLIP</div><h1>WELCOME TO FROSTSMP FLIP</h1><p>FrostSMP's in-game gaming experience.</p><div class="age">ARE YOU 18 OR OLDER?</div><div class="actions"><button class="btn primary" id="yes" onclick="document.getElementById('gate').style.display='none';sessionStorage.setItem('ff-entered','1');">YES, ENTER</button><button class="btn secondary" id="no" onclick="window.location.href='https://www.google.com/'">NO, EXIT</button></div><p style="font-size:10px;margin-top:20px">FrostSMP in-game currency only. No real-money deposits, withdrawals, cash-outs, or IRL trading.</p></div></div>
-<div class="banner-wrap"><div class="hanger"><div class="rope"></div><div class="frost-banner">❄ FROSTSMP • FROSTFLIP • IN-GAME ONLY ❄</div></div></div><header><nav class="nav"><a class="brand" href="#"><i>❄</i>Frost<span>Flip</span></a><div class="links"><a href="#rocket">Rocket</a><a href="#social">Community</a><a href="#history">History</a><a href="#rules">Rules</a></div><div class="balance"><small>Balance</small><b id="balance">$10,000,000</b></div>
-<div class="account-actions"><button class="account-btn deposit" id="depositBtn">＋ DEPOSIT</button><button class="account-btn" id="withdrawBtn">↗ WITHDRAW</button></div>
-<button class="profile">◉</button></nav></header>
-<main><aside class="sidebar"><div class="sidehead">❄ FROST PROFILE</div><div class="sideign" id="sideIgn">Guest</div><div class="stat"><span>Balance</span><b id="sideBalance">$10m</b></div><div class="stat"><span>Rounds</span><b id="sideRounds">0</b></div><div class="stat"><span>Cases Opened</span><b id="sideCases">0</b></div><div class="stat"><span>Status</span><b class="green">ONLINE</b></div><div class="sideLinks"><a href="#cases">📦 Cases</a><a href="#social">💬 Community</a><a href="#history">📜 History</a></div></aside>
-<section class="hero"><div><div class="pill"><span class="dot"></span> FROSTSMP IN-GAME CURRENCY ONLY</div><h1>PLAY.<br>RISK.<br><span>FLIP.</span></h1><p>FrostSMP's frozen gaming hub. Launch the rocket, watch the multiplier climb, and decide when to cash out.</p><div class="actions"><button class="btn primary" onclick="document.querySelector('#rocket').scrollIntoView({behavior:'smooth'})">EXPLORE ROCKET →</button><button class="btn secondary" id="rulesBtn">GAME RULES</button></div></div><div class="preview"><div class="mini-rocket"><div class="mini-body"><div class="mini-window"></div></div><i class="mini-fin"></i><i class="mini-fin"></i><div class="flame"></div></div></div></section>
-
-<div id="mouseGlow"></div>
-<section id="frostHud" aria-label="FrostFlip live dashboard">
-  <div class="hud-card"><span class="hud-kicker">FROSTFLIP STATUS</span><strong class="hud-value hud-live">ALL SYSTEMS ONLINE</strong><span class="hud-sub">Rocket engine · Case reel · Community</span></div>
-  <div class="hud-card"><span class="hud-kicker">YOUR SESSION</span><strong class="hud-value" id="hudSession">NEW RUN</strong><span class="hud-sub">Local browser stats</span></div>
-  <div class="hud-card"><span class="hud-kicker">ROUNDS PLAYED</span><strong class="hud-value" id="hudRounds">0</strong><span class="hud-sub">This session</span></div>
-  <div class="hud-card"><span class="hud-kicker">QUICK CONTROL</span><strong class="hud-value">SPACE</strong><span class="hud-sub">Launch / cash out</span></div>
-</section>
-<div class="frost-activity">
-  <div class="activity-head"><span>❄ LIVE FROST ACTIVITY</span><span class="hud-live">UPDATING</span></div>
-  <div class="activity-track" id="activityTrack"></div>
-</div><section class="section" id="rocket"><div class="sectionhead"><div><h2>Rocket Crash</h2><p>Climb higher. Watch the multiplier rise. Cash out before the crash.</p></div></div><div class="game"><div class="gamebar"><strong>🚀 FROSTSMP ROCKET</strong><span class="online">SYSTEM ONLINE</span></div><div class="gamegrid"><div class="scene" id="scene"><div class="stars" id="stars"></div><div class="world" id="world"></div><div class="cloud" style="top:22%;left:-12%;opacity:.78"></div><div class="cloud" style="top:38%;left:58%;transform:scale(.72);animation-duration:34s;opacity:.62"></div><div class="cloud" style="top:56%;left:8%;transform:scale(.52);animation-duration:41s;opacity:.5"></div><div class="cloud" style="top:70%;left:72%;transform:scale(.42);animation-duration:47s;opacity:.42"></div><div class="mult" id="mult">1.00x</div><div class="stage" id="stage">LAUNCH PAD READY</div><div class="trail" id="trail"></div><div class="rocket" id="rocketModel"><div class="body"><div class="window"></div></div><i class="fin l"></i><i class="fin r"></i><div class="engine"></div></div><div class="count" id="count"></div><div class="boom" id="boom"></div><div class="result" id="result"><div class="resultbox"><h2 id="resultTitle"></h2><p id="resultText"></p></div></div></div>
-<aside class="controls"><label class="label">WAGER</label><input class="bet" id="bet" value="100000" inputmode="numeric"><div class="quick"><button data-b="1000">1K</button><button data-b="5000">5K</button><button data-b="10000">10K</button><button data-b="25000">25K</button><button data-b="50000">50K</button><button data-b="100000">100K</button><button data-b="250000">250K</button><button data-b="500000">500K</button><button data-b="1000000">1M</button></div><div class="utils"><button id="half">½</button><button id="double">2×</button><button id="max">MAX</button></div><button class="btn primary launch" id="action">LAUNCH ROCKET</button><div class="status" id="status">Minimum wager: $1,000 · Maximum: $1,000,000<br>Crash result is generated before launch.</div><label class="label" style="margin-top:17px">RECENT ROCKETS</label><div class="recent" id="recent"><span class="chip">No rounds yet</span></div><button class="btn secondary sound" id="sound">🔊 SOUND ON</button><div class="fair">Every round gets an independent result before launch. The result does not depend on your wager, balance, previous rounds, username, or cashout behavior.</div></aside></div></div></section>
-<div class="bigbanner"><span>❄</span><b>FROSTSMP FLIP</b><small>PLAY THE FROST. OWN THE MOMENT.</small><span>❄</span></div><section class="section" id="cases">
-<div class="sectionhead"><div><h2>Frost Case</h2><p>Open the Frost Case and watch the reward reel spin. The listed values are FrostSMP reference values only.</p></div><span class="soon">500,000 FROST · 5 SPINS</span></div>
-<div class="case-shell">
-  <div class="case-top">
-    <div><div class="case-logo">❄</div><div><b>FROST CASE</b><span>7 possible item reveals</span></div></div>
-    <div class="case-cost"><small>CASE VALUE</small><strong>$500,000</strong><span>FrostSMP reference</span></div>
-  </div>
-  <div class="case-reel-wrap">
-    <div class="case-pointer"></div>
-    <div class="case-reel" id="caseReel"></div>
-    <div class="case-glow"></div>
-  </div>
-  <div class="case-bottom">
-    <div class="case-qty"><small>SPINS REMAINING</small><strong id="caseQty">5</strong></div>
-    <button class="btn primary caseopen" id="openCase">OPEN CASE ×1</button>
-  </div>
-  <div id="caseResult" class="case-result"><div id="caseBurst"></div></div>
+<div class="snow" aria-hidden="true">
+<span class="flake2 f1">❄</span><span class="flake2 f2">✦</span><span class="flake2 f3">❄</span><span class="flake2 f4">✧</span><span class="flake2 f5">❄</span><span class="flake2 f6">✦</span><span class="flake2 f7">❄</span>
 </div>
-<div class="case-chances">
-  <div><b>💎 DIAMOND BLOCK</b><span>$1,000,000</span></div>
-  <div><b>🟩 EMERALD BLOCK</b><span>$750,000</span></div>
-  <div><b>🟫 ANCIENT DEBRIS</b><span>$500,000</span></div>
-  <div><b>🟨 GOLD BLOCK</b><span>$300,000</span></div>
-  <div><b>⬜ IRON BLOCK</b><span>$25,000</span></div>
-  <div><b>🟥 REDSTONE BLOCK</b><span>$20,000</span></div>
-  <div><b>🔷 LAPIS BLOCK</b><span>$15,000</span></div>
-</div>
+<div class="banner"><span class="rope l"></span><span class="rope r"></span><div class="sign"><b>❄ FROSTFLIP ❄</b></div></div>
+<main class="center">
+<section class="box">
+<div class="flake">❄️</div>
+<h1>FROSTFLIP<br><span>MAYBE SOON...?</span></h1>
+<div class="status"><i class="dot"></i> FROSTFLIP IS CURRENTLY UNAVAILABLE</div>
+<p>The project is currently offline. Thanks to everyone who checked it out — maybe we'll see you again someday.</p>
+<div class="legal">FROSTFLIP IS AN INDEPENDENT PROJECT. FROSTSMP NAMES, MARKS AND MATERIALS REMAIN THE PROPERTY OF THEIR RESPECTIVE OWNERS. NO AFFILIATION OR ENDORSEMENT IS IMPLIED.</div>
 </section>
-<section class="section" id="soon-games">
-<div class="sectionhead"><div><h2>More Games</h2><p>Only fully working games are marked LIVE. The unfinished games stay locked until they are actually ready.</p></div></div>
-<div class="soon-grid">
-<div class="soon-card live-game"><div class="soon-icon">🚀</div><div><span class="live-badge">LIVE</span><h3>Rocket</h3><p>Playable Rocket experience.</p></div></div>
-<div class="soon-card"><div class="soon-icon">🎡</div><div><span class="soon">COMING SOON</span><h3>Frost Roulette</h3><p>Not available yet.</p></div></div>
-<div class="soon-card"><div class="soon-icon">🪙</div><div><span class="soon">COMING SOON</span><h3>Coin Flip</h3><p>Not available yet.</p></div></div>
-<div class="soon-card"><div class="soon-icon">💣</div><div><span class="soon">COMING SOON</span><h3>Mines</h3><p>Not available yet.</p></div></div>
-<div class="soon-card"><div class="soon-icon">🎲</div><div><span class="soon">COMING SOON</span><h3>Dice</h3><p>Not available yet.</p></div></div>
-<div class="soon-card"><div class="soon-icon">♠️</div><div><span class="soon">COMING SOON</span><h3>Blackjack</h3><p>Not available yet.</p></div></div>
-</div>
-</section>
-<section class="section" id="roulette"><div class="sectionhead"><div><h2>Roulette</h2><p>A FrostSMP roulette game is coming soon.</p></div></div><div class="roulette-card"><div class="roulette-wheel">❄</div><div><span class="soon">COMING SOON</span><h3>Frost Roulette</h3><p>We're preparing a roulette-style game for the FrostFlip arcade.</p><button class="btn secondary" disabled>NOT AVAILABLE YET</button></div></div></section><section class="section" id="social"><div class="sectionhead"><div><h2>FrostSMP Social</h2><p>Live-style community chat and local leaderboard.</p></div></div><div class="social-grid"><div class="social-card"><div class="social-head"><b>💬 LIVE CHAT</b><span class="live-dot">LIVE</span></div><div class="chat-list" id="chatList"></div><div class="chat-form"><input class="chat-input" id="chatInput" maxlength="120" placeholder="Say something..."><button class="chat-send" id="chatSend">SEND</button></div></div><div class="social-card"><div class="social-head"><b>🏆 LEADERBOARD</b><span class="live-dot">PLAYERS</span></div><div class="leader-list" id="leaders"></div></div><div class="social-card"><div class="social-head"><b>⚡ RECENT WINS & LOSSES</b><span class="live-dot">LIVE</span></div><div class="wins-list" id="winsList"></div></div><div class="goat-dancer"><div class="goat-label">🥇 FROSTYGOAT · #1</div><div class="steve" aria-label="Dancing Kratos representing FrostyGoat"><div class="head"><div class="hair"></div><span class="eye e1"></span><span class="eye e2"></span></div><div class="body-skin">F</div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div></div><div class="dancer-shadow"></div></div></div></div></div></section><section class="section" id="history"><div class="sectionhead"><div><h2>Round history</h2><p>Your Rocket results on this browser.</p></div></div><div class="history"><div class="row head"><span>ROUND</span><span>CRASH</span><span>RESULT</span><span>PAYOUT</span></div><div id="rows"><div class="row"><span>—</span><span>—</span><span>Play a round</span><span>—</span></div></div></div></section>
-<section class="section" id="rules"><div class="info"><div><b>❄ FrostSMP only</b><p>This prototype uses fictional/local FrostSMP balance only. No real-money deposits, withdrawals, cash-outs, or IRL trading.</p></div><div><b>⚡ Independent rounds</b><p>The crash point is generated before launch using cryptographic randomness when available.</p></div><div><b>📈 How Rocket works</b><p>The multiplier rises continuously. Cashing out locks the current value; crashing first loses the wager.</p></div></div></section>
-</main><footer><div>© 2026 <b>FrostFlip</b></div><div>FrostSMP in-game currency only · No real-money trading</div></footer>
-<div id="toast"></div>
-<div class="modal" id="accountModal"><div class="modalbox"><button class="close" id="accountClose">×</button><h3 id="accountTitle">Deposit FrostSMP Balance</h3><p id="accountDesc">Send FrostSMP in-game currency to the FrostFlip account using the command below. This website does not process real money.</p><div class="command"><code id="payCommand">/pay Frostflips 100000</code><button id="copyCommand">COPY</button></div><label class="label">AMOUNT</label><input class="bet" id="accountAmount" value="100000" inputmode="numeric"><p id="withdrawNote" style="display:none">Withdrawals are not automatically executed by this static site. Use the official FrostSMP process when one is connected; no real-money withdrawal is supported.</p></div></div>
-<div class="modal" id="modal"><div class="modalbox"><button class="close" id="close">×</button><h3>Rocket rules</h3><p>The rocket starts at 1.00x and rises continuously. Each round's crash point is fixed before launch.</p><ul><li>Minimum wager $1,000 · maximum $1,000,000.</li><li>Higher multipliers are progressively less likely to be reached.</li><li>Cash out before the crash to receive wager × multiplier.</li><li>If the rocket crashes first, the wager is lost.</li><li>Previous rounds never affect future rounds.</li></ul></div></div>
-<div class="playgate" id="playGate"><div class="playbox"><div class="flake">❄</div><div class="eyebrow">PLAYER SETUP</div><h2>ENTER YOUR FROSTSMP IGN</h2><p>Before playing, enter the Minecraft IGN you use on FrostSMP.</p><input id="playIgn" maxlength="16" placeholder="Minecraft IGN" autocomplete="off"><div class="actions"><button class="btn secondary" id="playCancel">CANCEL</button><button class="btn primary" id="playConfirm">CONTINUE</button></div></div></div><script>
-const $=id=>document.getElementById(id), compactMoney=n=>{n=Math.round(Number(n)||0);if(n>=1000000000)return "$"+(n/1000000000).toFixed(n%1000000000===0?0:1)+"B";if(n>=1000000)return "$"+(n/1000000).toFixed(n%1000000===0?0:1)+"M";if(n>=1000)return "$"+(n/1000).toFixed(n%1000===0?0:1)+"K";return "$"+n.toLocaleString();}, fmt=n=>compactMoney(n);
-let nickname=sessionStorage.getItem("ff-nickname")||"Frost"+Math.floor(1000+random()*9000);sessionStorage.setItem("ff-nickname",nickname);
-let balance=10000000,state="idle",wager=0,crash=0,m=1,start=0,round=0,raf=0,history=[],soundOn=true,ctx=null,engineOsc=null,engineGain=null,lastStage=1;
-function updateBalance(){if($("sideBalance"))$("sideBalance").textContent=fmt(balance);if($("sideRounds"))$("sideRounds").textContent=round; $("balance").textContent=fmt(balance) }
-function toast(t){const e=$("toast");e.textContent=t;e.classList.add("toast-show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove("toast-show"),2200)}
-function openAccount(mode){$("accountModal").style.display="grid";const dep=mode==="deposit";$("accountTitle").textContent=dep?"Deposit FrostSMP Balance":"Withdraw FrostSMP Balance";$("accountDesc").textContent=dep?"Send FrostSMP in-game currency to the FrostFlip account using the command below. This website does not process real money.":"Withdrawals are handled in FrostSMP in-game currency only. This static prototype cannot execute a server-side payout automatically.";$("withdrawNote").style.display=dep?"none":"block";$("payCommand").textContent="/pay Frostflips "+compactMoney(Number($("accountAmount").value||100000));$("copyCommand").style.display=dep?"block":"none"}
-function updateCommand(){const n=Math.max(1,Number(String($("accountAmount").value).replace(/\D/g,""))||100000);$("accountAmount").value=n;$("payCommand").textContent="/pay Frostflips "+compactMoney(n)}
-function initSocial(){
- const botNames=["IceNova","BlueFang","SnowByte","MangoMite","FrostPixel","GlacierFox","QuartzKid","FrostyBee","ArcticWolf","CryoByte","SnowRush","IceWarden","PolarBear","FrozenFox","BlizzardX","ChillViper","FrostByte","IceDrift","SnowStorm","GlacierKid","ColdSnap","FrostMage","WinterX","IceShard","SnowRider","ArcticAce","FrostKing","BlueBlizzard","CryoFox","IceClaw","SnowGhost","FrostNova","Glacial","WinterWolf","IceTitan","SnowFlake","FrostRunner","PolarX","ColdByte","IceKnight","SnowKing","FrostDash","GlacierX","ChillMaster","IceBolt","SnowPilot","FrostWave","ArcticFox","CryoKing","FrozenByte","IceStorm","SnowFlare","FrostBlade","GlacierWolf","ChillFox","IceRocket","SnowMage","FrostOrbit","PolarByte","ColdRush","IceVortex","SnowClaw","FrostAce","GlacierByte","WinterByte","IcePhantom","SnowViper","FrostWolf","CryoRush","ArcticByte","FrozenFox","IceBlaze","SnowBolt","FrostPilot","GlacierAce","ChillByte","IceComet","SnowGhost","FrostComet","PolarWolf","ColdFox","IceRider","SnowKnight","FrostKnight","GlacierRush","WinterFox","CryoByte2","IceDash","SnowTitan","FrostTitan","ArcticWolf2","FrozenRush","BlueFrost","IceWizard","SnowWizard","FrostWizard","GlacierMage","ChillMage","IceHunter","SnowHunter","FrostHunter","PolarHunter","ColdHunter","IceBunny","SnowBunny","FrostBunny","GlacierBunny","ChillBunny","IceMonkey","SnowMonkey","FrostMonkey","PolarMonkey","ColdMonkey","IceDragon","SnowDragon","FrostDragon","GlacierDragon","ChillDragon","IceReaper","SnowReaper","FrostReaper","PolarReaper","ColdReaper","IceLegend","SnowLegend","FrostLegend","GlacierLegend"];
- const topics=[
-  ["rocket is flying clean tonight 🚀","that multiplier is moving fast ngl"],
-  ["what do you guys cash out at?","I usually watch the multiplier and leave before it gets too spicy 😭"],
-  ["is 2x safe?","nothing is guaranteed, but 2x is a common target"],
-  ["bro I crashed at 1.3x 💀","that is brutal 😭 next round can still be completely different"],
-  ["anyone hit 10x?","I've seen the lobby hit big multipliers, but they are never guaranteed"],
-  ["how does the rocket work?","multiplier rises until the randomly generated crash point is reached"],
-  ["should I bet max?","I'd keep your wager within whatever amount you're comfortable losing"],
-  ["why did it crash so early?","every round has its own crash point, so previous rounds don't control the next one"],
-  ["FrostFlip looks icy ❄️","the snow effects are actually clean"],
-  ["who is first on leaderboard?","FrostyGoat is sitting at #1 right now 🥇❄️"],
-  ["faxlex60 has 1B??","yep, the leaderboard shows $1B for faxlex60 💎"],
-  ["Mazeen is at 891M","that's a huge FrostSMP balance 👑"],
-  ["when is roulette coming?","it is marked COMING SOON on the games list"],
-  ["case spins finished 😭","you've used all the available demo spins for this session"],
-  ["can I cash out after 1x?","yes, once the rocket is flying the cashout button is available"],
-  ["the rocket is too fast","watch the multiplier rather than the rocket height for timing your cashout"],
-  ["what happens on crash?","the current wager is lost if you haven't cashed out before the crash"],
-  ["new round?","yep, once the previous round finishes you can launch again"],
-  ["snow everywhere 😂","had to make the lobby feel properly FrostSMP"],
-  ["any tips?","there's no guaranteed timing trick; every round is generated independently"]
- ];
- function addChat(name,msg,bot=true){
-  const el=document.createElement("div");el.className="chat-msg";
-  el.innerHTML='<div class="avatar">'+name[0]+'</div><div><b>'+name+(bot?' <small style="color:#35aee0">BOT</small>':'')+'</b><span>'+msg+'</span></div>';
-  $("chatList").appendChild(el);
-  while($("chatList").children.length>16)$("chatList").removeChild($("chatList").firstChild);
-  $("chatList").scrollTop=$("chatList").scrollHeight;
- }
- const initial=[["IceNova","yo this rocket is clean ❄"],["BlueFang","anyone hitting 10x today?"],["SnowByte","FrostFlip lobby looking icy"],["MangoMite","good luck everyone 🚀"],["FrostPixel","just joined"],[nickname,"welcome to FrostFlip"]];
- $("chatList").innerHTML="";
- initial.forEach(x=>addChat(x[0],x[1],x[0]!==nickname));
- const players=[["🥇❄️🔥","FrostyGoat",2000000000],["🥈⚡💎","faxlex60",1000000000],["🥉👑🧊","Mazeen",891000000],["❄️🚀","IceNova",18400000],["💙⛄","SnowByte",12750000]];
- $("leaders").innerHTML=players.map(p=>'<div class="leader"><div class="rank">'+p[0]+'</div><div class="who"><b>'+p[1]+'</b><span>FrostSMP player</span></div><strong>'+fmt(p[2])+'</strong></div>').join("");
- const wins=[["🚀","FrostyGoat","CASHED 8.42x","+ $842K","plus"],["💀","faxlex60","ROCKET CRASH","- $500K","minus"],["🔥","Mazeen","CASHED 4.17x","+ $417K","plus"],["❄️","IceNova","CASHED 2.63x","+ $263K","plus"],["😭","SnowByte","ROCKET CRASH","- $75K","minus"],["💎","GlacierFox","CASHED 12.08x","+ $1.2M","plus"]];
- $("winsList").innerHTML=wins.map(x=>'<div class="win-row"><div class="win-icon">'+x[0]+'</div><div class="win-player"><b>'+x[1]+'</b><span>'+x[2]+'</span></div><strong class="win-amount '+x[4]+'">'+x[3]+'</strong></div>').join("");
- let q=0;
- setInterval(()=>{
-  const x=topics[q++%topics.length],name=botNames[Math.floor(random()*botNames.length)];
-  addChat(name,x[0]);
-  setTimeout(()=>addChat(botNames[Math.floor(random()*botNames.length)],x[1]),1400+Math.floor(random()*1800));
- },4200);
-}
-function random(){try{if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(2);crypto.getRandomValues(a);return (a[0]*4294967296+a[1])/18446744073709551616}}catch(e){}return Math.random()}
-function crashPoint(){const r=Math.max(1e-12,random());return Math.max(1.01,Math.min(100000,Math.floor((.88/r)*100)/100))}
-function multiplier(ms){return Math.exp(ms/4700)}
-function audio(){if(!soundOn)return;if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume()}
-function tone(f,d,type="sine",g=.04){if(!soundOn)return;try{audio();if(!ctx)return;const o=ctx.createOscillator(),a=ctx.createGain();o.type=type;o.frequency.value=f;a.gain.value=g;o.connect(a).connect(ctx.destination);o.start();a.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d);o.stop(ctx.currentTime+d)}catch(e){}}
-function engineStart(){if(!soundOn||engineOsc)return;audio();engineOsc=ctx.createOscillator();engineGain=ctx.createGain();engineOsc.type="sawtooth";engineOsc.frequency.value=60;engineGain.gain.value=.012;engineOsc.connect(engineGain).connect(ctx.destination);engineOsc.start()}
-function engineUpdate(x){if(engineOsc)engineOsc.frequency.setTargetAtTime(60+Math.min(180,x*9),ctx.currentTime,.06)}
-function engineStop(){if(engineOsc){try{engineOsc.stop()}catch(e){}engineOsc=null;engineGain=null}}
-let pendingPlay=null;function requireIgn(next){const saved=sessionStorage.getItem("ff-ign");if(saved){$("sideIgn").textContent=saved;next();return}pendingPlay=next;$("playIgn").value="";$("playGate").classList.add("show");setTimeout(()=>$("playIgn").focus(),50)}
-function status(t){$("status").innerHTML=t}
-function setStage(x){let s=1;if(x>=7.5){s=5;$("stage").textContent="UPPER ATMOSPHERE";$("stars").style.opacity=1;$("world").style.opacity=.8;$("scene").style.background="linear-gradient(#06172c,#123e65)"}else if(x>=4){s=4;$("stage").textContent="HIGH ATMOSPHERE";$("stars").style.opacity=.35;$("world").style.opacity=.45;$("scene").style.background="linear-gradient(#9eddf2,#419bc2)"}else if(x>=2.5){s=3;$("stage").textContent="ABOVE THE CLOUDS";$("scene").style.background="linear-gradient(#b9edff,#78cbe8)"}else if(x>=1.5){s=2;$("stage").textContent="FROSTSMP SKYLINE";$("scene").style.background="linear-gradient(#e2f9ff,#bce8f6)"}else{$("stage").textContent="LAUNCH PAD READY";$("stars").style.opacity=0;$("world").style.opacity=0;$("scene").style.background="linear-gradient(#eafaff,#c8effc 58%,#f8fdff)"}if(s>lastStage)tone(650+s*90,.16,"sine",.045);lastStage=s}
-function animate(t){if(state!=="flying")return;m=multiplier(t-start);$("mult").textContent=m.toFixed(2)+"x";$("mult").classList.add("live");$("trail").style.opacity=Math.min(.85,(m-1)*.3);const progress=Math.min(1,(m-1)/12);const drift=Math.min(34,progress*34),rise=Math.min(58,progress*58);$("rocketModel").style.transform="translate3d("+drift+"vw,-"+rise+"vh,0) rotate("+(Math.sin(t/120)*Math.min(2.5,m/3))+"deg)";setStage(m);engineUpdate(m);if(m>=crash){doCrash();return}raf=requestAnimationFrame(animate)}
-function countdown(done){state="countdown";$("action").disabled=true;const vals=["3","2","1","LAUNCH!"];let i=0;function next(){const c=$("count");c.textContent=vals[i];c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");tone(i<3?520:880,i<3?.13:.28,i<3?"square":"sawtooth",i<3?.035:.06);i++;if(i<vals.length)setTimeout(next,600);else setTimeout(done,300)}next()}
-function validBet(){const raw=String($("bet").value).replace(/\D/g,"");const n=Number(raw);if(!Number.isInteger(n)||n<1000){status("Enter a valid wager · minimum $1,000");return null}if(n>1000000){status("Maximum wager: $1,000,000");return null}if(n>balance){status("Insufficient FrostSMP balance");return null}return n}
-function resetScene(){ $("rocketModel").style.transform="translate3d(0,0,0) rotate(0deg)";$("trail").style.opacity=0;$("mult").textContent="1.00x";$("mult").classList.remove("live");$("boom").classList.remove("go");$("result").classList.remove("show");$("stars").style.opacity=0;$("world").style.opacity=0;$("scene").style.background="linear-gradient(#eafaff,#c8effc 58%,#f8fdff)"}
-function launch(){if(state!=="idle"&&state!=="complete")return;const b=validBet();if(b===null)return;audio();wager=b;balance-=wager;updateBalance();crash=crashPoint();round++;lastStage=1;resetScene();const btn=$("action");btn.disabled=true;btn.textContent="LAUNCHING…";btn.classList.remove("cash");status("Crash result generated. Preparing launch…");countdown(()=>{state="flying";start=performance.now();engineStart();tone(130,.45,"sawtooth",.07);status("Rocket flying — cash out whenever you choose.");btn.disabled=false;btn.textContent="CASH OUT";btn.classList.add("cash");btn.onclick=cashout;raf=requestAnimationFrame(animate)})}
-function showResult(title,text){$("resultTitle").textContent=title;$("resultText").textContent=text;$("result").classList.remove("show");void $("result").offsetWidth;$("result").classList.add("show")}
-function addHistory(cash,payout){history.unshift({round,crash,cash,payout});history=history.slice(0,8);$("rows").innerHTML=history.map(h=>'<div class="row"><span>#'+h.round+'</span><span><b>'+h.crash.toFixed(2)+'x</b></span><span>'+(h.cash?h.cash.toFixed(2)+"x":"CRASHED")+'</span><span>'+(h.cash?fmt(h.payout):"—")+'</span></div>').join("");$("recent").innerHTML=history.slice(0,7).map(h=>'<span class="chip '+(h.crash>=2?"hi":"lo")+'">'+h.crash.toFixed(2)+"x</span>").join("")}
-function cashout(){if(state!=="flying"||!Number.isFinite(m)||m<1)return;const btn=$("action");state="cashed";cancelAnimationFrame(raf);btn.disabled=true;const final=Math.floor(m*100)/100,payout=Math.floor(wager*final);balance+=payout;updateBalance();engineStop();tone(720,.12);setTimeout(()=>tone(980,.2),90);showResult("CASHED OUT!",final.toFixed(2)+"x · Payout "+fmt(payout)+" · Profit +"+fmt(payout-wager));addHistory(final,payout);status("Cashed out at "+final.toFixed(2)+"x — watch the rocket continue to see what you missed.");btn.textContent="WATCHING…";let watchStart=performance.now(),watchFrom=final,crashNow=crash;function watch(t){const elapsed=(t-watchStart)/1000;const watched=Math.max(watchFrom,watchFrom*Math.exp(elapsed/4.7));if(watched>=crashNow){m=crashNow;$("mult").textContent=crashNow.toFixed(2)+"x";$("rocketModel").style.transform="translate3d("+Math.min(34,(crashNow-1)/12*34)+"vw,-"+Math.min(58,(crashNow-1)/12*58)+"vh,0) rotate(75deg)";engineStop();$("boom").classList.remove("go");void $("boom").offsetWidth;$("boom").classList.add("go");tone(105,.18,"sawtooth",.07);setTimeout(()=>tone(50,.45,"square",.09),100);status("You cashed out at "+final.toFixed(2)+"x — the rocket crashed at "+crashNow.toFixed(2)+"x.");btn.disabled=false;btn.textContent="LAUNCH ROCKET";btn.classList.remove("cash");btn.onclick=()=>requireIgn(launch);state="complete";return}m=watched;$("mult").textContent=m.toFixed(2)+"x";$("trail").style.opacity=Math.min(.85,(m-1)*.3);const progress=Math.min(1,(m-1)/12);$("rocketModel").style.transform="translate3d("+Math.min(34,progress*34)+"vw,-"+Math.min(58,progress*58)+"vh,0) rotate("+(Math.sin(t/120)*Math.min(2.5,m/3))+"deg)";setStage(m);requestAnimationFrame(watch)}requestAnimationFrame(watch)}
-function doCrash(){if(state!=="flying")return;state="crashed";cancelAnimationFrame(raf);m=crash;$("mult").textContent=crash.toFixed(2)+"x";engineStop();$("boom").classList.remove("go");void $("boom").offsetWidth;$("boom").classList.add("go");$("rocketModel").style.transform="translate3d("+Math.min(34,(m-1)/12*34)+"vw,-"+Math.min(58,(m-1)/12*58)+"vh,0) rotate(75deg)";tone(105,.18,"sawtooth",.07);setTimeout(()=>tone(50,.45,"square",.09),100);showResult("ROCKET CRASHED",crash.toFixed(2)+"x · Wager lost "+fmt(wager));addHistory(null,0);status("Round crashed. The wager was lost. Start another round when ready.");$("action").disabled=false;$("action").textContent="LAUNCH ROCKET";$("action").classList.remove("cash");$("action").onclick=()=>requireIgn(launch);state="complete"}
-document.querySelectorAll("[data-b]").forEach(b=>b.onclick=()=>{$("bet").value=b.dataset.b});
-$("half").onclick=()=>{$("bet").value=Math.max(1000,Math.floor(Number($("bet").value)/2))};$("double").onclick=()=>{$("bet").value=Math.min(1000000,Math.floor(Number($("bet").value)*2))};$("max").onclick=()=>{$("bet").value=Math.min(1000000,balance)};$("bet").oninput=()=>{$("bet").value=$("bet").value.replace(/\D/g,"").slice(0,9)};
-$("action").onclick=()=>requireIgn(launch);$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 SOUND ON":"🔇 SOUND OFF";if(!soundOn)engineStop()};
-$("depositBtn").onclick=()=>openAccount("deposit");$("withdrawBtn").onclick=()=>openAccount("withdraw");$("accountClose").onclick=()=>{$("accountModal").style.display="none"};$("accountModal").onclick=e=>{if(e.target===$("accountModal"))$("accountModal").style.display="none"};$("accountAmount").oninput=updateCommand;$("copyCommand").onclick=async()=>{try{await navigator.clipboard.writeText($("payCommand").textContent);toast("Deposit command copied")}catch(e){toast("Copy unavailable — select the command manually")}};
-$("chatSend").onclick=()=>{const input=$("chatInput"),v=input.value.trim();if(!v)return;const el=document.createElement("div");el.className="chat-msg";el.innerHTML='<div class="avatar">'+nickname[0]+'</div><div><b>'+nickname+'</b><span>'+v.replace(/[<>]/g,"")+'</span></div>';$("chatList").appendChild(el);$("chatList").scrollTop=$("chatList").scrollHeight;input.value=""};$("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")$("chatSend").click()});initSocial();
-$("rulesBtn").onclick=()=>{$("modal").style.display="grid"};$("close").onclick=()=>{$("modal").style.display="none"};$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").style.display="none"};
-$("yes").onclick=()=>{$("gate").style.display="none";sessionStorage.setItem("ff-entered","1");toast("Welcome to FrostFlip")};$("no").onclick=()=>{window.location.href="https://www.google.com/"};
-$("playCancel").onclick=()=>{$("playGate").classList.remove("show");pendingPlay=null};$("playConfirm").onclick=()=>{const ign=$("playIgn").value.trim();if(!/^[A-Za-z0-9_]{3,16}$/.test(ign)){toast("Enter a valid FrostSMP IGN");$("playIgn").focus();return}sessionStorage.setItem("ff-ign",ign);$("sideIgn").textContent=ign;$("playGate").classList.remove("show");const next=pendingPlay||launch;pendingPlay=null;next()};$("playIgn").addEventListener("keydown",e=>{if(e.key==="Enter")$("playConfirm").click()});const savedIgn=sessionStorage.getItem("ff-ign");if(savedIgn)$("sideIgn").textContent=savedIgn;if(sessionStorage.getItem("ff-entered")==="1")$("gate").style.display="none";updateBalance();
-(function snow(){const c=$("snow"),x=c.getContext("2d"),flakes=[];function resize(){c.width=innerWidth;c.height=innerHeight;const n=innerWidth<600?42:78;while(flakes.length<n)flakes.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+.6,v:Math.random()*.5+.22,d:Math.random()*1.3-.65,p:Math.random()*6.28,a:Math.random()*.5+.15})}resize();addEventListener("resize",resize,{passive:true});function draw(){x.clearRect(0,0,c.width,c.height);for(const f of flakes){f.y+=f.v;f.p+=.012;f.x+=Math.sin(f.p)*f.d;if(f.y>c.height+5){f.y=-5;f.x=Math.random()*c.width}x.globalAlpha=f.a;x.fillStyle="#fff";x.beginPath();x.arc(f.x,f.y,f.r,0,Math.PI*2);x.fill();if(f.r>1.5){x.globalAlpha=f.a*.45;x.strokeStyle="#b9f4ff";x.lineWidth=.7;x.beginPath();x.moveTo(f.x-f.r*1.8,f.y);x.lineTo(f.x+f.r*1.8,f.y);x.moveTo(f.x,f.y-f.r*1.8);x.lineTo(f.x,f.y+f.r*1.8);x.stroke()}}requestAnimationFrame(draw)}draw()})();
-
-// Frost Case reel demo: spins are visual/non-wagering and use a fixed reward sequence.
-const caseItems=[
- {name:"Diamond Block",icon:"💎",value:1000000},
- {name:"Iron Block",icon:"⬜",value:25000},
- {name:"Gold Block",icon:"🟨",value:300000},
- {name:"Ancient Debris",icon:"🟫",value:500000},
- {name:"Lapis Block",icon:"🔷",value:15000},
- {name:"Redstone Block",icon:"🟥",value:20000},
- {name:"Emerald Block",icon:"🟩",value:750000}
-];
-let caseSpins=5,caseBusy=false,caseIndex=0;
-function buildCaseReel(){
- const reel=$("caseReel");if(!reel)return;
- const items=[];for(let i=0;i<42;i++)items.push(caseItems[i%caseItems.length]);
- reel.innerHTML=items.map((x,i)=>'<div class="reel-item" data-index="'+i+'"><div class="reel-icon">'+x.icon+'</div><b>'+x.name.toUpperCase()+'</b><span>'+fmt(x.value)+'</span></div>').join("");
- reel.style.transition="none";reel.style.transform="translateX(0)";
-}
-function caseTick(){tone(180,.045,"square",.018)}
-function openCase(){
- if(caseBusy)return;
- if(caseSpins<=0){toast("TOO POOR 💀 · You used all your spins");return}
- if(!sessionStorage.getItem("ff-ign")){requireIgn(openCase);return}
- caseBusy=true;
- const reel=$("caseReel"),wrap=reel.parentElement,out=$("caseResult"),btn=$("openCase");
- const target=caseIndex%caseItems.length;caseIndex++;
- const targetPos=21+target;const targetEl=reel.children[targetPos];
- const item=caseItems[target];
- caseSpins--;$("caseQty").textContent=caseSpins;if($("sideCases"))$("sideCases").textContent=5-caseSpins;
- btn.disabled=true;btn.textContent="OPENING…";out.classList.remove("show");out.classList.add("case-opening");
- reel.style.transition="none";reel.style.transform="translateX(0)";
- void reel.offsetWidth;
- const center=wrap.clientWidth/2, itemCenter=targetEl.offsetLeft+targetEl.offsetWidth/2;
- const offset=itemCenter-center;
- reel.style.transition="transform 3.8s cubic-bezier(.08,.82,.14,1)";
- reel.style.transform="translateX(-"+offset+"px)";
- let ticks=0;const tickTimer=setInterval(()=>{caseTick();if(++ticks>=31)clearInterval(tickTimer)},120);
- setTimeout(()=>{
-   out.innerHTML='<div class="win">'+item.icon+' '+item.name.toUpperCase()+'</div><small>Reward reveal · Reference value '+fmt(item.value)+' Frost</small>';
-   out.classList.add("show");tone(700,.12);setTimeout(()=>tone(980,.2),100);
-   btn.disabled=false;btn.textContent=caseSpins<=0?"TOO POOR 💀":"OPEN CASE ×1";caseBusy=false;
- },3950);
-}
-buildCaseReel();
-$("openCase").onclick=openCase;
-
-/* ===== FROSTFLIP ULTRA INTERACTIONS ===== */
-(function ultra(){
- const glow=document.createElement("div");glow.id="mouseGlow";document.body.appendChild(glow);
- addEventListener("pointermove",e=>{glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px"},{passive:true});
- const track=$("activityTrack");
- const activityNames=["FrostyGoat","faxlex60","Mazeen","IceNova","SnowByte","GlacierFox","FrostPilot","CryoByte"];
- const multipliers=["1.42x","2.08x","3.17x","4.63x","8.42x","1.18x","12.06x","2.74x"];
- function activity(){
-   if(!track)return;
-   const name=activityNames[Math.floor(random()*activityNames.length)],x=multipliers[Math.floor(random()*multipliers.length)];
-   const up=random()>.22;
-   const el=document.createElement("div");el.className="activity-item";
-   el.innerHTML='<span>'+ (up?"🚀":"💀") +'</span><b>'+name+'</b><span class="'+(up?"up":"down")+'">'+(up?"CASHED ":"CRASHED ")+x+'</span>';
-   track.prepend(el);
-   while(track.children.length>8)track.removeChild(track.lastChild);
- }
- for(let i=0;i<6;i++)activity();
- setInterval(activity,2600);
- const hudRounds=$("hudRounds"),hudSession=$("hudSession");
- const oldUpdate=updateBalance;
- updateBalance=function(){oldUpdate();if(hudRounds)hudRounds.textContent=round;if(hudSession)hudSession.textContent=round?"ACTIVE RUN":"NEW RUN"};
- document.querySelectorAll(".casecard,.soon-card,.social-card,.hud-card").forEach(el=>{
-   el.addEventListener("pointerenter",()=>el.style.filter="brightness(1.025)",{passive:true});
-   el.addEventListener("pointerleave",()=>el.style.filter="",{passive:true});
- });
- addEventListener("keydown",e=>{
-   if(e.code==="Space" && document.activeElement?.tagName!=="INPUT" && document.activeElement?.tagName!=="TEXTAREA"){
-     e.preventDefault();
-     if(state==="flying")cashout(); else if(state==="idle"||state==="complete")requireIgn(launch);
-   }
- });
-})();
-</script>
+</main>
 </body>
 </html>
