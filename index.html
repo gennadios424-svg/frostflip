@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FrostFlip — Maybe Soon...?</title>
+<title>FrostFlip — Cancelled</title>
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.actions{display:flex;justify-content:center;gap:12px;margin-top:22px}.actions button{min-width:135px;min-height:46px;padding:0 22px;border-radius:12px;border:1px solid #ffffff22;font:900 11px Inter,system-ui,sans-serif;letter-spacing:2px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}.actions button:hover{transform:translateY(-3px);filter:brightness(1.08)}.actions button:active{transform:translateY(1px) scale(.97)}.quack{color:#061520;background:linear-gradient(135deg,#eaffff,#71e7ff);box-shadow:0 10px 30px #4de0ff33}.exit{color:#d7e8ef;background:#071a29cc;box-shadow:0 10px 30px #0004}.toast{min-height:18px;margin-top:10px;color:#9fc0cc;font-size:10px;font-weight:800;letter-spacing:1px;opacity:0;transition:opacity .2s}.toast.show{opacity:1}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#eefaff;background:#fff;animation:night 14s ease-in-out infinite alternate;position:relative}
 body:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#ffffff22,transparent 25%),linear-gradient(180deg,#fdfefe,#d9f5ff 48%,#07192b 100%);animation:sky 14s ease-in-out infinite alternate;z-index:-3}
@@ -34,7 +35,7 @@ p{color:#bdd5e2;line-height:1.7;font-size:14px}
 @keyframes pulse{50%{transform:scale(1.35);opacity:.55}}
 @keyframes night{to{background:#061727}}
 @keyframes sky{to{opacity:.25}}
-@media(max-width:600px){.banner{width:94vw}.box{padding:35px 20px}.sign{height:52px}.sign b{letter-spacing:2px}h1{letter-spacing:-2px}.flake{font-size:50px}}
+@media(max-width:600px){.actions button{min-width:0;flex:1}.banner{width:94vw}.box{padding:35px 20px}.sign{height:52px}.sign b{letter-spacing:2px}h1{letter-spacing:-2px}.flake{font-size:50px}}
 </style>
 </head>
 <body>
@@ -45,11 +46,15 @@ p{color:#bdd5e2;line-height:1.7;font-size:14px}
 <main class="center">
 <section class="box">
 <div class="flake">❄️</div>
-<h1>FROSTFLIP<br><span>MAYBE SOON...?</span></h1>
-<div class="status"><i class="dot"></i> FROSTFLIP IS CURRENTLY UNAVAILABLE</div>
+<h1>FROSTFLIP<br><span>CANCELLED</span></h1>
+<div class="status"><i class="dot"></i> FROSTFLIP IS CURRENTLY UNAVAILABLE</div><div class="actions"><button id="quack" class="quack" type="button">🦆 QUACK</button><button id="exit" class="exit" type="button">EXIT</button></div><div id="toast" class="toast" aria-live="polite"></div>
 <p>The project is currently offline. Thanks to everyone who checked it out — maybe we'll see you again someday.</p>
 <div class="legal">FROSTFLIP IS AN INDEPENDENT PROJECT. FROSTSMP NAMES, MARKS AND MATERIALS REMAIN THE PROPERTY OF THEIR RESPECTIVE OWNERS. NO AFFILIATION OR ENDORSEMENT IS IMPLIED.</div>
 </section>
+</main>
+<script>
+(()=>{const q=document.getElementById("quack"),e=document.getElementById("exit"),t=document.getElementById("toast");let a;function quack(){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;a=a||new C;if(a.state==="suspended")a.resume();const n=a.currentTime;[[250,.18,.18],[145,.22,.12],[105,.16,.1]].forEach((x,i)=>{const o=a.createOscillator(),g=a.createGain();o.type=i===1?"square":"sawtooth";o.frequency.setValueAtTime(x[0],n+i*.045);o.frequency.exponentialRampToValueAtTime(x[0]*.58,n+i*.045+x[1]);g.gain.setValueAtTime(.0001,n+i*.045);g.gain.exponentialRampToValueAtTime(x[2],n+i*.045+.012);g.gain.exponentialRampToValueAtTime(.0001,n+i*.045+x[1]);o.connect(g).connect(a.destination);o.start(n+i*.045);o.stop(n+i*.045+x[1]+.02)})}q.addEventListener("click",()=>{quack();t.textContent="QUACK! 🦆";t.classList.add("show");clearTimeout(window.ft);window.ft=setTimeout(()=>t.classList.remove("show"),1200);q.animate([{transform:"scale(1)"},{transform:"scale(.94) rotate(-2deg)"},{transform:"scale(1.04) rotate(2deg)"},{transform:"scale(1)"}],{duration:260})});e.addEventListener("click",()=>{window.close();t.textContent="Close this tab to exit.";t.classList.add("show")})})()
+</script>
 </main>
 </body>
 </html>
