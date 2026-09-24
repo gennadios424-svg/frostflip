@@ -3,58 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FrostFlip — Cancelled</title>
+<title>Sunlight SMP</title>
+<meta name="description" content="Sunlight SMP">
 <style>
-*{box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
-.actions{display:flex;justify-content:center;gap:12px;margin-top:22px}.actions button{min-width:135px;min-height:46px;padding:0 22px;border-radius:12px;border:1px solid #ffffff22;font:900 11px Inter,system-ui,sans-serif;letter-spacing:2px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}.actions button:hover{transform:translateY(-3px);filter:brightness(1.08)}.actions button:active{transform:translateY(1px) scale(.97)}.quack{color:#061520;background:linear-gradient(135deg,#eaffff,#71e7ff);box-shadow:0 10px 30px #4de0ff33}.exit{color:#d7e8ef;background:#071a29cc;box-shadow:0 10px 30px #0004}.toast{min-height:18px;margin-top:10px;color:#9fc0cc;font-size:10px;font-weight:800;letter-spacing:1px;opacity:0;transition:opacity .2s}.toast.show{opacity:1}
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#eefaff;background:#fff;animation:night 14s ease-in-out infinite alternate;position:relative}
-body:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#ffffff22,transparent 25%),linear-gradient(180deg,#fdfefe,#d9f5ff 48%,#07192b 100%);animation:sky 14s ease-in-out infinite alternate;z-index:-3}
-body:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,#57e5ff18,transparent 28%),radial-gradient(circle at 80% 35%,#fff1 0,transparent 25%);z-index:-2}
-.banner{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(720px,88vw);height:86px;z-index:4}
-.rope{position:absolute;top:0;width:2px;height:43px;background:linear-gradient(#536b79,#b8dbe7);box-shadow:0 0 8px #57e5ff55}
-.rope.l{left:13%}.rope.r{right:13%}
-.sign{position:absolute;top:38px;left:50%;transform:translateX(-50%);width:100%;height:58px;border:1px solid #bdeafa;border-radius:8px;background:linear-gradient(105deg,#061b2b,#0b5274,#061b2b);display:grid;place-items:center;box-shadow:0 12px 35px #0005,inset 0 0 28px #57e5ff1c;animation:swing 5s ease-in-out infinite}
-.sign:before,.sign:after{content:"❄";position:absolute;font-size:23px;color:#aeeeff}.sign:before{left:18px}.sign:after{right:18px}
-.sign b{font-size:clamp(12px,2.2vw,18px);letter-spacing:5px;text-shadow:0 0 18px #57e5ff}
-.center{position:absolute;inset:0;display:grid;place-items:center;padding:110px 20px 40px;text-align:center;z-index:3}
-.box{width:min(780px,100%);padding:46px 30px;border:1px solid #ffffff30;border-radius:32px;background:#ffffff0d;backdrop-filter:blur(18px);box-shadow:0 30px 100px #0005}
-.flake{font-size:62px;filter:drop-shadow(0 0 20px #57e5ff);animation:float 2.8s ease-in-out infinite}
-h1{font-size:clamp(38px,8vw,82px);line-height:.9;margin:14px 0;letter-spacing:-4px}
-h1 span{background:linear-gradient(90deg,#fff,#72eaff,#fff);-webkit-background-clip:text;color:transparent}
-p{color:#bdd5e2;line-height:1.7;font-size:14px}
-.status{display:inline-flex;align-items:center;gap:9px;margin-top:12px;padding:10px 15px;border:1px solid #ffffff22;border-radius:99px;background:#071c2dcc;font-size:10px;font-weight:900;letter-spacing:2px}
-.dot{width:7px;height:7px;border-radius:50%;background:#ff647d;box-shadow:0 0 15px #ff647d;animation:pulse 1.2s infinite}
-.legal{margin-top:25px;color:#8299a8;font-size:9px;letter-spacing:.5px}
-.snow{position:absolute;inset:0;pointer-events:none;z-index:2}
-.flake2{position:absolute;top:-30px;color:#fff;opacity:.75;animation:fall linear infinite}
-.f1{left:7%;font-size:14px;animation-duration:8s}.f2{left:18%;font-size:9px;animation-duration:11s;animation-delay:-4s}.f3{left:31%;font-size:18px;animation-duration:13s;animation-delay:-7s}.f4{left:46%;font-size:11px;animation-duration:9s;animation-delay:-2s}.f5{left:62%;font-size:17px;animation-duration:12s;animation-delay:-8s}.f6{left:77%;font-size:10px;animation-duration:10s;animation-delay:-3s}.f7{left:91%;font-size:19px;animation-duration:14s;animation-delay:-9s}
-@keyframes fall{to{transform:translate3d(45px,110vh,0) rotate(360deg)}}
-@keyframes swing{0%,100%{transform:translateX(-50%) rotate(-1deg)}50%{transform:translateX(-50%) rotate(1deg)}}
-@keyframes float{50%{transform:translateY(-10px) rotate(3deg)}}
-@keyframes pulse{50%{transform:scale(1.35);opacity:.55}}
-@keyframes night{to{background:#061727}}
-@keyframes sky{to{opacity:.25}}
-@media(max-width:600px){.actions button{min-width:0;flex:1}.banner{width:94vw}.box{padding:35px 20px}.sign{height:52px}.sign b{letter-spacing:2px}h1{letter-spacing:-2px}.flake{font-size:50px}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=Outfit:wght@600;800;900&display=swap');
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#07131c;color:#fff;font-family:Inter,system-ui,sans-serif}body{overflow-x:hidden}
+:root{--sun:#ffd34e;--gold:#ff9d2e;--sky:#63d9ff;--glass:rgba(8,21,31,.48)}
+body:before{content:"";position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#07131c 0%,#102f3d 45%,#f0a63e 100%);background-size:100% 180%;animation:sky 12s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-4;background:radial-gradient(circle at 50% 22%,#ffe88966 0 8%,transparent 26%),radial-gradient(circle at 20% 50%,#50d9ff20,transparent 30%),radial-gradient(circle at 85% 70%,#ff9b2e22,transparent 30%)}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(1120px,92vw);z-index:10;display:flex;align-items:center;justify-content:space-between;padding:12px 15px 12px 20px;border:1px solid #ffffff20;border-radius:18px;background:#06151fd0;backdrop-filter:blur(18px);box-shadow:0 12px 50px #0005}
+.logo{display:flex;align-items:center;gap:10px;font:900 17px Outfit,sans-serif;letter-spacing:2px}.logo i{width:31px;height:31px;border-radius:9px;background:radial-gradient(circle at 35% 30%,#fff7a8,#ffd34e 42%,#ff8b22);box-shadow:0 0 25px #ffc44e99;display:block;animation:pulse 3s ease-in-out infinite}
+.navlinks{display:flex;gap:7px}.navlinks a{color:#d7edf5;text-decoration:none;padding:10px 13px;border-radius:11px;font-size:12px;font-weight:800;transition:.2s}.navlinks a:hover{background:#ffffff12;color:#fff;transform:translateY(-2px)}
+main{min-height:100vh}.hero{min-height:100vh;position:relative;display:grid;place-items:center;padding:120px 22px 80px;text-align:center;overflow:hidden}
+.sun{position:absolute;width:min(420px,65vw);aspect-ratio:1;border-radius:50%;top:15%;left:50%;transform:translateX(-50%);background:radial-gradient(circle at 38% 35%,#fffbd0,#ffe06b 28%,#ffb42f 62%,#ff7e20 100%);box-shadow:0 0 45px #ffc84eaa,0 0 140px #ffae3655,0 0 280px #ff9d2e22;animation:sun 7s ease-in-out infinite;z-index:-1}
+.sun:after{content:"";position:absolute;inset:-34px;border:1px solid #ffe06b55;border-radius:50%;animation:ring 9s linear infinite}
+.cloud{position:absolute;width:220px;height:54px;border-radius:50px;background:#ffffff18;filter:blur(1px);opacity:.6}.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}.cloud:before{width:85px;height:85px;left:35px;bottom:5px}.cloud:after{width:110px;height:110px;right:25px;bottom:0}.c1{top:31%;left:-40px;animation:cloud 24s linear infinite}.c2{top:48%;right:-260px;animation:cloud2 30s linear infinite}.c3{top:19%;right:-250px;opacity:.35;animation:cloud2 36s linear infinite}
+.heroContent{position:relative;z-index:2}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ffffff24;border-radius:99px;background:#07172280;backdrop-filter:blur(10px);font-size:10px;font-weight:900;letter-spacing:3px;color:#fff0b0;animation:rise .8s ease both}.eyebrow b{width:6px;height:6px;border-radius:50%;background:#65f2a1;box-shadow:0 0 12px #65f2a1}
+h1{font:900 clamp(64px,13vw,160px)/.78 Outfit,sans-serif;letter-spacing:-7px;margin:27px 0 24px;text-shadow:0 12px 60px #0008;animation:rise .9s .1s ease both}h1 span{display:block;background:linear-gradient(180deg,#fffdf1 0%,#ffe274 46%,#ff9d2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{font-size:13px;color:#d8edf3;letter-spacing:5px;font-weight:800;text-transform:uppercase;animation:rise .9s .2s ease both}.actions{margin-top:30px;display:flex;justify-content:center;gap:10px;animation:rise .9s .3s ease both}.btn{border:1px solid #ffffff22;border-radius:13px;padding:13px 19px;color:#fff;text-decoration:none;font-size:11px;font-weight:900;letter-spacing:1.5px;background:#071923aa;backdrop-filter:blur(10px);transition:.22s;box-shadow:0 10px 30px #0004}.btn.primary{background:linear-gradient(135deg,#ffd75a,#ff9b2e);color:#18202a;border-color:#ffe08b66;box-shadow:0 10px 35px #ffae3540}.btn:hover{transform:translateY(-4px) scale(1.02);filter:brightness(1.08)}
+.scroll{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;color:#ffffff88;animation:bob 2s ease-in-out infinite}.scroll:after{content:"↓";display:block;font-size:18px;margin-top:4px}
+section.showcase{position:relative;padding:90px 22px 120px;background:linear-gradient(180deg,transparent,#06121be8 16%,#06121b 100%)}.grid{width:min(1120px,100%);margin:auto;display:grid;grid-template-columns:1.4fr .8fr .8fr;grid-template-rows:260px 260px;gap:14px}.card{position:relative;overflow:hidden;border:1px solid #ffffff16;border-radius:24px;background:#0a1d28;box-shadow:0 25px 70px #0005;transition:.35s}.card:hover{transform:translateY(-7px);border-color:#ffd45b55}.card.big{grid-row:span 2}.scene{position:absolute;inset:0;background:linear-gradient(180deg,#58d4ff 0%,#a6ecff 43%,#72c95e 44%,#2c6d39 100%)}.scene:before{content:"";position:absolute;width:130px;height:130px;border-radius:50%;right:15%;top:13%;background:#ffe27a;box-shadow:0 0 80px #ffe27a}.scene:after{content:"";position:absolute;left:-5%;right:-5%;bottom:-20px;height:48%;background:linear-gradient(145deg,#214f31 0 35%,#376e3c 36% 62%,#1e452a 63%);clip-path:polygon(0 35%,20% 0,42% 38%,58% 10%,77% 44%,100% 4%,100% 100%,0 100%)}.scene2{background:linear-gradient(180deg,#18243d,#ef9d48 64%,#1b3540 65%)}.scene2:before{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe27a;left:20%;top:22%;box-shadow:0 0 65px #ffc84e}.scene2:after{content:"";position:absolute;inset:58% 0 0;background:repeating-linear-gradient(165deg,#163543 0 12px,#204b54 12px 22px)}.scene3{background:linear-gradient(180deg,#0b2733,#55b7d4 60%,#1e4935 61%)}.scene3:before{content:"✦ ✦ ✦";position:absolute;inset:20px;color:#fff7bd;font-size:30px;letter-spacing:30px}.scene3:after{content:"";position:absolute;inset:auto 0 0;height:45%;background:#1e4d34;clip-path:polygon(0 50%,18% 12%,36% 48%,53% 4%,72% 50%,88% 18%,100% 52%,100% 100%,0 100%)}.cardLabel{position:absolute;left:18px;bottom:17px;z-index:2;font:900 20px Outfit,sans-serif;text-shadow:0 4px 20px #000}.cardLabel small{display:block;margin-bottom:5px;font:800 8px Inter,sans-serif;letter-spacing:3px;color:#fff9bf}
+.floatBlock{position:absolute;width:46px;height:46px;background:linear-gradient(135deg,#8be27b,#397d45);border:2px solid #c4ff9e55;box-shadow:0 14px 30px #0005;transform:rotate(45deg);animation:drift 6s ease-in-out infinite}.b1{left:9%;top:25%}.b2{right:8%;top:40%;width:32px;height:32px;animation-delay:-2s}.b3{left:16%;bottom:18%;width:25px;height:25px;animation-delay:-4s}
+footer{padding:35px 22px;text-align:center;border-top:1px solid #ffffff0d;color:#6e8b98;font-size:9px;letter-spacing:2px}
+@keyframes sky{from{background-position:0 0}to{background-position:0 100%}}@keyframes sun{50%{transform:translateX(-50%) translateY(12px) scale(1.035)}}@keyframes ring{to{transform:rotate(360deg) scale(1.04)}}@keyframes cloud{to{transform:translateX(120vw)}}@keyframes cloud2{to{transform:translateX(-125vw)}}@keyframes rise{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}@keyframes bob{50%{transform:translateX(-50%) translateY(7px)}}@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 35px #ffc44ecc}}@keyframes drift{50%{transform:rotate(55deg) translate(8px,-15px)}}
+@media(max-width:760px){nav{padding:10px 12px 10px 15px}.navlinks a{padding:9px 7px;font-size:10px}.navlinks a:nth-child(2){display:none}.grid{grid-template-columns:1fr;grid-template-rows:230px 190px 190px}.card.big{grid-row:auto}.sun{top:20%;width:70vw}h1{letter-spacing:-4px}.subtitle{letter-spacing:3px}.actions{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="snow" aria-hidden="true">
-<span class="flake2 f1">❄</span><span class="flake2 f2">✦</span><span class="flake2 f3">❄</span><span class="flake2 f4">✧</span><span class="flake2 f5">❄</span><span class="flake2 f6">✦</span><span class="flake2 f7">❄</span>
+<div class="noise"></div>
+<nav><div class="logo"><i></i>SUNLIGHT SMP</div><div class="navlinks"><a href="#world">WORLD</a><a href="#community">COMMUNITY</a><a href="#play">PLAY</a></div></nav>
+<main>
+<section class="hero" id="play">
+<div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+<div class="floatBlock b1"></div><div class="floatBlock b2"></div><div class="floatBlock b3"></div>
+<div class="heroContent">
+<div class="eyebrow"><b></b> MINECRAFT SURVIVAL</div>
+<h1><span>SUNLIGHT</span>SMP</h1>
+<div class="subtitle">BUILD · EXPLORE · CREATE</div>
+<div class="actions"><a class="btn primary" href="#world">ENTER THE WORLD</a><a class="btn" href="#community">COMMUNITY ↗</a></div>
 </div>
-<div class="banner"><span class="rope l"></span><span class="rope r"></span><div class="sign"><b>❄ FROSTFLIP ❄</b></div></div>
-<main class="center">
-<section class="box">
-<div class="flake">❄️</div>
-<h1>FROSTFLIP<br><span>CANCELLED</span></h1>
-<div class="status"><i class="dot"></i> FROSTFLIP IS CURRENTLY UNAVAILABLE</div><div class="actions"><button id="quack" class="quack" type="button">🦆 QUACK</button><button id="exit" class="exit" type="button">EXIT</button></div><div id="toast" class="toast" aria-live="polite"></div>
-<p>The project is currently offline. Thanks to everyone who checked it out — maybe we'll see you again someday.</p>
-<div class="legal">FROSTFLIP IS AN INDEPENDENT PROJECT. FROSTSMP NAMES, MARKS AND MATERIALS REMAIN THE PROPERTY OF THEIR RESPECTIVE OWNERS. NO AFFILIATION OR ENDORSEMENT IS IMPLIED.</div>
+<div class="scroll">SCROLL</div>
+</section>
+<section class="showcase" id="world">
+<div class="grid">
+<div class="card big"><div class="scene"></div><div class="cardLabel"><small>THE WORLD</small>YOUR ADVENTURE</div></div>
+<div class="card"><div class="scene scene2"></div><div class="cardLabel"><small>EXPLORE</small>NEW HORIZONS</div></div>
+<div class="card"><div class="scene scene3"></div><div class="cardLabel"><small>CREATE</small>MAKE IT YOURS</div></div>
+</div>
 </section>
 </main>
-<script>
-(()=>{const q=document.getElementById("quack"),e=document.getElementById("exit"),t=document.getElementById("toast");let a;function quack(){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;a=a||new C;if(a.state==="suspended")a.resume();const n=a.currentTime;[[250,.18,.18],[145,.22,.12],[105,.16,.1]].forEach((x,i)=>{const o=a.createOscillator(),g=a.createGain();o.type=i===1?"square":"sawtooth";o.frequency.setValueAtTime(x[0],n+i*.045);o.frequency.exponentialRampToValueAtTime(x[0]*.58,n+i*.045+x[1]);g.gain.setValueAtTime(.0001,n+i*.045);g.gain.exponentialRampToValueAtTime(x[2],n+i*.045+.012);g.gain.exponentialRampToValueAtTime(.0001,n+i*.045+x[1]);o.connect(g).connect(a.destination);o.start(n+i*.045);o.stop(n+i*.045+x[1]+.02)})}q.addEventListener("click",()=>{quack();t.textContent="QUACK! 🦆";t.classList.add("show");clearTimeout(window.ft);window.ft=setTimeout(()=>t.classList.remove("show"),1200);q.animate([{transform:"scale(1)"},{transform:"scale(.94) rotate(-2deg)"},{transform:"scale(1.04) rotate(2deg)"},{transform:"scale(1)"}],{duration:260})});e.addEventListener("click",()=>{window.close();t.textContent="Close this tab to exit.";t.classList.add("show")})})()
-</script>
-</main>
+<footer id="community">SUNLIGHT SMP · MINECRAFT COMMUNITY</footer>
 </body>
 </html>
