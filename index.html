@@ -7,11 +7,13 @@
 <meta name="description" content="Sunlight SMP — a Minecraft survival experience coming this Christmas.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=Outfit:wght@700;800;900&display=swap');
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100%;background:#06121a;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100%;background:#081720;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
 :root{--gold:#ffd45a;--orange:#ff922d;--red:#d83b36;--green:#72d77a;--ice:#dff9ff}
-body:before{content:"";position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#06121c 0%,#17465b 42%,#d98b45 73%,#07151d 100%);background-size:100% 180%;animation:sky 14s ease-in-out infinite alternate}
-body:after{content:"";position:fixed;inset:0;z-index:-4;background:radial-gradient(circle at 50% 20%,#fff1a855,transparent 25%),radial-gradient(circle at 10% 60%,#62d9ff1c,transparent 28%),radial-gradient(circle at 90% 70%,#ff9b2e20,transparent 30%)}
-.noise{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body:before{content:"";position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#102a38 0%,#286078 38%,#c47b48 68%,#122b36 100%);background-size:100% 100%;will-change:filter;animation:ambientLight 18s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-4;background:radial-gradient(circle at 50% 18%,#fff1a83b,transparent 23%),radial-gradient(circle at 12% 58%,#62d9ff12,transparent 27%),radial-gradient(circle at 88% 68%,#ff9b2e12,transparent 28%);pointer-events:none}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(1160px,93vw);z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 20px;border:1px solid #ffffff22;border-radius:20px;background:#06151fd9;backdrop-filter:blur(20px);box-shadow:0 15px 60px #0007}
 .logo{display:flex;align-items:center;gap:10px;font:900 17px Outfit;letter-spacing:2px}.logo i{width:31px;height:31px;border-radius:9px;background:radial-gradient(circle at 35% 30%,#fff9ba,#ffd45a 45%,#ff8424);box-shadow:0 0 28px #ffc84e99;animation:pulse 3s infinite}
 .navlinks{display:flex;gap:6px}.navlinks a{color:#d9edf3;text-decoration:none;padding:10px 13px;border-radius:12px;font-size:11px;font-weight:900;transition:.2s}.navlinks a:hover{background:#fff1;color:#fff;transform:translateY(-2px)}
@@ -29,86 +31,38 @@ h1{font:900 clamp(64px,13vw,170px)/.76 Outfit;margin:28px 0 24px;letter-spacing:
 .bird{position:absolute;font-size:26px;z-index:3;filter:drop-shadow(0 6px 10px #0005)}.bird:before{content:"• •";font-size:18px;letter-spacing:3px}.bird1{top:24%;left:14%;animation:bird 13s linear infinite}.bird2{top:31%;left:40%;animation:bird2 17s linear infinite}.bird3{top:18%;right:18%;animation:bird3 15s linear infinite}.bird4{top:48%;right:9%;animation:bird4 20s linear infinite}
 .block{position:absolute;width:44px;height:44px;background:linear-gradient(135deg,#8be57d,#397e47);border:2px solid #c8ffad55;box-shadow:0 18px 35px #0005;transform:rotate(45deg);z-index:2;animation:drift 6s ease-in-out infinite}.b1{left:8%;top:34%}.b2{right:8%;top:42%;width:31px;height:31px;animation-delay:-2s}.b3{left:17%;bottom:17%;width:25px;height:25px;animation-delay:-4s}.b4{right:23%;bottom:24%;width:20px;height:20px;animation-delay:-1s}
 .banner{position:relative;z-index:6;margin-top:-1px;padding:18px 20px;background:linear-gradient(90deg,#091922,#143746,#091922);border-top:1px solid #ffffff18;border-bottom:1px solid #ffffff18;text-align:center;overflow:hidden}.banner:before{content:"✦";position:absolute;left:6%;animation:shine 4s infinite}.banner:after{content:"✦";position:absolute;right:6%;animation:shine 4s .8s infinite}.banner strong{font:900 13px Outfit;letter-spacing:3px;color:#fff1a9}.banner span{color:#b9d5dd;font-size:10px;margin-left:10px}
-section.showcase{padding:105px 22px 130px;background:linear-gradient(180deg,#06121be8,#06121b 18%,#081822)}.sectionHead{text-align:center;margin-bottom:34px}.sectionHead small{font-size:9px;letter-spacing:4px;color:#ffd96b;font-weight:900}.sectionHead h2{font:900 clamp(35px,6vw,65px) Outfit;margin:9px 0;color:#fff}.sectionHead p{margin:0;color:#8da9b4;font-size:12px}
-.grid{width:min(1160px,100%);margin:auto;display:grid;grid-template-columns:1.45fr .8fr .8fr;grid-template-rows:270px 270px;gap:15px}.card{position:relative;overflow:hidden;border:1px solid #ffffff18;border-radius:25px;background:#0a1d28;box-shadow:0 28px 80px #0006;transition:.35s}.card:hover{transform:translateY(-8px);border-color:#ffd45a66}.card.big{grid-row:span 2}.scene{position:absolute;inset:0;background:linear-gradient(180deg,#5ed9ff,#b8f2ff 44%,#69bf5c 45%,#245b32 100%)}.scene:before{content:"";position:absolute;width:125px;height:125px;border-radius:50%;right:15%;top:12%;background:#ffe47d;box-shadow:0 0 85px #ffe47d}.scene:after{content:"";position:absolute;left:-5%;right:-5%;bottom:-25px;height:52%;background:linear-gradient(145deg,#204d30 0 35%,#3b743d 36% 62%,#1c4329 63%);clip-path:polygon(0 35%,20% 0,42% 38%,58% 10%,77% 44%,100% 4%,100% 100%,0 100%)}.scene2{background:linear-gradient(180deg,#14243a,#ef9d48 63%,#16303c 64%)}.scene2:before{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe47d;left:20%;top:20%;box-shadow:0 0 65px #ffc84e}.scene2:after{content:"";position:absolute;inset:58% 0 0;background:repeating-linear-gradient(165deg,#163543 0 12px,#204b54 12px 22px)}.scene3{background:linear-gradient(180deg,#0b2733,#55b7d4 60%,#1e4935 61%)}.scene3:before{content:"✦  ✦  ✦";position:absolute;inset:20px;color:#fff7bd;font-size:29px}.scene3:after{content:"";position:absolute;inset:auto 0 0;height:46%;background:#1e4d34;clip-path:polygon(0 50%,18% 12%,36% 48%,53% 4%,72% 50%,88% 18%,100% 52%,100% 100%,0 100%)}.cardLabel{position:absolute;left:19px;bottom:18px;z-index:2;font:900 20px Outfit;text-shadow:0 4px 20px #000}.cardLabel small{display:block;margin-bottom:5px;font:900 8px Inter;letter-spacing:3px;color:#fff6ba}
-.community{position:relative;padding:115px 22px;text-align:center;background:radial-gradient(circle at 50% 0,#174457 0,transparent 55%),#06121b;overflow:hidden}.community h2{font:900 clamp(40px,7vw,80px) Outfit;margin:0 0 12px}.community p{color:#9cb5bf;font-size:13px;margin:0 auto 28px;max-width:520px}.discord{display:inline-flex;align-items:center;gap:11px;background:#5865f2;color:#fff;text-decoration:none;border-radius:14px;padding:15px 22px;font-size:12px;font-weight:900;letter-spacing:1px;box-shadow:0 15px 45px #5865f255;transition:.25s}.discord:hover{transform:translateY(-5px) scale(1.03);filter:brightness(1.08)}.discord .dot{width:9px;height:9px;border-radius:50%;background:#fff}
+section.showcase{padding:105px 22px 130px;background:linear-gradient(180deg,#0a1b24 0%,#0a1a22 50%,#091720 100%)}.sectionHead{text-align:center;margin-bottom:34px}.sectionHead small{font-size:9px;letter-spacing:4px;color:#ffd96b;font-weight:900}.sectionHead h2{font:900 clamp(35px,6vw,65px) Outfit;margin:9px 0;color:#fff}.sectionHead p{margin:0;color:#8da9b4;font-size:12px}
+.grid{width:min(1160px,100%);margin:auto;display:grid;grid-template-columns:1.45fr .8fr .8fr;grid-template-rows:270px 270px;gap:15px}.card{position:relative;overflow:hidden;border:1px solid #ffffff18;border-radius:25px;background:#0a1d28;box-shadow:0 28px 80px #0006;transition:.35s}.card:hover{transform:translateY(-8px);border-color:#ffd45a66}.card.big{grid-row:span 2}.scene{position:absolute;inset:0;background:linear-gradient(180deg,#5ed9ff,#b8f2ff 44%,#69bf5c 45%,#245b32 100%)}.scene:before{content:"";position:absolute;width:125px;height:125px;border-radius:50%;right:15%;top:12%;background:#ffe47d;box-shadow:0 0 85px #ffe47d}.scene:after{content:"";position:absolute;left:-5%;right:-5%;bottom:-25px;height:52%;background:linear-gradient(145deg,#204d30 0 35%,#3b743d 36% 62%,#1c4329 63%);clip-path:polygon(0 35%,20% 0,42% 38%,58% 10%,77% 44%,100% 4%,100% 100%,0 100%)}.scene2{background:linear-gradient(180deg,#14243a,#ef9d48 63%,#16303c 64%)}.scene2:before{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe47d;left:20%;top:20%;box-shadow:0 0 65px #ffc84e}.scene2:after{content:"";position:absolute;inset:58% 0 0;background:repeating-linear-gradient(165deg,#163543 0 12px,#204b54 12px 22px)}.scene3{background:linear-gradient(180deg,#0b2733,#55b7d4 60%,#1e4935 61%)}.scene3:before{content:"✦  ✦  ✦";position:absolute;inset:20px;color:#fff7bd;font-size:29px}.scene3:after{content:"";position:absolute;inset:auto 0 0;height:46%;background:#1e4d34;clip-path:polygon(0 50%,18% 12%,36% 48%,53% 4%,72% 50%,88% 18%,100% 52%,100% 100%,0 100%)}
+.cardLabel{position:absolute;left:19px;bottom:18px;z-index:2;font:900 20px Outfit;text-shadow:0 4px 20px #000}.cardLabel small{display:block;margin-bottom:5px;font:900 8px Inter;letter-spacing:3px;color:#fff6ba}
+.community{position:relative;padding:115px 22px;text-align:center;background:linear-gradient(180deg,#0a1c25 0%,#07151d 100%);overflow:hidden}.community h2{font:900 clamp(40px,7vw,80px) Outfit;margin:0 0 12px}.community p{color:#9cb5bf;font-size:13px;margin:0 auto 28px;max-width:520px}.discord{display:inline-flex;align-items:center;gap:11px;background:#5865f2;color:#fff;text-decoration:none;border-radius:14px;padding:15px 22px;font-size:12px;font-weight:900;letter-spacing:1px;box-shadow:0 15px 45px #5865f255;transition:.25s}.discord:hover{transform:translateY(-5px) scale(1.03);filter:brightness(1.08)}.discord .dot{width:9px;height:9px;border-radius:50%;background:#fff}
 footer{padding:35px 22px;text-align:center;border-top:1px solid #ffffff10;color:#708995;font-size:9px;letter-spacing:2px}
 .snow{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}.flake{position:absolute;top:-20px;color:#fff;font-size:var(--s);opacity:var(--o);animation:fall var(--d) linear infinite;left:var(--x)}
-@keyframes sky{from{background-position:0 0}to{background-position:0 100%}}@keyframes sun{50%{transform:translateX(-50%) translateY(12px) scale(1.04)}}@keyframes ring{to{transform:rotate(360deg) scale(1.04)}}@keyframes cloud{to{transform:translateX(150vw)}}@keyframes cloud2{to{transform:translateX(-150vw)}}@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}@keyframes bob{50%{transform:translateX(-50%) translateY(7px)}}@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 38px #ffc44ecc}}@keyframes drift{50%{transform:rotate(55deg) translate(9px,-15px)}}@keyframes bird{to{transform:translate(85vw,-20vh)}}@keyframes bird2{to{transform:translate(50vw,12vh)}}@keyframes bird3{to{transform:translate(-75vw,14vh)}}@keyframes bird4{to{transform:translate(-70vw,-10vh)}}@keyframes santa{50%{transform:translateY(12px) rotate(4deg)}}@keyframes blink{50%{opacity:.55}}@keyframes shine{50%{transform:scale(1.5) rotate(20deg)}}@keyframes fall{to{transform:translate3d(40px,110vh,0) rotate(360deg)}}
+@keyframes ambientLight{0%{filter:brightness(.96) saturate(.96)}50%{filter:brightness(1.02) saturate(1)}100%{filter:brightness(.98) saturate(.98)}}
+@keyframes sun{50%{transform:translateX(-50%) translateY(12px) scale(1.04)}}@keyframes ring{to{transform:rotate(360deg) scale(1.04)}}@keyframes cloud{to{transform:translateX(150vw)}}@keyframes cloud2{to{transform:translateX(-150vw)}}@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}@keyframes bob{50%{transform:translateX(-50%) translateY(7px)}}@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 38px #ffc44ecc}}@keyframes drift{50%{transform:rotate(55deg) translate(9px,-15px)}}@keyframes bird{to{transform:translate(85vw,-20vh)}}@keyframes bird2{to{transform:translate(50vw,12vh)}}@keyframes bird3{to{transform:translate(-75vw,14vh)}}@keyframes bird4{to{transform:translate(-70vw,-10vh)}}@keyframes santa{50%{transform:translateY(12px) rotate(4deg)}}@keyframes blink{50%{opacity:.55}}@keyframes shine{50%{transform:scale(1.5) rotate(20deg)}}@keyframes fall{to{transform:translate3d(40px,110vh,0) rotate(360deg)}}
 @media(max-width:760px){nav{top:10px}.navlinks a{padding:9px 7px;font-size:9px}.navlinks a:nth-child(2){display:none}.grid{grid-template-columns:1fr;grid-template-rows:230px 190px 190px}.card.big{grid-row:auto}h1{letter-spacing:-5px}.subtitle{letter-spacing:3px}.santa{right:0}.banner span{display:block;margin:6px 0 0}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="noise"></div>
-<div class="snow" id="snow"></div>
+<div class="noise"></div><div class="snow" id="snow"></div>
 <nav><div class="logo"><i></i>SUNLIGHT SMP</div><div class="navlinks"><a href="#world">WORLD</a><a href="#community">DISCORD</a><a href="#play">PLAY</a></div></nav>
 <main>
 <section class="hero" id="play">
-<div class="sun"></div>
-<div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div><div class="cloud c5"></div>
+<div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div><div class="cloud c5"></div>
 <div class="bird bird1">⌁</div><div class="bird bird2">⌁</div><div class="bird bird3">⌁</div><div class="bird bird4">⌁</div>
 <div class="block b1"></div><div class="block b2"></div><div class="block b3"></div><div class="block b4"></div>
-<div class="heroContent">
-<div class="eyebrow"><b></b> MINECRAFT SURVIVAL · COMING SOON</div>
-<h1><span>SUNLIGHT</span>SMP</h1>
-<div class="subtitle" id="liveText">COMING THIS CHRISTMAS</div>
-<div class="actions">
-<a class="btn primary" id="playBtn" href="#community">COMING THIS CHRISTMAS<span class="snow-cap"></span></a>
-<a class="btn" href="https://discord.gg/D3QkqexdE" target="_blank" rel="noopener">JOIN DISCORD ↗</a>
-</div>
-<div class="christmasBadge">🎄 LIVE EVENT · CHRISTMAS LAUNCH 🎄</div>
-</div>
-<div class="santa">🎅</div>
-<div class="scroll">SCROLL</div>
+<div class="heroContent"><div class="eyebrow"><b></b> MINECRAFT SURVIVAL · COMING SOON</div><h1><span>SUNLIGHT</span>SMP</h1><div class="subtitle" id="liveText">COMING THIS CHRISTMAS</div><div class="actions"><a class="btn primary" id="playBtn" href="#community">COMING THIS CHRISTMAS<span class="snow-cap"></span></a><a class="btn" href="https://discord.gg/D3QkqexdE" target="_blank" rel="noopener">JOIN DISCORD ↗</a></div><div class="christmasBadge">🎄 LIVE EVENT · CHRISTMAS LAUNCH 🎄</div></div>
+<div class="santa">🎅</div><div class="scroll">SCROLL</div>
 </section>
 <div class="banner"><strong>☃ SUNLIGHT SMP IS COMING ☃</strong><span>Prepare your adventure · Christmas launch</span></div>
-<section class="showcase" id="world">
-<div class="sectionHead"><small>THE WORLD</small><h2>BUILT FOR ADVENTURE</h2><p>A world waiting for its first sunrise.</p></div>
-<div class="grid">
-<div class="card big"><div class="scene"></div><div class="cardLabel"><small>EXPLORE</small>YOUR ADVENTURE</div></div>
-<div class="card"><div class="scene scene2"></div><div class="cardLabel"><small>DISCOVER</small>NEW HORIZONS</div></div>
-<div class="card"><div class="scene scene3"></div><div class="cardLabel"><small>CREATE</small>MAKE IT YOURS</div></div>
-</div>
-</section>
-<section class="community" id="community">
-<div class="sectionHead"><small>THE COMMUNITY</small><h2>READY FOR SUNLIGHT?</h2><p>The SMP isn't out yet. Join the Discord and be there when the gates open this Christmas.</p></div>
-<a class="discord" href="https://discord.gg/D3QkqexdE" target="_blank" rel="noopener"><span class="dot"></span> JOIN THE DISCORD ↗</a>
-</section>
-</main>
-<footer>SUNLIGHT SMP · MINECRAFT COMMUNITY · COMING CHRISTMAS</footer>
+<section class="showcase" id="world"><div class="sectionHead"><small>THE WORLD</small><h2>BUILT FOR ADVENTURE</h2><p>A world waiting for its first sunrise.</p></div><div class="grid"><div class="card big"><div class="scene"></div><div class="cardLabel"><small>EXPLORE</small>YOUR ADVENTURE</div></div><div class="card"><div class="scene scene2"></div><div class="cardLabel"><small>DISCOVER</small>NEW HORIZONS</div></div><div class="card"><div class="scene scene3"></div><div class="cardLabel"><small>CREATE</small>MAKE IT YOURS</div></div></div></section>
+<section class="community" id="community"><div class="sectionHead"><small>THE COMMUNITY</small><h2>READY FOR SUNLIGHT?</h2><p>The SMP isn't out yet. Join the Discord and be there when the gates open this Christmas.</p></div><a class="discord" href="https://discord.gg/D3QkqexdE" target="_blank" rel="noopener"><span class="dot"></span> JOIN THE DISCORD ↗</a></section>
+</main><footer>SUNLIGHT SMP · MINECRAFT COMMUNITY · COMING CHRISTMAS</footer>
 <script>
 (function(){
-  const christmas = true;
-  const root = document.documentElement;
-  const body = document.body;
-  const liveText = document.getElementById('liveText');
-  const playBtn = document.getElementById('playBtn');
-  if(christmas){
-    body.classList.add('christmas');
-    liveText.textContent='COMING THIS CHRISTMAS';
-    playBtn.childNodes[0].nodeValue='COMING THIS CHRISTMAS';
-    const snow=document.getElementById('snow');
-    for(let i=0;i<75;i++){
-      const f=document.createElement('span');
-      f.className='flake'; f.textContent=Math.random()>.7?'✦':'•';
-      f.style.setProperty('--x',Math.random()*100+'vw');
-      f.style.setProperty('--s',(5+Math.random()*13)+'px');
-      f.style.setProperty('--o',(0.35+Math.random()*0.6).toFixed(2));
-      f.style.setProperty('--d',(7+Math.random()*13)+'s');
-      f.style.animationDelay=(-Math.random()*18)+'s';
-      snow.appendChild(f);
-    }
-  }
-  const url=new URL(window.location.href);
-  let changed=false;
-  for(const key of [...url.searchParams.keys()]){
-    if(key.toLowerCase()==='utm_source' && (url.searchParams.get(key)||'').toLowerCase()==='chatgpt.com'){
-      url.searchParams.delete(key); changed=true;
-    }
-  }
-  if(changed) history.replaceState({},document.title,url.pathname+(url.searchParams.toString()?'?'+url.searchParams.toString():'')+url.hash);
+ const christmas=true,body=document.body,liveText=document.getElementById('liveText'),playBtn=document.getElementById('playBtn');
+ if(christmas){body.classList.add('christmas');liveText.textContent='COMING THIS CHRISTMAS';playBtn.childNodes[0].nodeValue='COMING THIS CHRISTMAS';const snow=document.getElementById('snow');for(let i=0;i<75;i++){const f=document.createElement('span');f.className='flake';f.textContent=Math.random()>.7?'✦':'•';f.style.setProperty('--x',Math.random()*100+'vw');f.style.setProperty('--s',(5+Math.random()*13)+'px');f.style.setProperty('--o',(0.35+Math.random()*0.6).toFixed(2));f.style.setProperty('--d',(7+Math.random()*13)+'s');f.style.animationDelay=(-Math.random()*18)+'s';snow.appendChild(f)}}
+ const url=new URL(window.location.href);let changed=false;for(const key of [...url.searchParams.keys()]){if(key.toLowerCase()==='utm_source'&&(url.searchParams.get(key)||'').toLowerCase()==='chatgpt.com'){url.searchParams.delete(key);changed=true}}if(changed)history.replaceState({},document.title,url.pathname+(url.searchParams.toString()?'?'+url.searchParams.toString():'')+url.hash);
 })();
 </script>
-</body>
-</html>
+</body></html>
