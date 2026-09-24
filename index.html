@@ -56,4 +56,34 @@ footer{padding:35px 22px;text-align:center;border-top:1px solid #ffffff0d;color:
 </main>
 <footer id="community">SUNLIGHT SMP · MINECRAFT COMMUNITY</footer>
 </body>
+</html><footer id="community">SUNLIGHT SMP · MINECRAFT COMMUNITY</footer>
+
+<script>
+(function(){
+  const url = new URL(window.location.href);
+  let changed = false;
+
+  for (const key of [...url.searchParams.keys()]) {
+    if (
+      key.toLowerCase() === 'utm_source' &&
+      (url.searchParams.get(key) || '').toLowerCase() === 'chatgpt.com'
+    ) {
+      url.searchParams.delete(key);
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    history.replaceState(
+      {},
+      document.title,
+      url.pathname +
+      (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') +
+      url.hash
+    );
+  }
+})();
+</script>
+
+</body>
 </html>
