@@ -37,5 +37,75 @@ footer{padding:38px 20px;border-top:1px solid var(--line);color:#66717a;font-siz
 function copyIP(){navigator.clipboard.writeText('sunlightsmp.play-mc.fun').then(()=>{const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}).catch(()=>{})}
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links')?.classList.remove('open')));
 </script>
-</body>
+</body>* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.sun {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  left: 50%;
+  bottom: -260px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, #fff8b5, #ffd447 42%, #ffad2f 70%);
+  box-shadow: 0 0 55px #ffd44799, 0 0 150px #ffad2f66;
+  animation: sunrise 7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.cloud {
+  position: absolute;
+  height: 30px;
+  width: 150px;
+  border-radius: 30px;
+  background: linear-gradient(#f4f7f2,#cfd6d2);
+  opacity: .08;
+  filter: blur(1px);
+  animation: cloudMove linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cloud::before {
+  width: 58px;
+  height: 58px;
+  left: 24px;
+  bottom: 3px;
+}
+
+.cloud::after {
+  width: 76px;
+  height: 76px;
+  left: 66px;
+  bottom: 0;
+}
+
+@keyframes sunrise {
+  from {
+    bottom: -260px;
+    opacity: 0;
+  }
+  to {
+    bottom: 26%;
+    opacity: 1;
+  }
+}
+
+@keyframes cloudMove {
+  from {
+    transform: translateX(-260px);
+  }
+  to {
+    transform: translateX(calc(100vw + 400px));
+  }
+}
 </html>
