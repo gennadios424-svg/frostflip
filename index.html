@@ -21,12 +21,20 @@ footer{padding:38px 20px;border-top:1px solid var(--line);color:#66717a;font-siz
 .toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);background:#f4f5f2;color:#111;padding:11px 15px;border-radius:10px;font-size:10px;font-weight:900;opacity:0;pointer-events:none;transition:.25s;z-index:200;box-shadow:0 15px 45px #0008}.toast.show{opacity:1;transform:translate(-50%,0)}
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes float{0%,100%{transform:translateY(-15px) scale(1)}50%{transform:translateY(15px) scale(1.04)}}@keyframes float2{0%,100%{transform:translate(0)}50%{transform:translate(-30px,35px)}}@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:800px){nav{height:56px}.links a{display:none}.links .store{display:block}.menu{display:block}.stats{grid-template-columns:1fr}.sectionTop{display:block}.sectionTop p{text-align:left;margin-top:14px}.features,.about{grid-template-columns:1fr}.feature{min-height:240px}.icon{margin-bottom:55px}h1{letter-spacing:-5px}.footerIn{display:block;text-align:center}.footerBrand{margin-bottom:8px}}
+
+*{user-select:none;-webkit-user-select:none;-moz-user-select:none}
+.sun{position:absolute;width:220px;height:220px;border-radius:50%;left:50%;bottom:-260px;transform:translateX(-50%);background:radial-gradient(circle,#fff8b5,#ffd447 42%,#ffad2f 70%);box-shadow:0 0 55px #ffd44799,0 0 150px #ffad2f66;animation:sunrise 7s cubic-bezier(.2,.8,.2,1) forwards;z-index:1}
+.cloud{position:absolute;height:30px;width:150px;border-radius:30px;background:linear-gradient(#f4f7f2,#cfd6d2);opacity:.09;filter:blur(1px);animation:cloudMove linear infinite;z-index:1}
+.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}.cloud:before{width:58px;height:58px;left:24px;bottom:3px}.cloud:after{width:76px;height:76px;left:66px;bottom:0}
+.c1{top:20%;animation-duration:95s}.c2{top:34%;animation-duration:125s;transform:scale(1.15)}.c3{top:53%;animation-duration:110s;transform:scale(.7)}
+@keyframes sunrise{from{bottom:-260px;opacity:0}to{bottom:26%;opacity:1}}
+@keyframes cloudMove{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw + 400px))}}
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <nav><a class="brand" href="#top"><span class="mark">S</span><span>SUNLIGHT SMP</span></a><div class="links"><a href="#server">SERVER</a><a href="#features">FEATURES</a><a href="#about">ABOUT</a><a class="store" href="#join">PLAY NOW</a></div><button class="menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button></nav>
-<section class="hero" id="top"><div class="orb"></div><div class="orb2"></div><div class="grid"></div><div class="heroInner"><div class="eyebrow"><i class="dot"></i> NEW SERVER • NOW ONLINE</div><h1>SUNLIGHT<br><span class="title2">SMP</span></h1><p class="lead">A fresh survival economy built around the community. Build your empire, trade with players, create your story and make Sunlight yours.</p><div class="heroButtons"><a class="btn primary" href="#join">START PLAYING →</a><a class="btn" href="https://discord.gg/D3QkqexdE" target="_blank">JOIN DISCORD</a></div><div class="serverLine">IP <strong id="ipTop">sunlightsmp.play-mc.fun</strong> <span class="copyIcon">⧉</span></div></div></section>
+<section class="hero" id="top"><div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="orb"></div><div class="orb2"></div><div class="grid"></div><div class="heroInner"><div class="eyebrow"><i class="dot"></i> NEW SERVER • NOW ONLINE</div><h1>SUNLIGHT<br><span class="title2">SMP</span></h1><p class="lead">A fresh survival economy built around the community. Build your empire, trade with players, create your story and make Sunlight yours.</p><div class="heroButtons"><a class="btn primary" href="#join">START PLAYING →</a><a class="btn" href="https://discord.gg/D3QkqexdE" target="_blank">JOIN DISCORD</a></div><div class="serverLine">IP <strong id="ipTop">sunlightsmp.play-mc.fun</strong> <span class="copyIcon">⧉</span></div></div></section>
 <div class="stats" id="server"><div class="stat"><small>SERVER ADDRESS</small><strong class="yellow">sunlightsmp.play-mc.fun</strong></div><div class="stat"><small>GAME MODE</small><strong>Survival Economy</strong></div><div class="stat"><small>COMMUNITY</small><strong class="green">Discord Connected</strong></div></div>
 <section class="content" id="features"><div class="wrap"><div class="sectionTop"><div><span class="kicker">THE EXPERIENCE</span><h2>Built for players.</h2></div><p>Everything is designed to make the server feel alive — from the economy to the people you meet along the way.</p></div><div class="features"><article class="feature big"><div class="icon">◈</div><h3>Player Economy</h3><p>Trade, sell, buy and build your way into the server's economy. Your decisions shape what happens next.</p></article><article class="feature"><div class="icon">⌂</div><h3>Build</h3><p>Start small or build something massive. Your base is your territory.</p></article><article class="feature"><div class="icon">↗</div><h3>Grow</h3><p>Progress through your own goals and turn a simple start into something huge.</p></article></div></div></section>
 <section class="content" id="about"><div class="wrap"><div class="sectionTop"><div><span class="kicker">WHY SUNLIGHT</span><h2>More than a server.</h2></div><p>A place where your builds, trades and friendships actually become part of the story.</p></div><div class="about"><div class="panel"><h3>Your world.</h3><p>Sunlight is built around freedom. There isn't one way to play — make money, build a base, trade with others or simply create something worth remembering.</p><div class="checks"><div class="check"><i>✓</i> Community-driven experience</div><div class="check"><i>✓</i> Player-focused economy</div><div class="check"><i>✓</i> Constantly evolving world</div></div></div><div class="panel"><h3>Come build it.</h3><p>Bring your friends, claim your spot and see where the season takes you. The server is only as good as the community that fills it.</p><div class="heroButtons" style="justify-content:flex-start"><a class="btn primary" href="https://discord.gg/D3QkqexdE" target="_blank">JOIN THE COMMUNITY</a></div></div></div></div></section>
@@ -37,77 +45,5 @@ footer{padding:38px 20px;border-top:1px solid var(--line);color:#66717a;font-siz
 function copyIP(){navigator.clipboard.writeText('sunlightsmp.play-mc.fun').then(()=>{const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}).catch(()=>{})}
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links')?.classList.remove('open')));
 </script>
-</body>* {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-}
-
-.sun {
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  left: 50%;
-  bottom: -260px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, #fff8b5, #ffd447 42%, #ffad2f 70%);
-  box-shadow: 0 0 55px #ffd44799, 0 0 150px #ffad2f66;
-  animation: sunrise 7s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-.cloud {
-  position: absolute;
-  height: 30px;
-  width: 150px;
-  border-radius: 30px;
-  background: linear-gradient(#f4f7f2,#cfd6d2);
-  opacity: .08;
-  filter: blur(1px);
-  animation: cloudMove linear infinite;
-}
-
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: inherit;
-}
-
-.cloud::before {
-  width: 58px;
-  height: 58px;
-  left: 24px;
-  bottom: 3px;
-}
-
-.cloud::after {
-  width: 76px;
-  height: 76px;
-  left: 66px;
-  bottom: 0;
-}
-
-@keyframes sunrise {
-  from {
-    bottom: -260px;
-    opacity: 0;
-  }
-  to {
-    bottom: 26%;
-    opacity: 1;
-  }
-}
-
-@keyframes cloudMove {
-  from {
-    transform: translateX(-260px);
-  }
-  to {
-    transform: translateX(calc(100vw + 400px));
-  }
-}.c1 { top: 20%; animation-duration: 95s; }
-.c2 { top: 32%; animation-duration: 125s; transform: scale(1.15); }
-.c3 { top: 52%; animation-duration: 110s; transform: scale(.7); }
+</body>
 </html>
